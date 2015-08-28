@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class MainMenu extends BasicScreen {
 
@@ -25,6 +27,10 @@ public class MainMenu extends BasicScreen {
 
     private TextureRegion buttonWhenNotPressed;
     private TextureRegion buttonWhenPressed;
+
+    private Skin skin = new Skin(Gdx.files.internal("skins/testpack.json"), new TextureAtlas(Gdx.files.internal("skins/testpack.pack")));
+    private TextButton buttonPlay = new TextButton("Play", skin),
+            buttonExit = new TextButton("Exit", skin);
 
     public MainMenu(Game game) {
         super(game);
@@ -71,6 +77,9 @@ public class MainMenu extends BasicScreen {
         });
 
         table.addActor(johnCenaButton);
+
+        table.add(buttonPlay).row();
+        table.add(buttonExit).row();
     }
 
     @Override
