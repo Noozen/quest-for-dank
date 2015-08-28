@@ -65,7 +65,6 @@ public class MainMenu extends BasicScreen {
                 buttonStyle.up = new TextureRegionDrawable(new TextureRegion(new Texture("john_cena.jpg")));
                 buttonStyle.down = new TextureRegionDrawable(new TextureRegion(new Texture("john_cena.jpg")));
                 johnCenaButton.setStyle(buttonStyle);
-
                 System.out.println("LPM down.");
                 return true;
             }
@@ -89,6 +88,6 @@ public class MainMenu extends BasicScreen {
 
     @Override
     public void hide() {
-        //Pamietamy ¿e na wszystkimi trzeba wywolywac .dispose()
+        stage.dispose();
     }
 }
