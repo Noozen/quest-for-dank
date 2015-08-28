@@ -3,34 +3,38 @@ package com.dankquest.game.com.dankquest.game.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class MainMenu extends BasicScreen {
 
     private Stage stage;
     private Table table;
-    private TextButton johnCenaButton;
+
+    private Image backgroundImage;
+
+    FreeTypeFontGenerator freeTypeFontGenerator;
+    FreeTypeFontGenerator.FreeTypeFontParameter freeTypeFontParameter;
+
+    BitmapFont buttonFont;
+
     private TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
-    private Music johnCenaMusic;
-    private Music relaxingMusic;
+    private TextButton playButton;
+    private TextButton settingsButton;
+    private TextButton exitButton;
 
-    private TextureRegion buttonWhenNotPressed;
-    private TextureRegion buttonWhenPressed;
-
-    private Skin skin = new Skin(Gdx.files.internal("skins/testpack.json"), new TextureAtlas(Gdx.files.internal("skins/testpack.pack")));
-    private TextButton buttonPlay = new TextButton("Play", skin),
-            buttonExit = new TextButton("Exit", skin);
+    Music relaxingMusic = Gdx.audio.newMusic(Gdx.files.internal("music/relaxing_music.mp3"));
 
     public MainMenu(Game game) {
         super(game);
@@ -45,58 +49,95 @@ public class MainMenu extends BasicScreen {
         table.setFillParent(true);
         stage.addActor(table);
 
-        buttonWhenNotPressed = new TextureRegion(new Texture(Gdx.files.internal("game_screen.png")));
-        buttonWhenPressed = new TextureRegion(new Texture(Gdx.files.internal("game_screen.png")));
-        BitmapFont buttonFont = new BitmapFont();
-        johnCenaMusic = Gdx.audio.newMusic(Gdx.files.internal("john_cena.mp3"));
-        johnCenaMusic.setVolume(1f);
-        relaxingMusic = Gdx.audio.newMusic(Gdx.files.internal("relaxing_music.mp3"));
+        //Music Setup
         relaxingMusic.setVolume(0.2f);
+        relaxingMusic.setLooping(true);
         relaxingMusic.play();
+        //Background Setup
+        backgroundImage = new Image(new TextureRegion(new Texture(Gdx.files.internal("main_menu/main_menu_background.png"))));
+        table.addActor(backgroundImage);
 
-        buttonStyle.up = new TextureRegionDrawable(buttonWhenNotPressed);
-        buttonStyle.down = new TextureRegionDrawable(buttonWhenPressed);
+        //Font Setup
+        freeTypeFontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/dank.ttf"));
+        freeTypeFontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        freeTypeFontParameter.size = 70;
+        freeTypeFontParameter.color = Color.RED;
+        buttonFont = freeTypeFontGenerator.generateFont(freeTypeFontParameter);
+
+        //Button Style Setup
         buttonStyle.font = buttonFont;
+        //Play Button Setup
+        playButton = new TextButton("PLAY", buttonStyle);
 
-        johnCenaButton = new TextButton("", buttonStyle);
+        playButton.setX(75);
+        playButton.setY(Gdx.graphics.getHeight() * 3 / 4 - playButton.getHeight()/2);
 
-        johnCenaButton.addListener(new InputListener() {
-
+        playButton.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if(relaxingMusic.isPlaying()) {
-                    relaxingMusic.stop();
-                }
-                johnCenaMusic.play();
+                freeTypeFontParameter.color = Color.BLUE;
+                buttonFont = freeTypeFontGenerator.generateFont(freeTypeFontParameter);
+                buttonStyle.font = buttonFont;
+                playButton.setStyle(buttonStyle);
+                return true;
+            }
 
-                buttonStyle.up = new TextureRegionDrawable(new TextureRegion(new Texture("john_cena.jpg")));
-                buttonStyle.down = new TextureRegionDrawable(new TextureRegion(new Texture("john_cena.jpg")));
-                johnCenaButton.setStyle(buttonStyle);
-                System.out.println("LPM down.");
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                relaxingMusic.stop();
+                game.setScreen(new GameMenu(game));
+            }
+        });
+
+        table.addActor(playButton);
+
+        //Settings Button Setup
+        settingsButton = new TextButton("OPTIONS", buttonStyle);
+
+        settingsButton.setX(20);
+        settingsButton.setY(Gdx.graphics.getHeight() * 2 / 4 - playButton.getHeight()/2);
+
+        settingsButton.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                freeTypeFontParameter.color = Color.BLUE;
+                buttonFont = freeTypeFontGenerator.generateFont(freeTypeFontParameter);
+                buttonStyle.font = buttonFont;
+                settingsButton.setStyle(buttonStyle);
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                relaxingMusic.stop();
+                game.setScreen(new SettingsMenu(game));
+            }
+        });
+
+        table.addActor(settingsButton);
+
+        //Exit Button Setup
+        exitButton = new TextButton("EXIT", buttonStyle);
+
+        exitButton.setX(75);
+        exitButton.setY(Gdx.graphics.getHeight() / 4 - playButton.getHeight()/2);
+
+        exitButton.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                Gdx.app.exit();
                 return true;
             }
         });
 
-        table.addActor(johnCenaButton);
-
-        table.add(buttonPlay).row();
-        table.add(buttonExit).row();
+        table.addActor(exitButton);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        if(johnCenaMusic.isPlaying() == false && relaxingMusic.isPlaying() == false) {
-            buttonStyle.up = new TextureRegionDrawable(new TextureRegion(new Texture("game_screen.png")));
-            buttonStyle.down = new TextureRegionDrawable(new TextureRegion(new Texture("game_screen.png")));
-            johnCenaButton.setStyle(buttonStyle);
-            relaxingMusic.play();
-        }
         stage.draw();
     }
 
     @Override
     public void hide() {
         stage.dispose();
+        freeTypeFontGenerator.dispose();
     }
 }
