@@ -16,6 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class MainMenu extends BasicScreen {
 
@@ -42,7 +44,7 @@ public class MainMenu extends BasicScreen {
 
     @Override
     public void show() {
-        stage = new Stage();
+        stage = new Stage(new FitViewport(640,480));
         Gdx.input.setInputProcessor(stage);
 
         table = new Table();
@@ -139,5 +141,10 @@ public class MainMenu extends BasicScreen {
     public void hide() {
         stage.dispose();
         freeTypeFontGenerator.dispose();
+    }
+
+    @Override
+    public void resize(int width, int heigth) {
+        stage.getViewport().update(width, heigth);
     }
 }
