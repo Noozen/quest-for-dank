@@ -1,0 +1,85 @@
+
+rainbowpack.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+blue_btn
+  rotate: false
+  xy: 1, 1
+  size: 48, 48
+  split: 4, 4, 4, 6
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+blue_btn_pressed
+  rotate: false
+  xy: 51, 1
+  size: 48, 48
+  split: 3, 3, 3, 3
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+green_btn
+  rotate: false
+  xy: 101, 1
+  size: 48, 48
+  split: 4, 4, 4, 6
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+green_btn_pressed
+  rotate: false
+  xy: 151, 1
+  size: 48, 48
+  split: 3, 3, 3, 3
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+grey_btn
+  rotate: false
+  xy: 201, 1
+  size: 48, 48
+  split: 4, 4, 4, 6
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+grey_btn_pressed
+  rotate: false
+  xy: 251, 1
+  size: 48, 48
+  split: 3, 3, 3, 3
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+orange_btn
+  rotate: false
+  xy: 301, 1
+  size: 48, 48
+  split: 4, 4, 4, 6
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+orange_btn_pressed
+  rotate: false
+  xy: 351, 1
+  size: 48, 48
+  split: 3, 3, 3, 3
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+yellow_btn
+  rotate: false
+  xy: 401, 1
+  size: 48, 48
+  split: 4, 4, 4, 6
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+yellow_btn_pressed
+  rotate: false
+  xy: 451, 1
+  size: 48, 48
+  split: 3, 3, 3, 3
+  orig: 48, 48
+  offset: 0, 0
+  index: -1

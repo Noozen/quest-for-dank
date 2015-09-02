@@ -1,0 +1,50 @@
+
+fantasypack.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+red_btn
+  rotate: false
+  xy: 1, 1
+  size: 334, 93
+  orig: 334, 93
+  offset: 0, 0
+  index: -1
+red_btn9p
+  rotate: false
+  xy: 1, 1
+  size: 334, 93
+  split: 44, 44, 20, 20
+  orig: 334, 93
+  offset: 0, 0
+  index: -1
+red_btn_hover
+  rotate: false
+  xy: 337, 1
+  size: 334, 93
+  orig: 334, 93
+  offset: 0, 0
+  index: -1
+red_btn_hover9p
+  rotate: false
+  xy: 337, 1
+  size: 334, 93
+  split: 44, 44, 20, 20
+  orig: 334, 93
+  offset: 0, 0
+  index: -1
+red_btn_pressed
+  rotate: false
+  xy: 673, 1
+  size: 334, 93
+  orig: 334, 93
+  offset: 0, 0
+  index: -1
+red_btn_pressed9p
+  rotate: false
+  xy: 673, 1
+  size: 334, 93
+  split: 44, 45, 20, 20
+  orig: 334, 93
+  offset: 0, 0
+  index: -1
