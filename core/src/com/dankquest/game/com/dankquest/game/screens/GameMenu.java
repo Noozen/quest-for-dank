@@ -96,7 +96,7 @@ public class GameMenu extends BasicScreen {
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 relaxingMusic.stop();
-                game.setScreen(new PartyManagementMenu(game));
+                game.setScreen(new HeroManagementMenu(game));
             }
         });
 

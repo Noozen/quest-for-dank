@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 /**
  * Created by Antah on 2015/09/02.
  */
-public class PartyManagementMenu extends BasicScreen {
-    public PartyManagementMenu(Game game) {
+public class HeroManagementMenu extends BasicScreen {
+    public HeroManagementMenu(Game game) {
         super(game);
     }
 
