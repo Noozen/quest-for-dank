@@ -25,10 +25,10 @@ public class GameMenu extends BasicScreen {
 
     private Image backgroundImage;
 
-    Skin skin;
+    private Skin skin;
 
     private TextButton adventureButton;
-    private TextButton partyManagmentButton;
+    private TextButton partyManagementButton;
     private TextButton backButton;
     private TextButton shopButton;
 
@@ -55,10 +55,10 @@ public class GameMenu extends BasicScreen {
         table.addActor(backgroundImage);
 
         //Skin setup
-        Skin skin = new Skin(Gdx.files.internal("skins/rainbowpack.json"),
+        skin = new Skin(Gdx.files.internal("skins/rainbowpack.json"),
                 new TextureAtlas(Gdx.files.internal("skins/rainbowpack.pack")));
 
-        //Play Button Setup
+        //Adventure Button Setup
         adventureButton = new TextButton("Adventure", skin, "orange_yellow_fat");
 
         adventureButton.setWidth(240);
@@ -81,15 +81,15 @@ public class GameMenu extends BasicScreen {
         table.addActor(adventureButton);
 
         //partyManagment Button Setup
-        partyManagmentButton = new TextButton("Party\nManagement", skin, "orange_yellow_fat");
+        partyManagementButton = new TextButton("Party\nManagement", skin, "orange_yellow_fat");
 
-        partyManagmentButton.setWidth(240);
-        partyManagmentButton.setHeight(140);
+        partyManagementButton.setWidth(240);
+        partyManagementButton.setHeight(140);
 
-        partyManagmentButton.setX(340);
-        partyManagmentButton.setY(260);
+        partyManagementButton.setX(340);
+        partyManagementButton.setY(260);
 
-        partyManagmentButton.addListener(new InputListener() {
+        partyManagementButton.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
@@ -100,7 +100,7 @@ public class GameMenu extends BasicScreen {
             }
         });
 
-        table.addActor(partyManagmentButton);
+        table.addActor(partyManagementButton);
 
         //Back Button Setup
         backButton = new TextButton("Back", skin, "orange_yellow_fat");
