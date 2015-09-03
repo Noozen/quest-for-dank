@@ -169,11 +169,11 @@ public class AdventureMenu extends BasicScreen {
                     avaliableHeroesActor.updateHero();
                     chosenHeroesActor.updateHeroList();
 
-                    Dank.ownedHeroesList.sort(new Comparator() {
+                    Dank.ownedHeroesList.sort(new Comparator<Hero>() {
 
                         @Override
-                        public int compare(Object o1, Object o2) {
-                            return ((Hero) o1).name.compareTo(((Hero) o2).name);
+                        public int compare(Hero o1, Hero o2) {
+                            return o1.name.compareTo(o2.name);
                         }
                     });
                 }
@@ -194,11 +194,11 @@ public class AdventureMenu extends BasicScreen {
                     avaliableHeroesActor.updateHero();
                     chosenHeroesActor.updateHeroList();
 
-                    Dank.ownedHeroesList.sort(new Comparator() {
+                    Dank.ownedHeroesList.sort(new Comparator<Hero>() {
 
                         @Override
-                        public int compare(Object o1, Object o2) {
-                            return ((Hero) o1).name.compareTo(((Hero) o2).name);
+                        public int compare(Hero o1, Hero o2) {
+                            return o1.name.compareTo(o2.name);
                         }
                     });
 

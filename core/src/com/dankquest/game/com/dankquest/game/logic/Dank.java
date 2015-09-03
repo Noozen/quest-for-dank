@@ -65,11 +65,11 @@ public class Dank {
         exampleHero.attackDamage = 30;
         ownedHeroesList.add(exampleHero);
 
-        ownedHeroesList.sort(new Comparator() {
+        ownedHeroesList.sort(new Comparator<Hero>() {
 
             @Override
-            public int compare(Object o1, Object o2) {
-                return ((Hero) o1).name.compareTo(((Hero) o2).name);
+            public int compare(Hero o1, Hero o2) {
+                return o1.name.compareTo(o2.name);
             }
         });
     }
