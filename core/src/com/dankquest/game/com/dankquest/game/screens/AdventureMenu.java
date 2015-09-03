@@ -15,11 +15,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.dankquest.game.com.dankquest.game.actors.AvaliableHeroesActor;
+import com.dankquest.game.com.dankquest.game.actors.ChosenHeroesActor;
+import com.dankquest.game.com.dankquest.game.logic.Dank;
+import com.dankquest.game.com.dankquest.game.logic.Hero;
+
+import java.util.Comparator;
 
 /**
  * Created by Antah on 2015/09/02.
  */
 public class AdventureMenu extends BasicScreen {
+
     private Stage stage;
     private Table table;
 
@@ -32,6 +39,11 @@ public class AdventureMenu extends BasicScreen {
 
     private TextButton backButton;
     private TextButton playButton;
+    private TextButton toLeftCharacterButton;
+    private TextButton toRightCharacterButton;
+
+    private AvaliableHeroesActor avaliableHeroesActor = new AvaliableHeroesActor();
+    private ChosenHeroesActor chosenHeroesActor = new ChosenHeroesActor();
 
     public AdventureMenu(Game game) {
         super(game);
@@ -55,11 +67,6 @@ public class AdventureMenu extends BasicScreen {
         backgroundImage = new Image(new TextureRegion(new Texture(Gdx.files.internal("backgrounds/Tower1.png"))));
         table.addActor(backgroundImage);
 
-        //Placeholder Hero Image
-        placeholderHeroImage = new Image(new TextureRegion(new Texture(Gdx.files.internal("adventure_menu/character_placeholder.png"))));
-        placeholderHeroImage.setX(120);
-        placeholderHeroImage.setY(10);
-        table.addActor(placeholderHeroImage);
         //Skin setup
         skin = new Skin(Gdx.files.internal("skins/rainbowpack.json"),
                 new TextureAtlas(Gdx.files.internal("skins/rainbowpack.pack")));
@@ -107,6 +114,99 @@ public class AdventureMenu extends BasicScreen {
         });
 
         table.addActor(playButton);
+
+        //toLeftCharacter Button Setup
+        toLeftCharacterButton = new TextButton("<-", skin, "orange_yellow_fat");
+
+        toLeftCharacterButton.setWidth(100);
+        toLeftCharacterButton.setHeight(350);
+
+        toLeftCharacterButton.setX(10);
+        toLeftCharacterButton.setY(120);
+
+        toLeftCharacterButton.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                avaliableHeroesActor.heroDecreased();
+            }
+        });
+
+        table.addActor(toLeftCharacterButton);
+
+        //toRightCharacter Button Setup
+        toRightCharacterButton = new TextButton("->", skin, "orange_yellow_fat");
+
+        toRightCharacterButton.setWidth(100);
+        toRightCharacterButton.setHeight(350);
+
+        toRightCharacterButton.setX(530);
+        toRightCharacterButton.setY(120);
+
+        toRightCharacterButton.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                avaliableHeroesActor.heroIncreased();
+            }
+        });
+
+        table.addActor(toRightCharacterButton);
+
+        //avaliableHeroesActor
+        avaliableHeroesActor.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if(Dank.chosenHeroesList.size()<4 && Dank.ownedHeroesList.size()>avaliableHeroesActor.currentHero + Math.round(x) / 100) {
+                    Dank.chosenHeroesList.add(Dank.ownedHeroesList.remove(avaliableHeroesActor.currentHero + Math.round(x) / 100));
+                    avaliableHeroesActor.updateHero();
+                    chosenHeroesActor.updateHeroList();
+
+                    Dank.ownedHeroesList.sort(new Comparator() {
+
+                        @Override
+                        public int compare(Object o1, Object o2) {
+                            return ((Hero) o1).name.compareTo(((Hero) o2).name);
+                        }
+                    });
+                }
+            }
+        });
+
+        table.addActor(avaliableHeroesActor);
+
+        //chosenHeroesActor
+        chosenHeroesActor.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if(Dank.chosenHeroesList.size()> Math.round(x) / 100) {
+                    Dank.ownedHeroesList.add(Dank.chosenHeroesList.remove(Math.round(x) / 100));
+                    avaliableHeroesActor.updateHero();
+                    chosenHeroesActor.updateHeroList();
+
+                    Dank.ownedHeroesList.sort(new Comparator() {
+
+                        @Override
+                        public int compare(Object o1, Object o2) {
+                            return ((Hero) o1).name.compareTo(((Hero) o2).name);
+                        }
+                    });
+
+                }
+            }
+        });
+
+        table.addActor(chosenHeroesActor);
     }
 
     @Override

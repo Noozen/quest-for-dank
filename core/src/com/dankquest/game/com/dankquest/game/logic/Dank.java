@@ -2,6 +2,7 @@ package com.dankquest.game.com.dankquest.game.logic;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -10,9 +11,9 @@ import java.util.List;
 public class Dank {
     private Dank(){};
 
-    private static List<Hero> ownedHeroesList;
-    private static List<Hero> chosenHeroesList;
-    private static List<Item> unassignedItemsList;
+    public static List<Hero> ownedHeroesList;
+    public static List<Hero> chosenHeroesList;
+    public static List<Item> unassignedItemsList;
 
     static {
         ownedHeroesList = new ArrayList<Hero>();
@@ -49,5 +50,27 @@ public class Dank {
         exampleHero.heathTotal = 60;
         exampleHero.attackDamage = 15;
         ownedHeroesList.add(exampleHero);
+
+        exampleHero = new Hero();
+        exampleHero.name = "Nachrichter";
+        exampleHero.heroClass = HeroClass.WARRIOR;
+        exampleHero.heathTotal = 80;
+        exampleHero.attackDamage = 12;
+        ownedHeroesList.add(exampleHero);
+
+        exampleHero = new Hero();
+        exampleHero.name = "Niebo";
+        exampleHero.heroClass = HeroClass.MAGE;
+        exampleHero.heathTotal = 1;
+        exampleHero.attackDamage = 30;
+        ownedHeroesList.add(exampleHero);
+
+        ownedHeroesList.sort(new Comparator() {
+
+            @Override
+            public int compare(Object o1, Object o2) {
+                return ((Hero) o1).name.compareTo(((Hero) o2).name);
+            }
+        });
     }
 }
