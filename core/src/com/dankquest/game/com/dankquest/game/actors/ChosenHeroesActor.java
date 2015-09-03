@@ -49,7 +49,7 @@ public class ChosenHeroesActor extends Actor {
                 continue;
             }
             if(Dank.chosenHeroesList.get(i).heroClass == HeroClass.WARRIOR) {
-                pixmapHelper.drawPixmap(warriorPixmap,0, 0);
+                pixmapHelper.drawPixmap(warriorPixmap,0, 25, 100, 125, 0 ,0 ,100, 100);
             }
             if(Dank.chosenHeroesList.get(i).heroClass == HeroClass.MAGE) {
                 pixmapHelper.drawPixmap(magePixmap, 0, 0);
