@@ -19,4 +19,6 @@ public class ArrowSkill implements Skill {
     public Texture getImage() {
         return baseTexture;
     }
+
+    public String toString(){ return "Arrow"; }
 }

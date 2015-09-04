@@ -18,4 +18,6 @@ public class FireballSkill implements Skill {
     public Texture getImage() {
         return baseTexture;
     }
+
+    public String toString(){ return "Fireball"; }
 }

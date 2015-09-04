@@ -15,8 +15,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.dankquest.game.com.dankquest.game.actors.HeroActor;
+import com.dankquest.game.com.dankquest.game.actors.SkillActor;
+import com.dankquest.game.com.dankquest.game.logic.Dank;
+import com.dankquest.game.com.dankquest.game.logic.Hero;
+import com.dankquest.game.com.dankquest.game.logic.HeroClass;
+import com.dankquest.game.com.dankquest.game.logic.skill.ArrowSkill;
+import com.dankquest.game.com.dankquest.game.logic.skill.FireballSkill;
+import com.dankquest.game.com.dankquest.game.logic.skill.SlamSkill;
+import com.dankquest.game.com.dankquest.game.logic.skill.TwinBladeSkill;
 
 import java.awt.*;
+import java.util.Comparator;
 
 /**
  * Created by Antah on 2015/09/02.
@@ -31,10 +41,10 @@ public class DankGame extends BasicScreen {
 
     private Skin skin;
 
-    private TextButton retreatButton,
-            skill1Button, skill2Button, skill3Button, skill4Button,
-            item1Button, item2Button,
-            attackButton, guardButton;
+    private TextButton retreatButton;
+
+    private SkillActor skill1, skill2, skill3, skill4;
+    private HeroActor hero1, hero2, hero3, hero4;
 
     public DankGame(Game game) {
         super(game);
@@ -87,6 +97,70 @@ public class DankGame extends BasicScreen {
         });
 
         table.addActor(retreatButton);
+
+        //Active hero
+        Dank.activeHero = Dank.chosenHeroesList.get(0);
+
+        //Skill buttons setup
+        skill1 = new SkillActor(440,0,1);
+        skill2 = new SkillActor(490,0,2);
+        skill3 = new SkillActor(540,0,3);
+        skill4 = new SkillActor(590,0,4);
+        skill1.addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+        });
+        skill2.addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+        });
+        skill3.addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+        });
+        skill4.addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+        });
+        table.addActor(skill1);
+        table.addActor(skill2);
+        table.addActor(skill3);
+        table.addActor(skill4);
+
+        //Heroes setup
+        hero1 = new HeroActor(180,200,1);
+        hero2 = new HeroActor(200,250,2);
+        hero3 = new HeroActor(220,300,3);
+        hero4 = new HeroActor(240,350,4);
+        table.addActor(hero4);
+        table.addActor(hero3);
+        table.addActor(hero2);
+        table.addActor(hero1);
+
     }
 
     @Override

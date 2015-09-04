@@ -18,4 +18,6 @@ public class SlamSkill implements Skill {
     public Texture getImage() {
         return baseTexture;
     }
+
+    public String toString(){ return "Slam"; }
 }

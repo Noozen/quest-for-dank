@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 /**
  * Created by Miko on 2015-08-28.
  */
@@ -28,7 +30,6 @@ public class Dank {
         chosenHeroesList = new ArrayList<Hero>();
         unassignedItemsList = new ArrayList<Item>();
 
-        //Przyk³adowe dane, w przysz³oœci powinne byæ ³adowane z pliku savu
         Hero exampleHero;
 
         exampleHero = new Hero();
@@ -40,6 +41,7 @@ public class Dank {
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
+        exampleHero.texture = new Texture(Gdx.files.internal("heroes/troll.png"));
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -51,6 +53,7 @@ public class Dank {
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
+        exampleHero.texture = new Texture(Gdx.files.internal("heroes/goblin.png"));
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -62,6 +65,7 @@ public class Dank {
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
+        exampleHero.texture = new Texture(Gdx.files.internal("heroes/dwarf.png"));
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -73,6 +77,7 @@ public class Dank {
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
+        exampleHero.texture = new Texture(Gdx.files.internal("heroes/goblin.png"));
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -84,6 +89,7 @@ public class Dank {
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
+        exampleHero.texture = new Texture(Gdx.files.internal("heroes/goblin.png"));
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -95,6 +101,7 @@ public class Dank {
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
+        exampleHero.texture = new Texture(Gdx.files.internal("heroes/goblin.png"));
         ownedHeroesList.add(exampleHero);
 
         ownedHeroesList.sort(new Comparator<Hero>() {
