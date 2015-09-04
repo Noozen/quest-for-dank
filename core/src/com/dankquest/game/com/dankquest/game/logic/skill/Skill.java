@@ -1,5 +1,6 @@
 package com.dankquest.game.com.dankquest.game.logic.skill;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
 
 /**
@@ -7,4 +8,5 @@ import com.dankquest.game.com.dankquest.game.logic.Hero;
  */
 public interface Skill {
     public void cast(Hero... heroTable);
+    public Texture getImage();
 }
