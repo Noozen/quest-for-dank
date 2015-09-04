@@ -1,7 +1,11 @@
 package com.dankquest.game.com.dankquest.game.logic;
 
+import com.dankquest.game.com.dankquest.game.logic.skill.ArrowSkill;
+import com.dankquest.game.com.dankquest.game.logic.skill.FireballSkill;
+import com.dankquest.game.com.dankquest.game.logic.skill.SlamSkill;
+import com.dankquest.game.com.dankquest.game.logic.skill.TwinBladeSkill;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
@@ -9,11 +13,15 @@ import java.util.List;
  * Created by Miko on 2015-08-28.
  */
 public class Dank {
-    private Dank(){};
+
+    private Dank() {
+    }
 
     public static List<Hero> ownedHeroesList;
     public static List<Hero> chosenHeroesList;
     public static List<Item> unassignedItemsList;
+
+    public static Hero activeHero;
 
     static {
         ownedHeroesList = new ArrayList<Hero>();
@@ -28,6 +36,10 @@ public class Dank {
         exampleHero.heroClass = HeroClass.WARRIOR;
         exampleHero.heathTotal = 200;
         exampleHero.attackDamage = 5;
+        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill2 = new FireballSkill();
+        exampleHero.skill3 = new SlamSkill();
+        exampleHero.skill4 = new TwinBladeSkill();
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -35,6 +47,10 @@ public class Dank {
         exampleHero.heroClass = HeroClass.WARRIOR;
         exampleHero.heathTotal = 100;
         exampleHero.attackDamage = 10;
+        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill2 = new FireballSkill();
+        exampleHero.skill3 = new SlamSkill();
+        exampleHero.skill4 = new TwinBladeSkill();
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -42,6 +58,10 @@ public class Dank {
         exampleHero.heroClass = HeroClass.MAGE;
         exampleHero.heathTotal = 50;
         exampleHero.attackDamage = 20;
+        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill2 = new FireballSkill();
+        exampleHero.skill3 = new SlamSkill();
+        exampleHero.skill4 = new TwinBladeSkill();
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -49,6 +69,10 @@ public class Dank {
         exampleHero.heroClass = HeroClass.MAGE;
         exampleHero.heathTotal = 60;
         exampleHero.attackDamage = 15;
+        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill2 = new FireballSkill();
+        exampleHero.skill3 = new SlamSkill();
+        exampleHero.skill4 = new TwinBladeSkill();
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -56,13 +80,21 @@ public class Dank {
         exampleHero.heroClass = HeroClass.WARRIOR;
         exampleHero.heathTotal = 80;
         exampleHero.attackDamage = 12;
+        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill2 = new FireballSkill();
+        exampleHero.skill3 = new SlamSkill();
+        exampleHero.skill4 = new TwinBladeSkill();
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
-        exampleHero.name = "Niebo";
+        exampleHero.name = "Ray";
         exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.heathTotal = 1;
+        exampleHero.heathTotal = 30;
         exampleHero.attackDamage = 30;
+        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill2 = new FireballSkill();
+        exampleHero.skill3 = new SlamSkill();
+        exampleHero.skill4 = new TwinBladeSkill();
         ownedHeroesList.add(exampleHero);
 
         ownedHeroesList.sort(new Comparator<Hero>() {
@@ -73,4 +105,5 @@ public class Dank {
             }
         });
     }
+
 }
