@@ -13,7 +13,6 @@ public class HeroManagementMenu extends BasicScreen {
     public HeroManagementMenu(Game game) {
         super(game);
     }
-
     @Override
     public void show() {
 

@@ -25,7 +25,7 @@ public class DankGame extends BasicScreen {
     private Stage stage;
     private Table table;
 
-    Music battleMusic = Gdx.audio.newMusic(Gdx.files.internal("music/Battle2.ogg"));
+    private Music battleMusic;
 
     private Image backgroundImage, backgroundImage1;
 
@@ -51,6 +51,7 @@ public class DankGame extends BasicScreen {
         stage.addActor(table);
 
         //Music Setup
+        battleMusic = Gdx.audio.newMusic(Gdx.files.internal("music/Battle2.ogg"));
         battleMusic.setVolume(0.2f);
         battleMusic.setLooping(true);
         battleMusic.play();

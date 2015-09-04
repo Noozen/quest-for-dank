@@ -21,7 +21,7 @@ public class GameMenu extends BasicScreen {
     private Stage stage;
     private Table table;
 
-    Music relaxingMusic = Gdx.audio.newMusic(Gdx.files.internal("music/night_hours.mp3"));
+    Music relaxingMusic;
 
     private Image backgroundImage;
 
@@ -46,6 +46,7 @@ public class GameMenu extends BasicScreen {
         stage.addActor(table);
 
         //Music Setup
+        relaxingMusic = Gdx.audio.newMusic(Gdx.files.internal("music/night_hours.mp3"));
         relaxingMusic.setVolume(0.2f);
         relaxingMusic.setLooping(true);
         relaxingMusic.play();
@@ -68,6 +69,7 @@ public class GameMenu extends BasicScreen {
         adventureButton.setY(80);
 
         adventureButton.addListener(new InputListener() {
+
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }

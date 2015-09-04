@@ -9,17 +9,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class MainMenu extends BasicScreen {
+
+    private int currentHero;
 
     private Stage stage;
     private Table table;
@@ -31,12 +31,12 @@ public class MainMenu extends BasicScreen {
 
     BitmapFont buttonFont;
 
-    private TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
+    private TextButton.TextButtonStyle buttonStyle;
     private TextButton playButton;
     private TextButton settingsButton;
     private TextButton exitButton;
 
-    Music relaxingMusic = Gdx.audio.newMusic(Gdx.files.internal("music/relaxing_music.mp3"));
+    Music relaxingMusic;
 
     public MainMenu(Game game) {
         super(game);
@@ -52,6 +52,7 @@ public class MainMenu extends BasicScreen {
         stage.addActor(table);
 
         //Music Setup
+        relaxingMusic = Gdx.audio.newMusic(Gdx.files.internal("music/relaxing_music.mp3"));
         relaxingMusic.setVolume(0.2f);
         relaxingMusic.setLooping(true);
         relaxingMusic.play();
@@ -67,6 +68,7 @@ public class MainMenu extends BasicScreen {
         buttonFont = freeTypeFontGenerator.generateFont(freeTypeFontParameter);
 
         //Button Style Setup
+        buttonStyle = new TextButton.TextButtonStyle();
         buttonStyle.font = buttonFont;
         //Play Button Setup
         playButton = new TextButton("PLAY", buttonStyle);

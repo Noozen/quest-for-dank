@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.dankquest.game.com.dankquest.game.actors.AvaliableHeroesActor;
+import com.dankquest.game.com.dankquest.game.actors.OwnedHeroesActor;
 import com.dankquest.game.com.dankquest.game.actors.ChosenHeroesActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
@@ -30,19 +30,18 @@ public class AdventureMenu extends BasicScreen {
     private Stage stage;
     private Table table;
 
-    Music relaxingMusic = Gdx.audio.newMusic(Gdx.files.internal("music/night_hours.mp3"));
+    private Music relaxingMusic;
 
     private Image backgroundImage;
-    private Image placeholderHeroImage;
 
-    Skin skin;
+    private Skin skin;
 
     private TextButton backButton;
     private TextButton playButton;
     private TextButton toLeftCharacterButton;
     private TextButton toRightCharacterButton;
 
-    private AvaliableHeroesActor avaliableHeroesActor = new AvaliableHeroesActor();
+    private OwnedHeroesActor ownedHeroesActor = new OwnedHeroesActor();
     private ChosenHeroesActor chosenHeroesActor = new ChosenHeroesActor();
 
     public AdventureMenu(Game game) {
@@ -59,6 +58,7 @@ public class AdventureMenu extends BasicScreen {
         stage.addActor(table);
 
         //Music Setup
+        relaxingMusic = Gdx.audio.newMusic(Gdx.files.internal("music/night_hours.mp3"));
         relaxingMusic.setVolume(0.2f);
         relaxingMusic.setLooping(true);
         relaxingMusic.play();
@@ -81,6 +81,7 @@ public class AdventureMenu extends BasicScreen {
         backButton.setY(10);
 
         backButton.addListener(new InputListener() {
+
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
@@ -103,6 +104,7 @@ public class AdventureMenu extends BasicScreen {
         playButton.setY(10);
 
         playButton.addListener(new InputListener() {
+
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
@@ -125,12 +127,13 @@ public class AdventureMenu extends BasicScreen {
         toLeftCharacterButton.setY(120);
 
         toLeftCharacterButton.addListener(new InputListener() {
+
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                avaliableHeroesActor.heroDecreased();
+                ownedHeroesActor.heroDecreased();
             }
         });
 
@@ -146,28 +149,30 @@ public class AdventureMenu extends BasicScreen {
         toRightCharacterButton.setY(120);
 
         toRightCharacterButton.addListener(new InputListener() {
+
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                avaliableHeroesActor.heroIncreased();
+                ownedHeroesActor.heroIncreased();
             }
         });
 
         table.addActor(toRightCharacterButton);
 
-        //avaliableHeroesActor
-        avaliableHeroesActor.addListener(new InputListener() {
+        //ownedHeroesActor
+        ownedHeroesActor.addListener(new InputListener() {
+
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(Dank.chosenHeroesList.size()<4 && Dank.ownedHeroesList.size()>avaliableHeroesActor.currentHero + Math.round(x) / 100) {
-                    Dank.chosenHeroesList.add(Dank.ownedHeroesList.remove(avaliableHeroesActor.currentHero + Math.round(x) / 100));
-                    avaliableHeroesActor.updateHero();
-                    chosenHeroesActor.updateHeroList();
+                if(Dank.chosenHeroesList.size()<4 && Dank.ownedHeroesList.size()> ownedHeroesActor.currentHero + Math.round(x) / 100) {
+                    Dank.chosenHeroesList.add(Dank.ownedHeroesList.remove(ownedHeroesActor.currentHero + Math.round(x) / 100));
+                    ownedHeroesActor.update();
+                    chosenHeroesActor.update();
 
                     Dank.ownedHeroesList.sort(new Comparator<Hero>() {
 
@@ -180,10 +185,11 @@ public class AdventureMenu extends BasicScreen {
             }
         });
 
-        table.addActor(avaliableHeroesActor);
+        table.addActor(ownedHeroesActor);
 
         //chosenHeroesActor
         chosenHeroesActor.addListener(new InputListener() {
+
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
@@ -191,8 +197,8 @@ public class AdventureMenu extends BasicScreen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 if(Dank.chosenHeroesList.size()> Math.round(x) / 100) {
                     Dank.ownedHeroesList.add(Dank.chosenHeroesList.remove(Math.round(x) / 100));
-                    avaliableHeroesActor.updateHero();
-                    chosenHeroesActor.updateHeroList();
+                    ownedHeroesActor.update();
+                    chosenHeroesActor.update();
 
                     Dank.ownedHeroesList.sort(new Comparator<Hero>() {
 
@@ -219,5 +225,10 @@ public class AdventureMenu extends BasicScreen {
     @Override
     public void hide() {
 
+    }
+
+    @Override
+    public void resize(int width, int heigth) {
+        stage.getViewport().update(width, heigth);
     }
 }
