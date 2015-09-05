@@ -36,6 +36,6 @@ public class SkillActor extends Actor {
     }
 
     public void update() {
-        texture = Dank.activeHero.getSkill(skill_number).getImage();
+        texture = new Texture(Dank.activeHero.getSkill(skill_number).getImage());
     }
 }

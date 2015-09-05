@@ -1,5 +1,6 @@
 package com.dankquest.game.com.dankquest.game.logic;
 
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.dankquest.game.com.dankquest.game.logic.skill.Skill;
 
@@ -7,7 +8,7 @@ public class Hero {
 
     public String name;
     public HeroClass heroClass;
-    public Texture texture;
+    public Pixmap texture;
     
     public double heathTotal;
     public double healthCurrent;
@@ -28,7 +29,7 @@ public class Hero {
         return skill1;
     }
 
-    public Texture getImage() {
+    public Pixmap getImage() {
         return texture;
     }
 }
