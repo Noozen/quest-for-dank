@@ -43,7 +43,7 @@ public class HeroActor extends Actor {
         hpPixmap.setColor(1,0.5f,0.5f, 1);
         hpPixmap.fillRectangle(0, 0, 64, 10);
         hpPixmap.setColor(1,0,0,1);
-        hpPixmap.fillRectangle(0, 0, (int) (64 * (Dank.chosenHeroesList.get(hero_number - 1).healthCurrent / Dank.chosenHeroesList.get(hero_number - 1).heathTotal)), 10);
+        hpPixmap.fillRectangle(0, 0, (int) (64 * (Dank.chosenHeroesList.get(hero_number - 1).healthCurrent / Dank.chosenHeroesList.get(hero_number - 1).healthTotal)), 10);
         texture = new Texture(hpPixmap);
     }
 }

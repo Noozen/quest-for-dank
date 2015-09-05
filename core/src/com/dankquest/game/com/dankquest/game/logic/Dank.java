@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+
 /**
  * Created by Miko on 2015-08-28.
  */
@@ -23,6 +23,9 @@ public class Dank {
     public static List<Hero> ownedHeroesList;
     public static List<Hero> chosenHeroesList;
     public static List<Item> unassignedItemsList;
+    public static List<Hero> enemyHeroesList;
+    public static List<Hero> allHeroesInGameList;
+    public static List<Hero> thisTurnLeftHeroesList;
 
     public static Hero activeHero;
 
@@ -30,15 +33,19 @@ public class Dank {
         ownedHeroesList = new ArrayList<Hero>();
         chosenHeroesList = new ArrayList<Hero>();
         unassignedItemsList = new ArrayList<Item>();
+        enemyHeroesList = new ArrayList<Hero>();
+        allHeroesInGameList = new ArrayList<Hero>();
+        thisTurnLeftHeroesList = new ArrayList<Hero>();
 
         Hero exampleHero;
 
         exampleHero = new Hero();
         exampleHero.name = "Noozen";
         exampleHero.heroClass = HeroClass.WARRIOR;
-        exampleHero.heathTotal = 200;
+        exampleHero.healthTotal = 200;
         exampleHero.healthCurrent = 200;
         exampleHero.attackDamage = 5;
+        exampleHero.initiative = 7;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
@@ -49,9 +56,10 @@ public class Dank {
         exampleHero = new Hero();
         exampleHero.name = "Xental";
         exampleHero.heroClass = HeroClass.WARRIOR;
-        exampleHero.heathTotal = 100;
+        exampleHero.healthTotal = 100;
         exampleHero.healthCurrent = 100;
         exampleHero.attackDamage = 10;
+        exampleHero.initiative = 9;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
@@ -62,9 +70,10 @@ public class Dank {
         exampleHero = new Hero();
         exampleHero.name = "Antah";
         exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.heathTotal = 50;
+        exampleHero.healthTotal = 50;
         exampleHero.healthCurrent = 50;
         exampleHero.attackDamage = 20;
+        exampleHero.initiative = 10;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
@@ -75,9 +84,10 @@ public class Dank {
         exampleHero = new Hero();
         exampleHero.name = "Noctiphobia";
         exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.heathTotal = 60;
+        exampleHero.healthTotal = 60;
         exampleHero.healthCurrent = 60;
         exampleHero.attackDamage = 15;
+        exampleHero.initiative = 6;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
@@ -88,9 +98,10 @@ public class Dank {
         exampleHero = new Hero();
         exampleHero.name = "Nachrichter";
         exampleHero.heroClass = HeroClass.WARRIOR;
-        exampleHero.heathTotal = 80;
+        exampleHero.healthTotal = 80;
         exampleHero.healthCurrent = 80;
         exampleHero.attackDamage = 12;
+        exampleHero.initiative = 5;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
@@ -101,9 +112,10 @@ public class Dank {
         exampleHero = new Hero();
         exampleHero.name = "Ray";
         exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.heathTotal = 30;
+        exampleHero.healthTotal = 30;
         exampleHero.healthCurrent = 30;
         exampleHero.attackDamage = 30;
+        exampleHero.initiative = 11;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();

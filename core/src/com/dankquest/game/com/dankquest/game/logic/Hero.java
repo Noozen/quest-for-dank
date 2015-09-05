@@ -10,9 +10,10 @@ public class Hero {
     public HeroClass heroClass;
     public Pixmap texture;
     
-    public double heathTotal;
+    public double healthTotal;
     public double healthCurrent;
     public double attackDamage;
+    public double initiative;
 
     public Skill skill1;
     public Skill skill2;

@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.dankquest.game.com.dankquest.game.actors.HeroActor;
+import com.dankquest.game.com.dankquest.game.actors.PortraitActor;
 import com.dankquest.game.com.dankquest.game.actors.SkillActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
@@ -43,6 +44,8 @@ public class DankGame extends BasicScreen {
 
     private TextButton retreatButton, castButton;
 
+    private PortraitActor portraitActor;
+
     private SkillActor skill1, skill2, skill3, skill4;
     private HeroActor hero1, hero2, hero3, hero4;
     private int skillCast;
@@ -56,6 +59,25 @@ public class DankGame extends BasicScreen {
 
     @Override
     public void show() {
+        //Lista postaci
+        Dank.allHeroesInGameList.addAll(Dank.chosenHeroesList);
+        Dank.allHeroesInGameList.addAll(Dank.enemyHeroesList);
+        Dank.allHeroesInGameList.sort((new Comparator<Hero>() {
+
+            @Override
+            public int compare(Hero o1, Hero o2) {
+                if (o1.initiative < o2.initiative)
+                    return 1;
+                if (o1.initiative == o2.initiative)
+                    return 0;
+                if (o1.initiative > o2.initiative)
+                    return -1;
+                return -2; //Error
+            }
+        }));
+        Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
+
+        //Setup stag'a
         stage = new Stage(new FitViewport(640,480));
         Gdx.input.setInputProcessor(stage);
 
@@ -82,11 +104,11 @@ public class DankGame extends BasicScreen {
         //Retreat Button Setup
         retreatButton = new TextButton("Retreat", skin, "orange_yellow_fat");
 
-        retreatButton.setWidth(130);
-        retreatButton.setHeight(60);
+        retreatButton.setWidth(100);
+        retreatButton.setHeight(50);
 
-        retreatButton.setX(0);
-        retreatButton.setY(420);
+        retreatButton.setX(10);
+        retreatButton.setY(530);
 
         retreatButton.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -102,13 +124,13 @@ public class DankGame extends BasicScreen {
         table.addActor(retreatButton);
 
         //Active hero
-        Dank.activeHero = Dank.chosenHeroesList.get(0);
+        Dank.activeHero = Dank.allHeroesInGameList.get(0);
 
         //Skill buttons setup
-        skill1 = new SkillActor(440,0,1);
-        skill2 = new SkillActor(490,0,2);
-        skill3 = new SkillActor(540,0,3);
-        skill4 = new SkillActor(590,0,4);
+        skill1 = new SkillActor(200,10,1);
+        skill2 = new SkillActor(260,10,2);
+        skill3 = new SkillActor(320,10,3);
+        skill4 = new SkillActor(380,10,4);
         skill1.addListener(new InputListener() {
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -171,10 +193,10 @@ public class DankGame extends BasicScreen {
         table.addActor(skill4);
 
         //Heroes setup
-        hero1 = new HeroActor(180,200,1);
-        hero2 = new HeroActor(200,250,2);
-        hero3 = new HeroActor(220,300,3);
-        hero4 = new HeroActor(240,350,4);
+        hero1 = new HeroActor(10,120,1);
+        hero2 = new HeroActor(60,180,2);
+        hero3 = new HeroActor(110,240,3);
+        hero4 = new HeroActor(160,300,4);
         hero1.addListener(new InputListener() {
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -228,14 +250,18 @@ public class DankGame extends BasicScreen {
         table.addActor(hero2);
         table.addActor(hero1);
 
+        //Portrait Actor
+        portraitActor = new PortraitActor();
+        table.addActor(portraitActor);
+
         //Cast Button Setup
         castButton = new TextButton("Cast", skin, "orange_yellow_fat");
 
-        castButton.setWidth(130);
-        castButton.setHeight(60);
+        castButton.setWidth(100);
+        castButton.setHeight(100);
 
-        castButton.setX(0);
-        castButton.setY(0);
+        castButton.setX(530);
+        castButton.setY(10);
 
         castButton.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -247,14 +273,51 @@ public class DankGame extends BasicScreen {
                     return;
                 Dank.activeHero.getSkill(skillCast).cast(targetList);
                 targetMode = false;
-                targetList = new ArrayList<Hero>();
+                targetList.clear();
+                Dank.thisTurnLeftHeroesList.remove(Dank.activeHero);
+                Dank.thisTurnLeftHeroesList.sort((new Comparator<Hero>() {
+
+                    @Override
+                    public int compare(Hero o1, Hero o2) {
+                        if (o1.initiative < o2.initiative)
+                            return 1;
+                        if (o1.initiative == o2.initiative)
+                            return 0;
+                        if (o1.initiative > o2.initiative)
+                            return -1;
+                        return -2; //Error
+                    }
+                }));
+                Dank.allHeroesInGameList.sort((new Comparator<Hero>() {
+
+                    @Override
+                    public int compare(Hero o1, Hero o2) {
+                        if (o1.initiative < o2.initiative)
+                            return 1;
+                        if (o1.initiative == o2.initiative)
+                            return 0;
+                        if (o1.initiative > o2.initiative)
+                            return -1;
+                        return -2; //Error
+                    }
+                }));
+                if(Dank.thisTurnLeftHeroesList.isEmpty()) {
+                    Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
+                }
+                Dank.activeHero = Dank.thisTurnLeftHeroesList.get(0);
                 hero1.update();
                 hero2.update();
                 hero3.update();
                 hero4.update();
+                skill1.update();
+                skill2.update();
+                skill3.update();
+                skill4.update();
+                portraitActor.update();
             }
         });
         table.addActor(castButton);
+
     }
 
     @Override
