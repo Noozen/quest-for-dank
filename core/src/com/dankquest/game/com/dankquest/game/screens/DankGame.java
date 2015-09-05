@@ -116,7 +116,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (targetMode == true)
                     return;
                 skillCast = 1;
                 targetMode = true;
@@ -130,7 +130,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (targetMode == true)
                     return;
                 skillCast = 2;
                 targetMode = true;
@@ -144,7 +144,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (targetMode == true)
                     return;
                 skillCast = 3;
                 targetMode = true;
@@ -158,7 +158,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (targetMode == true)
                     return;
                 skillCast = 4;
                 targetMode = true;
