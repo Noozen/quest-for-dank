@@ -35,7 +35,9 @@ public class HeroActor extends Actor {
 
     @Override
     public void draw (Batch batch, float parentAlpha) {
+
         batch.draw(texture, x, y);
+        bitmapFont.draw(batch, Dank.chosenHeroesList.get(hero_number-1).name, x, y+74);
     }
 
     public void update() {
