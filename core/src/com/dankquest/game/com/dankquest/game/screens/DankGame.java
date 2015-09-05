@@ -248,6 +248,10 @@ public class DankGame extends BasicScreen {
                 Dank.activeHero.getSkill(skillCast).cast(targetList);
                 targetMode = false;
                 targetList = new ArrayList<Hero>();
+                hero1.update();
+                hero2.update();
+                hero3.update();
+                hero4.update();
             }
         });
         table.addActor(castButton);
