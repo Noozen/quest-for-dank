@@ -52,9 +52,9 @@ public class HeroActor extends Actor {
 
     public void update() {
         hpPixmap.drawPixmap(characterList.get(hero_number - 1).getImage(), 0, 0);
-        hpPixmap.setColor(1,0.5f,0.5f, 1);
+        hpPixmap.setColor(1, 0.5f, 0.5f, 1);
         hpPixmap.fillRectangle(0, 0, 64, 10);
-        hpPixmap.setColor(1,0,0,1);
+        hpPixmap.setColor(1, 0, 0, 1);
         hpPixmap.fillRectangle(0, 0, (int) (64 * (characterList.get(hero_number - 1).healthCurrent / characterList.get(hero_number - 1).healthTotal)), 10);
         texture = new Texture(hpPixmap);
     }

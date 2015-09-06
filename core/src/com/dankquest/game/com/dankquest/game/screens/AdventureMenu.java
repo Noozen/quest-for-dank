@@ -110,8 +110,10 @@ public class AdventureMenu extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                relaxingMusic.stop();
-                game.setScreen(new DankGame(game));
+                if (Dank.chosenHeroesList.size() == 4) {
+                    relaxingMusic.stop();
+                    game.setScreen(new DankGame(game));
+                 }
             }
         });
 

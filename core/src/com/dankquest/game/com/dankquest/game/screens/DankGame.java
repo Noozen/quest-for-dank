@@ -118,6 +118,7 @@ public class DankGame extends BasicScreen {
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 battleMusic.stop();
+                resetHealthAndStuff();
                 game.setScreen(new GameMenu(game));
             }
         });
@@ -217,7 +218,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(targetMode == false)
+                if (targetMode == false)
                     return;
                 targetList.add(Dank.chosenHeroesList.get(1));
             }
@@ -275,7 +276,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(targetMode == false)
+                if (targetMode == false)
                     return;
                 targetList.add(Dank.enemyHeroesList.get(1));
             }
@@ -330,40 +331,17 @@ public class DankGame extends BasicScreen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 if (targetMode == false)
                     return;
-                Dank.activeHero.getSkill(skillCast).cast(targetList);
-                targetMode = false;
-                targetList.clear();
-                Dank.thisTurnLeftHeroesList.remove(Dank.activeHero);
-                Dank.thisTurnLeftHeroesList.sort((new Comparator<Hero>() {
-
-                    @Override
-                    public int compare(Hero o1, Hero o2) {
-                        if (o1.initiative < o2.initiative)
-                            return 1;
-                        if (o1.initiative == o2.initiative)
-                            return 0;
-                        if (o1.initiative > o2.initiative)
-                            return -1;
-                        return -2; //Error
-                    }
-                }));
-                Dank.allHeroesInGameList.sort((new Comparator<Hero>() {
-
-                    @Override
-                    public int compare(Hero o1, Hero o2) {
-                        if (o1.initiative < o2.initiative)
-                            return 1;
-                        if (o1.initiative == o2.initiative)
-                            return 0;
-                        if (o1.initiative > o2.initiative)
-                            return -1;
-                        return -2; //Error
-                    }
-                }));
-                if(Dank.thisTurnLeftHeroesList.isEmpty()) {
-                    Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
+                if (Dank.chosenHeroesList.contains(Dank.activeHero)) {
+                    Dank.activeHero.getSkill(skillCast).cast(targetList);
+                    targetMode = false;
+                    checkIfGameEnded();
+                    clearTargetsAndSortHeroList();
                 }
-                Dank.activeHero = Dank.thisTurnLeftHeroesList.get(0);
+                while (Dank.enemyHeroesList.contains(Dank.activeHero)) {
+                    artificialIntelligence();
+                    checkIfGameEnded();
+                    clearTargetsAndSortHeroList();
+                }
                 hero1.update();
                 hero2.update();
                 hero3.update();
@@ -381,6 +359,119 @@ public class DankGame extends BasicScreen {
         });
         table.addActor(castButton);
 
+
+        //If computer begins
+        while (Dank.enemyHeroesList.contains(Dank.activeHero)) {
+            artificialIntelligence();
+            checkIfGameEnded();
+            clearTargetsAndSortHeroList();
+        }
+        hero1.update();
+        hero2.update();
+        hero3.update();
+        hero4.update();
+        enemy1.update();
+        enemy2.update();
+        enemy3.update();
+        enemy4.update();
+        skill1.update();
+        skill2.update();
+        skill3.update();
+        skill4.update();
+        portraitActor.update();
+
+    }
+
+    private void resetHealthAndStuff() {
+        for(Hero hero : Dank.allHeroesInGameList) {
+            hero.healthCurrent = hero.healthTotal;
+        }
+    }
+
+    private void checkIfGameEnded() {
+        boolean win = true;
+        boolean lose = true;
+        for(Hero hero : Dank.enemyHeroesList){
+            if(hero.healthCurrent>0) {
+                win = false;
+            }
+        }
+        for(Hero hero : Dank.chosenHeroesList){
+            if(hero.healthCurrent>0) {
+                lose = false;
+            }
+        }
+        if(win) {
+            for(Hero hero : Dank.allHeroesInGameList) {
+                hero.healthCurrent = hero.healthTotal;
+            }
+            Image winImage = new Image(new Texture(Gdx.files.internal("inne/victory.png")));
+            winImage.setX(270);
+            winImage.setY(215);
+            table.addActor(winImage);
+            resetHealthAndStuff();
+        }
+        if(lose) {
+            for(Hero hero : Dank.allHeroesInGameList) {
+                hero.healthCurrent = hero.healthTotal;
+            }
+            Image loseImage = new Image(new Texture(Gdx.files.internal("inne/defeat.png")));
+            loseImage.setX(270);
+            loseImage.setY(215);
+            table.addActor(loseImage);
+            resetHealthAndStuff();
+        }
+    }
+
+    private void artificialIntelligence() {
+        int i;
+        for( i=0;;i++) {
+            if(i==4) {
+                checkIfGameEnded();
+                return;
+            }
+            if(Dank.chosenHeroesList.get(i).healthCurrent>0){
+                break;
+            }
+        }
+        targetList.add(Dank.activeHero);
+        targetList.add(Dank.chosenHeroesList.get(i));
+        Dank.activeHero.getSkill(0).cast(targetList);
+    }
+
+    private void clearTargetsAndSortHeroList() {
+        targetList.clear();
+        Dank.thisTurnLeftHeroesList.remove(Dank.activeHero);
+        Dank.thisTurnLeftHeroesList.sort((new Comparator<Hero>() {
+
+            @Override
+            public int compare(Hero o1, Hero o2) {
+                if (o1.initiative < o2.initiative)
+                    return 1;
+                if (o1.initiative == o2.initiative)
+                    return 0;
+                if (o1.initiative > o2.initiative)
+                    return -1;
+                return -2; //Error
+            }
+        }));
+        Dank.allHeroesInGameList.sort((new Comparator<Hero>() {
+
+            @Override
+            public int compare(Hero o1, Hero o2) {
+                if (o1.initiative < o2.initiative)
+                    return 1;
+                if (o1.initiative == o2.initiative)
+                    return 0;
+                if (o1.initiative > o2.initiative)
+                    return -1;
+                return -2; //Error
+            }
+        }));
+        if(Dank.thisTurnLeftHeroesList.isEmpty()) {
+            Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
+        }
+        Dank.activeHero = Dank.thisTurnLeftHeroesList.get(0);
     }
 
     @Override
