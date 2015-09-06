@@ -10,6 +10,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
+import com.dankquest.game.com.dankquest.game.logic.Hero;
+
+import java.util.List;
 
 public class HeroActor extends Actor {
 
@@ -21,8 +24,15 @@ public class HeroActor extends Actor {
 
     private Pixmap hpPixmap;
 
+    List<Hero> characterList;
 
-    public HeroActor(int x, int y, int hero_number) {
+
+    public HeroActor(int x, int y, int hero_number, boolean playerControlled) {
+        if(playerControlled) {
+            characterList = Dank.chosenHeroesList;
+        } else {
+            characterList = Dank.enemyHeroesList;
+        }
         hpPixmap  = new Pixmap(64, 64, Pixmap.Format.RGBA8888);
         bitmapFont = new BitmapFont();
         bitmapFont.setColor(1, 0, 0, 1);
@@ -37,15 +47,15 @@ public class HeroActor extends Actor {
     public void draw (Batch batch, float parentAlpha) {
 
         batch.draw(texture, x, y);
-        bitmapFont.draw(batch, Dank.chosenHeroesList.get(hero_number-1).name, x, y+74);
+        bitmapFont.draw(batch, characterList.get(hero_number - 1).name, x, y+74);
     }
 
     public void update() {
-        hpPixmap.drawPixmap(Dank.chosenHeroesList.get(hero_number - 1).getImage(), 0, 0);
+        hpPixmap.drawPixmap(characterList.get(hero_number - 1).getImage(), 0, 0);
         hpPixmap.setColor(1,0.5f,0.5f, 1);
         hpPixmap.fillRectangle(0, 0, 64, 10);
         hpPixmap.setColor(1,0,0,1);
-        hpPixmap.fillRectangle(0, 0, (int) (64 * (Dank.chosenHeroesList.get(hero_number - 1).healthCurrent / Dank.chosenHeroesList.get(hero_number - 1).healthTotal)), 10);
+        hpPixmap.fillRectangle(0, 0, (int) (64 * (characterList.get(hero_number - 1).healthCurrent / characterList.get(hero_number - 1).healthTotal)), 10);
         texture = new Texture(hpPixmap);
     }
 }

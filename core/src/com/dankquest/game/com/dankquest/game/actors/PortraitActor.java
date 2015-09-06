@@ -1,5 +1,6 @@
 package com.dankquest.game.com.dankquest.game.actors;
 
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,6 +13,8 @@ import com.dankquest.game.com.dankquest.game.logic.Dank;
 public class PortraitActor extends Actor {
 
     private Texture texture;
+
+    private Pixmap pixmap = new Pixmap(100,100, Pixmap.Format.RGBA8888);
 
     BitmapFont bitmapFont;
 
@@ -28,6 +31,11 @@ public class PortraitActor extends Actor {
     }
 
     public void update() {
-        texture = new Texture(Dank.activeHero.getImage());
+        pixmap.setColor(0, 0, 0, 0);
+        pixmap.fill();
+        pixmap.setColor(0.5f, 0.5f, 0.5f, 1);
+        pixmap.fillCircle(50, 50, 50);
+        pixmap.drawPixmap(Dank.activeHero.getImage(), 0, 0, 64, 64, 0, 0, 100, 100);
+        texture = new Texture(pixmap);
     }
 }

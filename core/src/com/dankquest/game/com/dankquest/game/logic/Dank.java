@@ -39,6 +39,7 @@ public class Dank {
 
         Hero exampleHero;
 
+        //Heroes
         exampleHero = new Hero();
         exampleHero.name = "Noozen";
         exampleHero.heroClass = HeroClass.WARRIOR;
@@ -130,6 +131,64 @@ public class Dank {
                 return o1.name.compareTo(o2.name);
             }
         });
+
+        //Enemies
+        exampleHero = new Hero();
+        exampleHero.name = "Enemy1";
+        exampleHero.heroClass = HeroClass.MAGE;
+        exampleHero.healthTotal = 50;
+        exampleHero.healthCurrent = 50;
+        exampleHero.attackDamage = 20;
+        exampleHero.initiative = 9;
+        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill2 = new FireballSkill();
+        exampleHero.skill3 = new SlamSkill();
+        exampleHero.skill4 = new TwinBladeSkill();
+        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
+        enemyHeroesList.add(exampleHero);
+
+        exampleHero = new Hero();
+        exampleHero.name = "Enemy2";
+        exampleHero.heroClass = HeroClass.MAGE;
+        exampleHero.healthTotal = 50;
+        exampleHero.healthCurrent = 50;
+        exampleHero.attackDamage = 20;
+        exampleHero.initiative = 9;
+        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill2 = new FireballSkill();
+        exampleHero.skill3 = new SlamSkill();
+        exampleHero.skill4 = new TwinBladeSkill();
+        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
+        enemyHeroesList.add(exampleHero);
+
+        exampleHero = new Hero();
+        exampleHero.name = "Enemy3";
+        exampleHero.heroClass = HeroClass.MAGE;
+        exampleHero.healthTotal = 50;
+        exampleHero.healthCurrent = 50;
+        exampleHero.attackDamage = 20;
+        exampleHero.initiative = 9;
+        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill2 = new FireballSkill();
+        exampleHero.skill3 = new SlamSkill();
+        exampleHero.skill4 = new TwinBladeSkill();
+        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
+        enemyHeroesList.add(exampleHero);
+
+        exampleHero = new Hero();
+        exampleHero.name = "Enemy4";
+        exampleHero.heroClass = HeroClass.MAGE;
+        exampleHero.healthTotal = 50;
+        exampleHero.healthCurrent = 50;
+        exampleHero.attackDamage = 20;
+        exampleHero.initiative = 9;
+        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill2 = new FireballSkill();
+        exampleHero.skill3 = new SlamSkill();
+        exampleHero.skill4 = new TwinBladeSkill();
+        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
+        enemyHeroesList.add(exampleHero);
+
     }
 
 }

@@ -48,6 +48,7 @@ public class DankGame extends BasicScreen {
 
     private SkillActor skill1, skill2, skill3, skill4;
     private HeroActor hero1, hero2, hero3, hero4;
+    private HeroActor enemy1, enemy2, enemy3, enemy4;
     private int skillCast;
     private boolean targetMode;
     private List<Hero> targetList = new ArrayList<Hero>();
@@ -102,13 +103,13 @@ public class DankGame extends BasicScreen {
                 new TextureAtlas(Gdx.files.internal("skins/rainbowpack.pack")));
 
         //Retreat Button Setup
-        retreatButton = new TextButton("Retreat", skin, "orange_yellow_fat");
+        retreatButton = new TextButton(":<", skin, "orange_yellow_fat");
 
-        retreatButton.setWidth(100);
+        retreatButton.setWidth(50);
         retreatButton.setHeight(50);
 
         retreatButton.setX(10);
-        retreatButton.setY(530);
+        retreatButton.setY(420);
 
         retreatButton.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -193,10 +194,10 @@ public class DankGame extends BasicScreen {
         table.addActor(skill4);
 
         //Heroes setup
-        hero1 = new HeroActor(10,120,1);
-        hero2 = new HeroActor(60,180,2);
-        hero3 = new HeroActor(110,240,3);
-        hero4 = new HeroActor(160,300,4);
+        hero1 = new HeroActor(10,120,1, true);
+        hero2 = new HeroActor(60,180,2, true);
+        hero3 = new HeroActor(110,240,3, true);
+        hero4 = new HeroActor(160,300,4, true);
         hero1.addListener(new InputListener() {
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -249,6 +250,64 @@ public class DankGame extends BasicScreen {
         table.addActor(hero3);
         table.addActor(hero2);
         table.addActor(hero1);
+
+        //Enemy setup
+        enemy1 = new HeroActor(566,120,1, false);
+        enemy2 = new HeroActor(516,180,2, false);
+        enemy3 = new HeroActor(466,240,3, false);
+        enemy4 = new HeroActor(416,300,4, false);
+        enemy1.addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (targetMode == false)
+                    return;
+                targetList.add(Dank.enemyHeroesList.get(0));
+            }
+        });
+        enemy2.addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if(targetMode == false)
+                    return;
+                targetList.add(Dank.enemyHeroesList.get(1));
+            }
+        });
+        enemy3.addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (targetMode == false)
+                    return;
+                targetList.add(Dank.enemyHeroesList.get(2));
+            }
+        });
+        enemy4.addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (targetMode == false)
+                    return;
+                targetList.add(Dank.enemyHeroesList.get(3));
+            }
+        });
+        table.addActor(enemy4);
+        table.addActor(enemy3);
+        table.addActor(enemy2);
+        table.addActor(enemy1);
 
         //Portrait Actor
         portraitActor = new PortraitActor();
@@ -309,6 +368,10 @@ public class DankGame extends BasicScreen {
                 hero2.update();
                 hero3.update();
                 hero4.update();
+                enemy1.update();
+                enemy2.update();
+                enemy3.update();
+                enemy4.update();
                 skill1.update();
                 skill2.update();
                 skill3.update();
