@@ -20,6 +20,7 @@ import com.dankquest.game.com.dankquest.game.actors.PortraitActor;
 import com.dankquest.game.com.dankquest.game.actors.SkillActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
+import com.dankquest.game.com.dankquest.game.util.DankUtil;
 
 import java.util.Comparator;
 
@@ -60,19 +61,7 @@ public class DankGame extends BasicScreen {
     private void heroesListSetup() {
         Dank.allHeroesInGameList.addAll(Dank.chosenHeroesList);
         Dank.allHeroesInGameList.addAll(Dank.enemyHeroesList);
-        Dank.allHeroesInGameList.sort((new Comparator<Hero>() {
-
-            @Override
-            public int compare(Hero o1, Hero o2) {
-                if (o1.initiative < o2.initiative)
-                    return 1;
-                if (o1.initiative == o2.initiative)
-                    return 0;
-                if (o1.initiative > o2.initiative)
-                    return -1;
-                return -2; //Error
-            }
-        }));
+        Dank.allHeroesInGameList.sort(DankUtil.descendingInitiativeComparator);
         Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
         Dank.activeHero = Dank.allHeroesInGameList.get(0);
     }
@@ -336,50 +325,16 @@ public class DankGame extends BasicScreen {
         Dank.skillCastNumber = 0;
         Dank.targetList.clear();
         Dank.thisTurnLeftHeroesList.remove(Dank.activeHero);
-        Dank.thisTurnLeftHeroesList.sort((new Comparator<Hero>() {
-
-            @Override
-            public int compare(Hero o1, Hero o2) {
-                if (o1.initiative < o2.initiative)
-                    return 1;
-                if (o1.initiative == o2.initiative)
-                    return 0;
-                if (o1.initiative > o2.initiative)
-                    return -1;
-                return -2; //Error
-            }
-        }));
-        Dank.allHeroesInGameList.sort((new Comparator<Hero>() {
-
-            @Override
-            public int compare(Hero o1, Hero o2) {
-                if (o1.initiative < o2.initiative)
-                    return 1;
-                if (o1.initiative == o2.initiative)
-                    return 0;
-                if (o1.initiative > o2.initiative)
-                    return -1;
-                return -2; //Error
-            }
-        }));
+        Dank.thisTurnLeftHeroesList.sort(DankUtil.descendingInitiativeComparator);
+        Dank.allHeroesInGameList.sort(DankUtil.descendingInitiativeComparator);
         if (Dank.thisTurnLeftHeroesList.isEmpty()) {
             if (!Dank.passHeroesList.isEmpty()) {
-                Dank.passHeroesList.sort((new Comparator<Hero>() {
-
-                    @Override
-                    public int compare(Hero o1, Hero o2) {
-                        if (o1.initiative < o2.initiative)
-                            return 1;
-                        if (o1.initiative == o2.initiative)
-                            return 0;
-                        if (o1.initiative > o2.initiative)
-                            return -1;
-                        return -2; //Error
-                    }
-                }));
+                Dank.passHeroesList.sort(DankUtil.descendingInitiativeComparator);
                 Dank.thisTurnLeftHeroesList.addAll(Dank.passHeroesList);
+                Dank.passHeroesList.clear();
                 Dank.passPhase = true;
             } else {
+                Dank.passPhase = false;
                 Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
             }
         }

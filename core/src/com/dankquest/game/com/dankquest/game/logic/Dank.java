@@ -7,10 +7,10 @@ import com.dankquest.game.com.dankquest.game.logic.skill.SlamSkill;
 import com.dankquest.game.com.dankquest.game.logic.skill.TwinBladeSkill;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.dankquest.game.com.dankquest.game.util.DankUtil;
 
 /**
  * Created by Miko on 2015-08-28.
@@ -131,13 +131,7 @@ public class Dank {
         exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/goblin.png"));
         ownedHeroesList.add(exampleHero);
 
-        ownedHeroesList.sort(new Comparator<Hero>() {
-
-            @Override
-            public int compare(Hero o1, Hero o2) {
-                return o1.name.compareTo(o2.name);
-            }
-        });
+        ownedHeroesList.sort(DankUtil.ascendingNameComparator);
 
         //Enemies
         exampleHero = new Hero();

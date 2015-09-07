@@ -19,6 +19,7 @@ import com.dankquest.game.com.dankquest.game.actors.OwnedHeroesActor;
 import com.dankquest.game.com.dankquest.game.actors.ChosenHeroesActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
+import com.dankquest.game.com.dankquest.game.util.DankUtil;
 
 import java.util.Comparator;
 
@@ -176,13 +177,7 @@ public class AdventureMenu extends BasicScreen {
                     ownedHeroesActor.update();
                     chosenHeroesActor.update();
 
-                    Dank.ownedHeroesList.sort(new Comparator<Hero>() {
-
-                        @Override
-                        public int compare(Hero o1, Hero o2) {
-                            return o1.name.compareTo(o2.name);
-                        }
-                    });
+                    Dank.ownedHeroesList.sort(DankUtil.ascendingNameComparator);
                 }
             }
         });
@@ -202,13 +197,7 @@ public class AdventureMenu extends BasicScreen {
                     ownedHeroesActor.update();
                     chosenHeroesActor.update();
 
-                    Dank.ownedHeroesList.sort(new Comparator<Hero>() {
-
-                        @Override
-                        public int compare(Hero o1, Hero o2) {
-                            return o1.name.compareTo(o2.name);
-                        }
-                    });
+                    Dank.ownedHeroesList.sort(DankUtil.ascendingNameComparator);
 
                 }
             }
