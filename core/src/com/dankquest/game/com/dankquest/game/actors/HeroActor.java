@@ -22,7 +22,7 @@ public class HeroActor extends Actor {
 
     private int x, y, hero_number;
 
-    private Pixmap hpPixmap;
+    private Pixmap pixmap;
 
     List<Hero> characterList;
 
@@ -33,7 +33,7 @@ public class HeroActor extends Actor {
         } else {
             characterList = Dank.enemyHeroesList;
         }
-        hpPixmap  = new Pixmap(64, 64, Pixmap.Format.RGBA8888);
+        pixmap = new Pixmap(64, 64, Pixmap.Format.RGBA8888);
         bitmapFont = new BitmapFont();
         bitmapFont.setColor(1, 0, 0, 1);
         this.x = x;
@@ -45,17 +45,16 @@ public class HeroActor extends Actor {
 
     @Override
     public void draw (Batch batch, float parentAlpha) {
-
         batch.draw(texture, x, y);
         bitmapFont.draw(batch, characterList.get(hero_number - 1).name, x, y+74);
     }
 
     public void update() {
-        hpPixmap.drawPixmap(characterList.get(hero_number - 1).getImage(), 0, 0);
-        hpPixmap.setColor(1, 0.5f, 0.5f, 1);
-        hpPixmap.fillRectangle(0, 0, 64, 10);
-        hpPixmap.setColor(1, 0, 0, 1);
-        hpPixmap.fillRectangle(0, 0, (int) (64 * (characterList.get(hero_number - 1).healthCurrent / characterList.get(hero_number - 1).healthTotal)), 10);
-        texture = new Texture(hpPixmap);
+        pixmap.drawPixmap(characterList.get(hero_number - 1).getImage(), 0, 0);
+        pixmap.setColor(1, 0.5f, 0.5f, 1);
+        pixmap.fillRectangle(0, 0, 64, 10);
+        pixmap.setColor(1, 0, 0, 1);
+        pixmap.fillRectangle(0, 0, (int) (64 * (characterList.get(hero_number - 1).healthCurrent / characterList.get(hero_number - 1).healthTotal)), 10);
+        texture = new Texture(pixmap);
     }
 }

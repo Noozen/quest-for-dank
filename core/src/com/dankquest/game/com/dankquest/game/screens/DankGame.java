@@ -44,8 +44,7 @@ public class DankGame extends BasicScreen {
     private HeroActor hero1, hero2, hero3, hero4;
     private HeroActor enemy1, enemy2, enemy3, enemy4;
     //Targeting
-    private int skillCast = 0;
-    private boolean targetMode = false;
+    private static int skillCast = 0;
     private List<Hero> targetList = new ArrayList<Hero>();
     //Pass mechanic
     private List<Hero> passHeroesList = new ArrayList<Hero>();
@@ -56,6 +55,9 @@ public class DankGame extends BasicScreen {
         super(game);
     }
 
+    public static int getSkillCast(){
+        return skillCast;
+    }
 
     @Override
     public void show() {
@@ -192,11 +194,11 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (skillCast == 0)
                     return;
                 if (Dank.chosenHeroesList.contains(Dank.activeHero)) {
                     Dank.activeHero.getSkill(skillCast).cast(targetList);
-                    targetMode = false;
+                    skillCast = 0;
                     checkIfGameEnded();
                     clearTargetsAndSortHeroList();
                 }
@@ -218,16 +220,8 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == true) {
-                    if (skillCast == 1) {
-                        targetMode = false;
-                        targetList.clear();
-                    }
-                    return;
-                }
-                skillCast = 1;
-                targetMode = true;
-                targetList.add(Dank.activeHero);
+                skillCastTouchUp(1);
+                update();
             }
         });
         skill2.addListener(new InputListener() {
@@ -237,16 +231,8 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == true) {
-                    if (skillCast == 2) {
-                        targetMode = false;
-                        targetList.clear();
-                    }
-                    return;
-                }
-                skillCast = 2;
-                targetMode = true;
-                targetList.add(Dank.activeHero);
+                skillCastTouchUp(2);
+                update();
             }
         });
         skill3.addListener(new InputListener() {
@@ -256,16 +242,8 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == true) {
-                    if (skillCast == 3) {
-                        targetMode = false;
-                        targetList.clear();
-                    }
-                    return;
-                }
-                skillCast = 3;
-                targetMode = true;
-                targetList.add(Dank.activeHero);
+                skillCastTouchUp(3);
+                update();
             }
         });
         skill4.addListener(new InputListener() {
@@ -275,22 +253,26 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == true) {
-                    if (skillCast == 4) {
-                        targetMode = false;
-                        targetList.clear();
-                    }
-                    return;
-                }
-                skillCast = 4;
-                targetMode = true;
-                targetList.add(Dank.activeHero);
+                skillCastTouchUp(4);
+                update();
             }
         });
         table.addActor(skill1);
         table.addActor(skill2);
         table.addActor(skill3);
         table.addActor(skill4);
+    }
+    private void skillCastTouchUp(int i) {
+        if (skillCast > 0) {
+            if (skillCast == i) {
+                skillCast = 0;
+                targetList.clear();
+            }
+        }
+        else{
+            skillCast = i;
+            targetList.add(Dank.activeHero);
+        }
     }
     private void heroesSetup() {
         hero1 = new HeroActor(10, 120, 1, true);
@@ -304,7 +286,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (skillCast == 0)
                     return;
                 targetList.add(Dank.chosenHeroesList.get(0));
             }
@@ -316,7 +298,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (skillCast == 0)
                     return;
                 targetList.add(Dank.chosenHeroesList.get(1));
             }
@@ -328,7 +310,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (skillCast == 0)
                     return;
                 targetList.add(Dank.chosenHeroesList.get(2));
             }
@@ -340,7 +322,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (skillCast == 0)
                     return;
                 targetList.add(Dank.chosenHeroesList.get(3));
             }
@@ -362,7 +344,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (skillCast == 0)
                     return;
                 targetList.add(Dank.enemyHeroesList.get(0));
             }
@@ -374,7 +356,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (skillCast == 0)
                     return;
                 targetList.add(Dank.enemyHeroesList.get(1));
             }
@@ -386,7 +368,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (skillCast == 0)
                     return;
                 targetList.add(Dank.enemyHeroesList.get(2));
             }
@@ -398,7 +380,7 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (targetMode == false)
+                if (skillCast == 0)
                     return;
                 targetList.add(Dank.enemyHeroesList.get(3));
             }
@@ -499,7 +481,7 @@ public class DankGame extends BasicScreen {
     }
 
     private void clearTargetsAndSortHeroList() {
-        targetMode = false;
+        skillCast = 0;
         targetList.clear();
         Dank.thisTurnLeftHeroesList.remove(Dank.activeHero);
         Dank.thisTurnLeftHeroesList.sort((new Comparator<Hero>() {
