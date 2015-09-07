@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.screens.DankGame;
 
@@ -22,35 +24,63 @@ public class SkillActor extends Actor {
 
     private int x, y, skillNumber;
 
-    public SkillActor(int x, int y, int skillNumber) {
+    private DankGame dankGameInstance;
+
+    public SkillActor(int x, int y, int skillNumber, DankGame dankGame) {
         bitmapFont = new BitmapFont();
         bitmapFont.setColor(1, 0, 0, 1);
         pixmap = new Pixmap(50, 50, Pixmap.Format.RGBA8888);
         this.x = x;
         this.y = y;
         this.skillNumber = skillNumber;
+        this.dankGameInstance = dankGame;
         setBounds(x, y, 50, 50);
+        addCustomListener();
         update();
     }
 
     @Override
     public void draw (Batch batch, float parentAlpha) {
         batch.draw(texture, x, y);
-        bitmapFont.draw(batch, Dank.activeHero.getSkill(skillNumber).toString(),x,y+62);
+        bitmapFont.draw(batch, Dank.activeHero.getSkill(skillNumber).toString(), x, y + 62);
     }
 
     public void update() {
         pixmap.setColor(0, 0, 0, 0);
         pixmap.fill();
-        pixmap.drawPixmap(Dank.activeHero.getSkill(skillNumber).getImage(),0,0);
-        if(DankGame.getSkillCast() == skillNumber){
-            pixmap.setColor(1, 1, 1, 0.2f);
-            pixmap.fillRectangle(0, 0, 50, 50);
+        pixmap.drawPixmap(Dank.activeHero.getSkill(skillNumber).getImage(), 0, 0);
+        if(Dank.skillCastNumber == skillNumber){
             pixmap.setColor(1, 1, 1, 0.4f);
-            pixmap.fillRectangle(20, 20, 30, 30);
-            pixmap.setColor(1, 1, 1, 0.6f);
-            pixmap.fillRectangle(40, 40, 10, 10);
+            pixmap.fillRectangle(0, 0, 100, 100);
         }
         texture = new Texture(pixmap);
+        pixmap.setColor(1, 1, 1, 0);
+        pixmap.fill();
+    }
+
+    public void addCustomListener() {
+        addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                skillCastTouchUp(skillNumber);
+                dankGameInstance.update();
+            }
+        });
+    }
+
+    private void skillCastTouchUp(int i) {
+        if (Dank.skillCastNumber > 0) {
+            if (Dank.skillCastNumber == i) {
+                Dank.skillCastNumber = 0;
+                Dank.targetList.clear();
+            }
+        } else {
+            Dank.skillCastNumber = i;
+            Dank.targetList.add(Dank.activeHero);
+        }
     }
 }

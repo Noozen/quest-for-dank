@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class ArrowSkill implements Skill {
 
+    private int amountOfTargets = 1;
+
     Pixmap basePixmap = new Pixmap(Gdx.files.internal("skills/arrow.png"));
 
     public void cast(List<Hero> heroList) {
@@ -19,6 +21,10 @@ public class ArrowSkill implements Skill {
 
     public Pixmap getImage() {
         return basePixmap;
+    }
+
+    public int getAmountOfTargets() {
+        return amountOfTargets;
     }
 
     public String toString(){ return "Arrow"; }

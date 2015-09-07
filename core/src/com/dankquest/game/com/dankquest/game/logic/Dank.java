@@ -20,14 +20,19 @@ public class Dank {
     private Dank() {
     }
 
+    public static Hero activeHero;
+
     public static List<Hero> ownedHeroesList;
     public static List<Hero> chosenHeroesList;
     public static List<Item> unassignedItemsList;
     public static List<Hero> enemyHeroesList;
     public static List<Hero> allHeroesInGameList;
     public static List<Hero> thisTurnLeftHeroesList;
+    public static List<Hero> targetList;
+    public static List<Hero> passHeroesList;
 
-    public static Hero activeHero;
+    public static int skillCastNumber = 0;
+    public static boolean passPhase = false;
 
     static {
         ownedHeroesList = new ArrayList<Hero>();
@@ -36,6 +41,8 @@ public class Dank {
         enemyHeroesList = new ArrayList<Hero>();
         allHeroesInGameList = new ArrayList<Hero>();
         thisTurnLeftHeroesList = new ArrayList<Hero>();
+        targetList = new ArrayList<Hero>();
+        passHeroesList = new ArrayList<Hero>();
 
         Hero exampleHero;
 

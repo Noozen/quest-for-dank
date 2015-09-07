@@ -11,4 +11,6 @@ import java.util.List;
 public interface Skill {
     public void cast(List<Hero> heroList);
     public Pixmap getImage();
+    public int getAmountOfTargets();
+    public String toString();
 }
