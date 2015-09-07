@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.dankquest.game.com.dankquest.game.actors.HeroActor;
 import com.dankquest.game.com.dankquest.game.actors.PortraitActor;
@@ -41,6 +42,8 @@ public class DankGame extends BasicScreen {
     //Heroes
     private HeroActor hero1, hero2, hero3, hero4;
     private HeroActor enemy1, enemy2, enemy3, enemy4;
+    //Timer
+    private Timer AITimer = new Timer();
 
 
     public DankGame(Game game) {
@@ -150,10 +153,13 @@ public class DankGame extends BasicScreen {
                 if (Dank.passPhase == true) {
                     return;
                 }
+                if (Dank.enemyTurnInProgress == true) {
+                    return;
+                }
                 Dank.passHeroesList.add(Dank.activeHero);
                 checkIfGameEnded();
                 clearTargetsAndSortHeroList();
-                checkEnemyTurn();
+                processComputerTurns();
                 update();
             }
         });
@@ -179,6 +185,9 @@ public class DankGame extends BasicScreen {
                 if (Dank.skillCastNumber == 0)
                     return;
                 if (Dank.targetList.size() != Dank.activeHero.getSkill(Dank.skillCastNumber).getAmountOfTargets() + 1) {
+                    return;
+                }
+                if (Dank.enemyTurnInProgress == true) {
                     return;
                 }
                 if (Dank.chosenHeroesList.contains(Dank.activeHero)) {
@@ -248,19 +257,22 @@ public class DankGame extends BasicScreen {
         portraitActor.update();
     }
 
-    private void checkEnemyTurn() {
-        while (Dank.enemyHeroesList.contains(Dank.activeHero)) {
-            artificialIntelligence();
-            checkIfGameEnded();
-            clearTargetsAndSortHeroList();
-        }
-    }
-
     private void processComputerTurns() {
-        while (Dank.enemyHeroesList.contains(Dank.activeHero)) {
-            artificialIntelligence();
-            checkIfGameEnded();
-            clearTargetsAndSortHeroList();
+        if (Dank.enemyHeroesList.contains(Dank.activeHero)) {
+            Dank.enemyTurnInProgress = true;
+            AITimer.scheduleTask(new Timer.Task() {
+
+                @Override
+                public void run() {
+                    artificialIntelligence();
+                    checkIfGameEnded();
+                    clearTargetsAndSortHeroList();
+                    update();
+                    processComputerTurns();
+                }
+            },0.75f);
+        } else {
+            Dank.enemyTurnInProgress = false;
         }
     }
 

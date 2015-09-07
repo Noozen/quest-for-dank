@@ -80,8 +80,12 @@ public class HeroActor extends Actor {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (Dank.skillCastNumber == 0)
+                if (Dank.skillCastNumber == 0) {
                     return;
+                }
+                if (Dank.enemyTurnInProgress == true) {
+                    return;
+                }
                 if (Dank.targetList.subList(1, Dank.targetList.size()).contains(characterList.get(heroNumber - 1))) {
                     for(int i=1;i<Dank.targetList.size();i++) {
                         if(Dank.targetList.get(i) == characterList.get(heroNumber-1)) {

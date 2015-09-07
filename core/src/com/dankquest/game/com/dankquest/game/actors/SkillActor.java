@@ -66,6 +66,9 @@ public class SkillActor extends Actor {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (Dank.enemyTurnInProgress == true) {
+                    return;
+                }
                 skillCastTouchUp(skillNumber);
                 dankGameInstance.update();
             }

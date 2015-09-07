@@ -33,6 +33,7 @@ public class Dank {
 
     public static int skillCastNumber = 0;
     public static boolean passPhase = false;
+    public static boolean enemyTurnInProgress = false;
 
     static {
         ownedHeroesList = new ArrayList<Hero>();
