@@ -131,7 +131,7 @@ public class DankGame extends BasicScreen {
     private void retreatButtonSetup() {
         retreatButton = new TextButton("Babyrage", skin, "orange_yellow_fat");
 
-        retreatButton.setWidth(150);
+        retreatButton.setWidth(200);
         retreatButton.setHeight(50);
 
         retreatButton.setX(10);
@@ -154,10 +154,10 @@ public class DankGame extends BasicScreen {
     private void passButtonSetup() {
         passButton = new TextButton("Pass", skin, "orange_yellow_fat");
 
-        passButton.setWidth(50);
+        passButton.setWidth(100);
         passButton.setHeight(50);
 
-        passButton.setX(580);
+        passButton.setX(530);
         passButton.setY(420);
 
         passButton.addListener(new InputListener() {
