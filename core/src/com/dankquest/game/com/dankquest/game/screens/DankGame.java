@@ -47,15 +47,8 @@ public class DankGame extends BasicScreen {
     //Timer
     private Timer AITimer = new Timer();
     //Animation
-    private Texture skillSheet;
-    private TextureRegion[] skillFrames;
-    private Animation skillAnimation;
-    private SpriteBatch spriteBatch;
     private float stateTime;
-    private TextureRegion currentSkillFrame;
     private boolean castState;
-    private Timer castTimer = new Timer();
-
 
     public DankGame(Game game) {
         super(game);
@@ -203,23 +196,27 @@ public class DankGame extends BasicScreen {
                     return;
                 }
                 if (Dank.chosenHeroesList.contains(Dank.activeHero)) {
-                    skillSheet = new Texture(Gdx.files.internal("skills_animations/Fireball.png")); // #9
-                    TextureRegion[][] tmp = TextureRegion.split(skillSheet, 192, 192);              // #10
-                    skillFrames = new TextureRegion[3 * 5];
-                    int index = 0;
-                    for (int i = 0; i < 3; i++) {
-                        for (int j = 0; j < 5; j++) {
-                            skillFrames[index++] = tmp[i][j];
-                        }
-                    }
-                    skillAnimation = new Animation(0.05f, skillFrames);      // #11
-                    spriteBatch = new SpriteBatch();                // #12
-                    stateTime = 0f;                         // #13
                     castState = true;
                 }
             }
         });
         table.addActor(castButton);
+    }
+
+    private void spellAnimation() {
+        if(stateTime <= 1f){
+            stateTime += Gdx.graphics.getDeltaTime();
+            Dank.activeHero.getSkill(Dank.skillCastNumber).castAnimation(Dank.targetList,stateTime);
+        } else {
+            castState = false;
+            Dank.activeHero.getSkill(Dank.skillCastNumber).cast(Dank.targetList);
+            Dank.skillCastNumber = 0;
+            checkIfGameEnded();
+            clearTargetsAndSortHeroList();
+            update();
+            processComputerTurns();
+            update();
+        }
     }
 
     private void skillsSetup() {
@@ -380,22 +377,8 @@ public class DankGame extends BasicScreen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-        if(castState == true) {
-            stateTime += Gdx.graphics.getDeltaTime();           // #15
-            currentSkillFrame = skillAnimation.getKeyFrame(stateTime, true);  // #16
-            spriteBatch.begin();
-            spriteBatch.draw(currentSkillFrame, 50, 50);             // #17
-            spriteBatch.end();
-            if(stateTime >= 1){
-                Dank.activeHero.getSkill(Dank.skillCastNumber).cast(Dank.targetList);
-                Dank.skillCastNumber = 0;
-                checkIfGameEnded();
-                clearTargetsAndSortHeroList();
-                update();
-                castState = false;
-                processComputerTurns();
-                update();
-            }
+        if(castState == true){
+            spellAnimation();
         }
     }
 
