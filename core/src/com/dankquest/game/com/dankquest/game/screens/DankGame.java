@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -44,6 +46,15 @@ public class DankGame extends BasicScreen {
     private HeroActor enemy1, enemy2, enemy3, enemy4;
     //Timer
     private Timer AITimer = new Timer();
+    //Animation
+    private Texture skillSheet;
+    private TextureRegion[] skillFrames;
+    private Animation skillAnimation;
+    private SpriteBatch spriteBatch;
+    private float stateTime;
+    private TextureRegion currentSkillFrame;
+    private boolean castState;
+    private Timer castTimer = new Timer();
 
 
     public DankGame(Game game) {
@@ -52,6 +63,7 @@ public class DankGame extends BasicScreen {
 
     @Override
     public void show() {
+        castState = false;
         heroesListSetup();
         stageSetup();
         musicSetup();
@@ -64,8 +76,8 @@ public class DankGame extends BasicScreen {
     private void heroesListSetup() {
         Dank.allHeroesInGameList.addAll(Dank.chosenHeroesList);
         Dank.allHeroesInGameList.addAll(Dank.enemyHeroesList);
-        Dank.allHeroesInGameList.sort(DankUtil.descendingInitiativeComparator);
         Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
+        Dank.thisTurnLeftHeroesList.sort(DankUtil.descendingInitiativeComparator);
         Dank.activeHero = Dank.allHeroesInGameList.get(0);
     }
 
@@ -191,14 +203,20 @@ public class DankGame extends BasicScreen {
                     return;
                 }
                 if (Dank.chosenHeroesList.contains(Dank.activeHero)) {
-                    Dank.activeHero.getSkill(Dank.skillCastNumber).cast(Dank.targetList);
-                    Dank.skillCastNumber = 0;
-                    checkIfGameEnded();
-                    clearTargetsAndSortHeroList();
+                    skillSheet = new Texture(Gdx.files.internal("skills_animations/Fireball.png")); // #9
+                    TextureRegion[][] tmp = TextureRegion.split(skillSheet, 192, 192);              // #10
+                    skillFrames = new TextureRegion[3 * 5];
+                    int index = 0;
+                    for (int i = 0; i < 3; i++) {
+                        for (int j = 0; j < 5; j++) {
+                            skillFrames[index++] = tmp[i][j];
+                        }
+                    }
+                    skillAnimation = new Animation(0.05f, skillFrames);      // #11
+                    spriteBatch = new SpriteBatch();                // #12
+                    stateTime = 0f;                         // #13
+                    castState = true;
                 }
-
-                processComputerTurns();
-                update();
             }
         });
         table.addActor(castButton);
@@ -215,7 +233,6 @@ public class DankGame extends BasicScreen {
         table.addActor(skill3);
         table.addActor(skill4);
     }
-
 
     private void heroesSetup() {
         hero1 = new HeroActor(10, 120, 1, true, this);
@@ -352,6 +369,7 @@ public class DankGame extends BasicScreen {
             } else {
                 Dank.passPhase = false;
                 Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
+                Dank.thisTurnLeftHeroesList.sort(DankUtil.descendingInitiativeComparator);
             }
         }
         Dank.activeHero = Dank.thisTurnLeftHeroesList.get(0);
@@ -362,6 +380,23 @@ public class DankGame extends BasicScreen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
+        if(castState == true) {
+            stateTime += Gdx.graphics.getDeltaTime();           // #15
+            currentSkillFrame = skillAnimation.getKeyFrame(stateTime, true);  // #16
+            spriteBatch.begin();
+            spriteBatch.draw(currentSkillFrame, 50, 50);             // #17
+            spriteBatch.end();
+            if(stateTime >= 1){
+                Dank.activeHero.getSkill(Dank.skillCastNumber).cast(Dank.targetList);
+                Dank.skillCastNumber = 0;
+                checkIfGameEnded();
+                clearTargetsAndSortHeroList();
+                update();
+                castState = false;
+                processComputerTurns();
+                update();
+            }
+        }
     }
 
     @Override

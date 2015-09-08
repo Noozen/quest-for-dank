@@ -23,6 +23,8 @@ public class HeroActor extends Actor {
 
     BitmapFont bitmapFont;
 
+
+
     private int x, y, heroNumber;
 
     private Pixmap pixmap;
