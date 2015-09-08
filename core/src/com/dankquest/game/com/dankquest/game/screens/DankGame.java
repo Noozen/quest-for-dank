@@ -277,6 +277,10 @@ public class DankGame extends BasicScreen {
     }
 
     private void resetHealthAndStuff() {
+        Dank.thisTurnLeftHeroesList.clear();
+        Dank.allHeroesInGameList.clear();
+        Dank.targetList.clear();
+        Dank.passHeroesList.clear();
         for (Hero hero : Dank.allHeroesInGameList) {
             hero.healthCurrent = hero.healthTotal;
         }
