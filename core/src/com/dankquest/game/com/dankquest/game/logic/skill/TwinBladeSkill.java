@@ -17,7 +17,7 @@ import java.util.List;
 public class TwinBladeSkill extends Skill {
 
     public TwinBladeSkill () {
-        amountOfTargets = 1;
+        amountOfTargets = 2;
         basePixmap = new Pixmap(Gdx.files.internal("skills/twin_blade.png"));
         skillName = "Twin Blade";
         skillSheet = new Texture(Gdx.files.internal("skills_animations/Fireball.png"));
