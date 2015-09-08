@@ -2,6 +2,11 @@ package com.dankquest.game.com.dankquest.game.logic.skill;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Timer;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
 
 import java.util.List;
@@ -14,6 +19,12 @@ public abstract class Skill {
     protected int amountOfTargets;
     protected Pixmap basePixmap;
     protected String skillName;
+    //Animation
+    protected Texture skillSheet;
+    protected TextureRegion[] skillFrames;
+    protected Animation skillAnimation;
+    protected SpriteBatch spriteBatch;
+    protected TextureRegion currentSkillFrame;
 
     abstract public void cast(List<Hero> heroList);
     public Pixmap getImage() {
@@ -25,4 +36,5 @@ public abstract class Skill {
     public String toString() {
         return skillName;
     };
+    abstract public void castAnimation(List<Hero> heroList, float skillTime);
 }
