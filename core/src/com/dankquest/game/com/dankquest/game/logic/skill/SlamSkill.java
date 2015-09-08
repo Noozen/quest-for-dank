@@ -9,23 +9,15 @@ import java.util.List;
 /**
  * Created by Miko on 2015-09-04.
  */
-public class SlamSkill implements Skill {
+public class SlamSkill extends Skill {
 
-    private int amountOfTargets = 1;
-
-    Pixmap basePixmap = new Pixmap(Gdx.files.internal("skills/slam.png"));
-
+    public SlamSkill () {
+        amountOfTargets = 1;
+        basePixmap = new Pixmap(Gdx.files.internal("skills/slam.png"));
+        skillName = "Arrow";
+    }
     public void cast(List<Hero> heroList) {
         heroList.get(1).healthCurrent -= heroList.get(0).healthCurrent * 0.2;
     };
 
-    public Pixmap getImage() {
-        return basePixmap;
-    }
-
-    public int getAmountOfTargets() {
-        return amountOfTargets;
-    }
-
-    public String toString(){ return "Slam"; }
 }
