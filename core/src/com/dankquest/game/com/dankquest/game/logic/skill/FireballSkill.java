@@ -6,11 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Timer;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
-import com.dankquest.game.com.dankquest.game.logic.Hero;
-
-import java.util.List;
 
 /**
  * Created by Miko on 2015-09-04.
@@ -44,5 +40,21 @@ public class FireballSkill extends Skill {
         spriteBatch.begin();
         spriteBatch.draw(currentSkillFrame, Dank.targetList.get(1).heroActor.getX()-64, Dank.targetList.get(1).heroActor.getY()-64);
         spriteBatch.end();
+    }
+
+    @Override
+    public TextureRegion getFrame() {
+        currentSkillFrame = skillAnimation.getKeyFrame(Dank.castStateTime, true);
+        return currentSkillFrame;
+    }
+
+    @Override
+    public float getX() {
+        return Dank.targetList.get(1).heroActor.getX()-64;
+    }
+
+    @Override
+    public float getY() {
+        return Dank.targetList.get(1).heroActor.getY()-64;
     }
 }

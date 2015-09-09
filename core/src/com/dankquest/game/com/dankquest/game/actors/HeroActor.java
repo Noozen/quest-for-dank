@@ -4,18 +4,18 @@ package com.dankquest.game.com.dankquest.game.actors;
  * Created by Antah on 2015/09/05.
  */
 
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.dankquest.game.com.dankquest.game.logic.Dank;
-import com.dankquest.game.com.dankquest.game.logic.Hero;
-import com.dankquest.game.com.dankquest.game.screens.DankGame;
+        import com.badlogic.gdx.graphics.Pixmap;
+        import com.badlogic.gdx.graphics.Texture;
+        import com.badlogic.gdx.graphics.g2d.Batch;
+        import com.badlogic.gdx.graphics.g2d.BitmapFont;
+        import com.badlogic.gdx.scenes.scene2d.Actor;
+        import com.badlogic.gdx.scenes.scene2d.InputEvent;
+        import com.badlogic.gdx.scenes.scene2d.InputListener;
+        import com.dankquest.game.com.dankquest.game.logic.Dank;
+        import com.dankquest.game.com.dankquest.game.logic.Hero;
+        import com.dankquest.game.com.dankquest.game.screens.DankGame;
 
-import java.util.List;
+        import java.util.List;
 
 public class HeroActor extends Actor {
 

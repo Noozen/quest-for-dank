@@ -27,14 +27,26 @@ public abstract class Skill {
     protected TextureRegion currentSkillFrame;
 
     abstract public void cast();
+
     public Pixmap getImage() {
         return basePixmap;
     }
+
     public int getAmountOfTargets() {
         return amountOfTargets;
     }
+
     public String toString() {
         return skillName;
-    };
+    }
+
+    ;
+
     abstract public void castAnimation();
+
+    abstract public TextureRegion getFrame();
+
+    abstract public float getX();
+
+    abstract public float getY();
 }
