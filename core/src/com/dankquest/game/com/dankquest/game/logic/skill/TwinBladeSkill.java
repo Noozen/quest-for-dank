@@ -33,8 +33,9 @@ public class TwinBladeSkill extends Skill {
         spriteBatch = new SpriteBatch();
     }
     public void cast() {
-        Dank.targetList.get(1).healthCurrent -= Dank.targetList.get(0).attackDamage * 0.8;
-        Dank.targetList.get(2).healthCurrent -= Dank.targetList.get(0).attackDamage * 0.8;
+        double damage = Dank.targetList.get(0).getAttackDamage() * 0.8 * Dank.targetList.get(0).getDamageMultiplier();
+        Dank.targetList.get(1).healthCurrent -= damage;
+        Dank.targetList.get(2).healthCurrent -= damage;
     }
     public void castAnimation(){
         currentSkillFrame = skillAnimation.getKeyFrame(Dank.castStateTime, true);

@@ -19,7 +19,7 @@ public class SlamSkill extends Skill {
     public SlamSkill () {
         amountOfTargets = 1;
         basePixmap = new Pixmap(Gdx.files.internal("skills/slam.png"));
-        skillName = "Arrow";
+        skillName = "Slam";
         skillSheet = new Texture(Gdx.files.internal("skills_animations/Fireball.png"));
         skillFrames = new TextureRegion[3 * 5];
         TextureRegion[][] tmp = TextureRegion.split(skillSheet, 192, 192);
@@ -33,8 +33,10 @@ public class SlamSkill extends Skill {
         spriteBatch = new SpriteBatch();
     }
     public void cast() {
-        Dank.targetList.get(1).healthCurrent -= Dank.targetList.get(0).healthCurrent * 0.2;
-    }
+        double damage = Dank.targetList.get(0).getHealthCurrent() * 0.2 * Dank.targetList.get(0).getDamageMultiplier();
+        Dank.targetList.get(1).healthCurrent -= damage;
+    };
+
     public void castAnimation(){
         currentSkillFrame = skillAnimation.getKeyFrame(Dank.castStateTime, true);
         spriteBatch.begin();

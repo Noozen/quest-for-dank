@@ -26,11 +26,11 @@ public class DankUtil {
 
             @Override
             public int compare(Hero o1, Hero o2) {
-                if (o1.initiative < o2.initiative)
+                if (o1.getInitiative() < o2.getInitiative())
                     return 1;
-                if (o1.initiative == o2.initiative)
+                if (o1.getInitiative() == o2.getInitiative())
                     return 0;
-                if (o1.initiative > o2.initiative)
+                if (o1.getInitiative() > o2.getInitiative())
                     return -1;
                 return -2; //Error
             }

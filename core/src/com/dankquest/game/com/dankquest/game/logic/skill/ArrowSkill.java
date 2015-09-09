@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
+import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
+import com.dankquest.game.com.dankquest.game.logic.buffs.ExhaustedBuff;
 
 import java.util.List;
 
@@ -34,8 +36,13 @@ public class ArrowSkill extends Skill {
     }
 
     public void cast() {
-        Dank.targetList.get(1).healthCurrent -=Dank.targetList.get(0).attackDamage;
-    }
+
+        double damage = Dank.targetList.get(0).getAttackDamage() * Dank.targetList.get(0).getDamageMultiplier();
+        Dank.targetList.get(1).healthCurrent -= damage;
+        Buff exhaustedBuff = new ExhaustedBuff();
+        Dank.targetList.get(1).buffMap.put(exhaustedBuff.getName() + Dank.targetList.get(0).toString(), exhaustedBuff);
+    };
+
     public void castAnimation(){
         currentSkillFrame = skillAnimation.getKeyFrame(Dank.castStateTime, true);
         spriteBatch.begin();

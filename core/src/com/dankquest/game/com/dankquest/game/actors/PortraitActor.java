@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
+import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
+
+import java.util.Map;
 
 /**
  * Created by Miko on 2015-09-05.
@@ -36,6 +39,11 @@ public class PortraitActor extends Actor {
         pixmap.setColor(0.5f, 0.5f, 0.5f, 1);
         pixmap.fillCircle(50, 50, 50);
         pixmap.drawPixmap(Dank.activeHero.getImage(), 0, 0, 64, 64, 0, 0, 100, 100);
+        int i = 0;
+        for(Map.Entry<String, Buff> buffEntry : Dank.activeHero.buffMap.entrySet()) {
+            pixmap.drawPixmap(buffEntry.getValue().getImage(), 0 + 32*i, 68);
+            i++;
+        }
         texture = new Texture(pixmap);
     }
 }

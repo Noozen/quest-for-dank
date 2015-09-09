@@ -1,12 +1,14 @@
 package com.dankquest.game.com.dankquest.game.logic;
 
 import com.badlogic.gdx.graphics.Pixmap;
+import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
 import com.dankquest.game.com.dankquest.game.logic.skill.ArrowSkill;
 import com.dankquest.game.com.dankquest.game.logic.skill.FireballSkill;
 import com.dankquest.game.com.dankquest.game.logic.skill.SlamSkill;
 import com.dankquest.game.com.dankquest.game.logic.skill.TwinBladeSkill;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
@@ -58,11 +60,13 @@ public class Dank {
         exampleHero.healthCurrent = 200;
         exampleHero.attackDamage = 5;
         exampleHero.initiative = 7;
+        exampleHero.damageMultiplier = 1;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
         exampleHero.texture = new Pixmap(Gdx.files.internal("heroes/troll.png"));
+        exampleHero.buffMap = new HashMap<String, Buff>();
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -72,11 +76,13 @@ public class Dank {
         exampleHero.healthCurrent = 100;
         exampleHero.attackDamage = 10;
         exampleHero.initiative = 9;
+        exampleHero.damageMultiplier = 1;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
         exampleHero.texture = new Pixmap(Gdx.files.internal("heroes/goblin.png"));
+        exampleHero.buffMap = new HashMap<String, Buff>();
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -86,11 +92,13 @@ public class Dank {
         exampleHero.healthCurrent = 50;
         exampleHero.attackDamage = 20;
         exampleHero.initiative = 10;
+        exampleHero.damageMultiplier = 1;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
         exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
+        exampleHero.buffMap = new HashMap<String, Buff>();
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -100,11 +108,13 @@ public class Dank {
         exampleHero.healthCurrent = 60;
         exampleHero.attackDamage = 15;
         exampleHero.initiative = 6;
+        exampleHero.damageMultiplier = 1;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
         exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/goblin.png"));
+        exampleHero.buffMap = new HashMap<String, Buff>();
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -114,11 +124,13 @@ public class Dank {
         exampleHero.healthCurrent = 80;
         exampleHero.attackDamage = 12;
         exampleHero.initiative = 5;
+        exampleHero.damageMultiplier = 1;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
         exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/goblin.png"));
+        exampleHero.buffMap = new HashMap<String, Buff>();
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -128,11 +140,13 @@ public class Dank {
         exampleHero.healthCurrent = 30;
         exampleHero.attackDamage = 30;
         exampleHero.initiative = 11;
+        exampleHero.damageMultiplier = 1;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
         exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/goblin.png"));
+        exampleHero.buffMap = new HashMap<String, Buff>();
         ownedHeroesList.add(exampleHero);
 
         ownedHeroesList.sort(DankUtil.ascendingNameComparator);
@@ -145,11 +159,13 @@ public class Dank {
         exampleHero.healthCurrent = 50;
         exampleHero.attackDamage = 20;
         exampleHero.initiative = 9;
+        exampleHero.damageMultiplier = 1;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
         exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
+        exampleHero.buffMap = new HashMap<String, Buff>();
         enemyHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -159,11 +175,13 @@ public class Dank {
         exampleHero.healthCurrent = 50;
         exampleHero.attackDamage = 20;
         exampleHero.initiative = 9;
+        exampleHero.damageMultiplier = 1;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
         exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
+        exampleHero.buffMap = new HashMap<String, Buff>();
         enemyHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -173,11 +191,13 @@ public class Dank {
         exampleHero.healthCurrent = 50;
         exampleHero.attackDamage = 20;
         exampleHero.initiative = 9;
+        exampleHero.damageMultiplier = 1;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
         exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
+        exampleHero.buffMap = new HashMap<String, Buff>();
         enemyHeroesList.add(exampleHero);
 
         exampleHero = new Hero();
@@ -187,11 +207,13 @@ public class Dank {
         exampleHero.healthCurrent = 50;
         exampleHero.attackDamage = 20;
         exampleHero.initiative = 9;
+        exampleHero.damageMultiplier = 1;
         exampleHero.skill1 = new ArrowSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();
         exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
+        exampleHero.buffMap = new HashMap<String, Buff>();
         enemyHeroesList.add(exampleHero);
 
     }

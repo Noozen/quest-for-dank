@@ -321,6 +321,7 @@ public class DankGame extends BasicScreen {
         }
         if (win) {
             for (Hero hero : Dank.allHeroesInGameList) {
+                hero.buffMap.clear();
                 hero.healthCurrent = hero.healthTotal;
             }
             Image winImage = new Image(new Texture(Gdx.files.internal("inne/victory.png")));
@@ -331,6 +332,7 @@ public class DankGame extends BasicScreen {
         }
         if (lose) {
             for (Hero hero : Dank.allHeroesInGameList) {
+                hero.buffMap.clear();
                 hero.healthCurrent = hero.healthTotal;
             }
             Image loseImage = new Image(new Texture(Gdx.files.internal("inne/defeat.png")));
