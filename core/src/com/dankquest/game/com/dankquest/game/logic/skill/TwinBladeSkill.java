@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
 
 import java.util.List;
@@ -31,12 +32,12 @@ public class TwinBladeSkill extends Skill {
         skillAnimation = new Animation(0.05f, skillFrames);
         spriteBatch = new SpriteBatch();
     }
-    public void cast(List<Hero> heroList) {
-        heroList.get(1).healthCurrent -= heroList.get(0).attackDamage * 0.8;
-        heroList.get(2).healthCurrent -= heroList.get(0).attackDamage * 0.8;
-    };
-    public void castAnimation(List<Hero> heroList, float skillTime){
-        currentSkillFrame = skillAnimation.getKeyFrame(skillTime, true);
+    public void cast() {
+        Dank.targetList.get(1).healthCurrent -= Dank.targetList.get(0).attackDamage * 0.8;
+        Dank.targetList.get(2).healthCurrent -= Dank.targetList.get(0).attackDamage * 0.8;
+    }
+    public void castAnimation(){
+        currentSkillFrame = skillAnimation.getKeyFrame(Dank.castStateTime, true);
         spriteBatch.begin();
         spriteBatch.draw(currentSkillFrame, 50, 50);
         spriteBatch.end();

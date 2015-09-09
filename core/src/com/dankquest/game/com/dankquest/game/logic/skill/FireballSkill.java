@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Timer;
+import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
 
 import java.util.List;
@@ -33,14 +34,14 @@ public class FireballSkill extends Skill {
         spriteBatch = new SpriteBatch();
     }
 
-    public void cast(List<Hero> heroList) {
-        heroList.get(1).healthCurrent -= heroList.get(0).attackDamage*2;
-    };
+    public void cast() {
+        Dank.targetList.get(1).healthCurrent -=  Dank.targetList.get(0).attackDamage*2;
+    }
 
-    public void castAnimation(List<Hero> heroList, float skillTime){
-        currentSkillFrame = skillAnimation.getKeyFrame(skillTime, true);
+    public void castAnimation(){
+        currentSkillFrame = skillAnimation.getKeyFrame(Dank.castStateTime, true);
         spriteBatch.begin();
-        spriteBatch.draw(currentSkillFrame, 50, 50);
+        spriteBatch.draw(currentSkillFrame, Dank.targetList.get(1).heroActor.getX()-64, Dank.targetList.get(1).heroActor.getY()-64);
         spriteBatch.end();
     }
 }

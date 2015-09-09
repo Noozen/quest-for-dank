@@ -5,8 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -24,8 +22,6 @@ import com.dankquest.game.com.dankquest.game.actors.SkillActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
-
-import java.util.Comparator;
 
 /**
  * Created by Antah on 2015/09/02.
@@ -46,8 +42,7 @@ public class DankGame extends BasicScreen {
     private HeroActor enemy1, enemy2, enemy3, enemy4;
     //Timer
     private Timer AITimer = new Timer();
-    //Animation
-    private float stateTime;
+    //Cast animation
     private boolean castState;
 
     public DankGame(Game game) {
@@ -196,6 +191,7 @@ public class DankGame extends BasicScreen {
                     return;
                 }
                 if (Dank.chosenHeroesList.contains(Dank.activeHero)) {
+                    //castActor = new CastActor();
                     castState = true;
                 }
             }
@@ -204,18 +200,18 @@ public class DankGame extends BasicScreen {
     }
 
     private void spellAnimation() {
-        if(stateTime <= 1f){
-            stateTime += Gdx.graphics.getDeltaTime();
-            Dank.activeHero.getSkill(Dank.skillCastNumber).castAnimation(Dank.targetList,stateTime);
+        if(Dank.castStateTime <= 1f){
+            Dank.castStateTime += Gdx.graphics.getDeltaTime();
+            Dank.activeHero.getSkill(Dank.skillCastNumber).castAnimation();
         } else {
             castState = false;
-            Dank.activeHero.getSkill(Dank.skillCastNumber).cast(Dank.targetList);
+            Dank.castStateTime = 0f;
+            Dank.activeHero.getSkill(Dank.skillCastNumber).cast();
             Dank.skillCastNumber = 0;
-            checkIfGameEnded();
             clearTargetsAndSortHeroList();
+            checkIfGameEnded();
             update();
             processComputerTurns();
-            update();
         }
     }
 
@@ -237,6 +233,11 @@ public class DankGame extends BasicScreen {
         hero3 = new HeroActor(110, 240, 3, true, this);
         hero4 = new HeroActor(160, 300, 4, true, this);
 
+        Dank.chosenHeroesList.get(0).heroActor = hero1;
+        Dank.chosenHeroesList.get(1).heroActor = hero2;
+        Dank.chosenHeroesList.get(2).heroActor = hero3;
+        Dank.chosenHeroesList.get(3).heroActor = hero4;
+
         table.addActor(hero4);
         table.addActor(hero3);
         table.addActor(hero2);
@@ -248,6 +249,11 @@ public class DankGame extends BasicScreen {
         enemy2 = new HeroActor(516, 180, 2, false, this);
         enemy3 = new HeroActor(466, 240, 3, false, this);
         enemy4 = new HeroActor(416, 300, 4, false, this);
+
+        Dank.enemyHeroesList.get(0).heroActor = enemy1;
+        Dank.enemyHeroesList.get(1).heroActor = enemy2;
+        Dank.enemyHeroesList.get(2).heroActor = enemy3;
+        Dank.enemyHeroesList.get(3).heroActor = enemy4;
 
         table.addActor(enemy4);
         table.addActor(enemy3);
@@ -279,8 +285,8 @@ public class DankGame extends BasicScreen {
                 @Override
                 public void run() {
                     artificialIntelligence();
-                    checkIfGameEnded();
                     clearTargetsAndSortHeroList();
+                    checkIfGameEnded();
                     update();
                     processComputerTurns();
                 }
@@ -348,7 +354,7 @@ public class DankGame extends BasicScreen {
         }
         Dank.targetList.add(Dank.activeHero);
         Dank.targetList.add(Dank.chosenHeroesList.get(i));
-        Dank.activeHero.getSkill(0).cast(Dank.targetList);
+        Dank.activeHero.getSkill(0).cast();
     }
 
     private void clearTargetsAndSortHeroList() {

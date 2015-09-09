@@ -2,6 +2,7 @@ package com.dankquest.game.com.dankquest.game.logic;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.dankquest.game.com.dankquest.game.actors.HeroActor;
 import com.dankquest.game.com.dankquest.game.logic.skill.Skill;
 
 public class Hero {
@@ -19,6 +20,7 @@ public class Hero {
     public Skill skill2;
     public Skill skill3;
     public Skill skill4;
+    public HeroActor heroActor;
 
     public Skill getSkill(int skill_number) {
         switch(skill_number){

@@ -31,9 +31,12 @@ public class Dank {
     public static List<Hero> targetList;
     public static List<Hero> passHeroesList;
 
+    //Targeting
     public static int skillCastNumber = 0;
     public static boolean passPhase = false;
     public static boolean enemyTurnInProgress = false;
+    //Cast animation
+    public static float castStateTime;
 
     static {
         ownedHeroesList = new ArrayList<Hero>();

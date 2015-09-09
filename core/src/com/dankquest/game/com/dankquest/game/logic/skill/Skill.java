@@ -26,7 +26,7 @@ public abstract class Skill {
     protected SpriteBatch spriteBatch;
     protected TextureRegion currentSkillFrame;
 
-    abstract public void cast(List<Hero> heroList);
+    abstract public void cast();
     public Pixmap getImage() {
         return basePixmap;
     }
@@ -36,5 +36,5 @@ public abstract class Skill {
     public String toString() {
         return skillName;
     };
-    abstract public void castAnimation(List<Hero> heroList, float skillTime);
+    abstract public void castAnimation();
 }
