@@ -22,6 +22,8 @@ import com.dankquest.game.com.dankquest.game.actors.PortraitActor;
 import com.dankquest.game.com.dankquest.game.actors.SkillActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
+import com.dankquest.game.com.dankquest.game.logic.skill.ArrowSkill;
+import com.dankquest.game.com.dankquest.game.logic.skill.Skill;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
 
 /**
@@ -44,7 +46,6 @@ public class DankGame extends BasicScreen {
     //Timer
     private Timer AITimer = new Timer();
     //Cast animation
-    private boolean castState;
     private CastAnimationActor castAnimationActor;
 
     public DankGame(Game game) {
@@ -53,7 +54,6 @@ public class DankGame extends BasicScreen {
 
     @Override
     public void show() {
-        castState = false;
         heroesListSetup();
         stageSetup();
         musicSetup();
@@ -193,35 +193,25 @@ public class DankGame extends BasicScreen {
                     return;
                 }
                 if (Dank.chosenHeroesList.contains(Dank.activeHero)) {
-                    castState = true;
-                    spellAnimation();
+                    Timer timer = new Timer();
+                    castAnimationActor = new CastAnimationActor(Dank.activeHero.getSkill(Dank.skillCastNumber));
+                    stage.addActor(castAnimationActor);
+                    timer.scheduleTask(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            castAnimationActor.remove();
+                            Dank.activeHero.getSkill(Dank.skillCastNumber).cast();
+                            Dank.skillCastNumber = 0;
+                            clearTargetsAndSortHeroList();
+                            checkIfGameEnded();
+                            update();
+                            processComputerTurns();
+                        }
+                    }, Dank.activeHero.getSkill(Dank.skillCastNumber).skillAnimation.getAnimationDuration());
                 }
             }
         });
         table.addActor(castButton);
-    }
-
-    private void spellAnimation() {
-        if(Dank.castStateTime <= 1f){
-            Dank.castStateTime += Gdx.graphics.getDeltaTime();
-            //Dank.activeHero.getSkill(Dank.skillCastNumber).castAnimation();
-            if(castAnimationActor == null){
-                castAnimationActor = new CastAnimationActor(Dank.activeHero.getSkill(Dank.skillCastNumber));
-                table.addActor(castAnimationActor);
-            }
-            spellAnimation();
-        } else {
-            table.removeActor(castAnimationActor);
-            castAnimationActor = null;
-            castState = false;
-            Dank.castStateTime = 0f;
-            Dank.activeHero.getSkill(Dank.skillCastNumber).cast();
-            Dank.skillCastNumber = 0;
-            clearTargetsAndSortHeroList();
-            checkIfGameEnded();
-            update();
-            processComputerTurns();
-        }
     }
 
     private void skillsSetup() {
@@ -394,9 +384,6 @@ public class DankGame extends BasicScreen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-        //if(castState == true){
-        //    spellAnimation();
-        //}
     }
 
     @Override

@@ -22,7 +22,7 @@ public abstract class Skill {
     //Animation
     protected Texture skillSheet;
     protected TextureRegion[] skillFrames;
-    protected Animation skillAnimation;
+    public Animation skillAnimation;
     protected SpriteBatch spriteBatch;
     protected TextureRegion currentSkillFrame;
 
@@ -39,12 +39,6 @@ public abstract class Skill {
     public String toString() {
         return skillName;
     }
-
-    ;
-
-    abstract public void castAnimation();
-
-    abstract public TextureRegion getFrame();
 
     abstract public float getX();
 

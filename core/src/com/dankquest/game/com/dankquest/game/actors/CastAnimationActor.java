@@ -4,8 +4,10 @@ package com.dankquest.game.com.dankquest.game.actors;
  * Created by Antah on 2015/09/09.
  */
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -21,21 +23,28 @@ import java.util.List;
 
 public class CastAnimationActor extends Actor {
 
-    private TextureRegion texture;
     private Skill skill;
+    public boolean castInProgress;
+    public float playTime;
 
     public CastAnimationActor(Skill skill) {
-        setBounds(this.skill.getX(),  this.skill.getY(), 192, 192);
-        this.skill = skill;
-        update();
+        if(skill!=null) {
+            playTime = 0;
+            skill.skillAnimation.setPlayMode(Animation.PlayMode.NORMAL);
+            this.skill = skill;
+            castInProgress = true;
+        }
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        batch.draw(texture, this.skill.getX(), this.skill.getY());
-    }
-
-    public void update() {
-        texture = this.skill.getFrame();
+        if(castInProgress) {
+            batch.draw(skill.skillAnimation.getKeyFrame(playTime), Dank.targetList.get(1).heroActor.getX() - Dank.targetList.get(1).heroActor.getWidth(), Dank.targetList.get(1).heroActor.getY() - Dank.targetList.get(1).heroActor.getHeight());
+            playTime += Gdx.graphics.getDeltaTime();
+            if(skill.skillAnimation.isAnimationFinished(playTime)) {
+                playTime = 0;
+                castInProgress = false;
+            }
+        }
     }
 }

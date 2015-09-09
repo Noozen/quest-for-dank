@@ -37,17 +37,6 @@ public class TwinBladeSkill extends Skill {
         Dank.targetList.get(1).healthCurrent -= damage;
         Dank.targetList.get(2).healthCurrent -= damage;
     }
-    public void castAnimation(){
-        currentSkillFrame = skillAnimation.getKeyFrame(Dank.castStateTime, true);
-        spriteBatch.begin();
-        spriteBatch.draw(currentSkillFrame, 50, 50);
-        spriteBatch.end();
-    }
-
-    @Override
-    public TextureRegion getFrame() {
-        return null;
-    }
 
     @Override
     public float getX() {

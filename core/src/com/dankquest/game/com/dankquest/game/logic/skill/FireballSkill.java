@@ -35,19 +35,6 @@ public class FireballSkill extends Skill {
         Dank.targetList.get(1).healthCurrent -= damage;
     };
 
-    public void castAnimation(){
-        currentSkillFrame = skillAnimation.getKeyFrame(Dank.castStateTime, true);
-        spriteBatch.begin();
-        spriteBatch.draw(currentSkillFrame, Dank.targetList.get(1).heroActor.getX()-64, Dank.targetList.get(1).heroActor.getY()-64);
-        spriteBatch.end();
-    }
-
-    @Override
-    public TextureRegion getFrame() {
-        currentSkillFrame = skillAnimation.getKeyFrame(Dank.castStateTime, true);
-        return currentSkillFrame;
-    }
-
     @Override
     public float getX() {
         return Dank.targetList.get(1).heroActor.getX()-64;

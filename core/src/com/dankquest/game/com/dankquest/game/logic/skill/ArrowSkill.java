@@ -43,18 +43,6 @@ public class ArrowSkill extends Skill {
         Dank.targetList.get(1).buffMap.put(exhaustedBuff.getName() + Dank.targetList.get(0).toString(), exhaustedBuff);
     };
 
-    public void castAnimation(){
-        currentSkillFrame = skillAnimation.getKeyFrame(Dank.castStateTime, true);
-        spriteBatch.begin();
-        spriteBatch.draw(currentSkillFrame, 50, 50);
-        spriteBatch.end();
-    }
-
-    @Override
-    public TextureRegion getFrame() {
-        return null;
-    }
-
     @Override
     public float getX() {
         return 0;
