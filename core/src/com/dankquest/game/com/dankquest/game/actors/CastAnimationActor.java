@@ -24,7 +24,6 @@ import java.util.List;
 public class CastAnimationActor extends Actor {
 
     private Skill skill;
-    public boolean castInProgress;
     public float playTime;
 
     public CastAnimationActor(Skill skill) {
@@ -32,19 +31,15 @@ public class CastAnimationActor extends Actor {
             playTime = 0;
             skill.skillAnimation.setPlayMode(Animation.PlayMode.NORMAL);
             this.skill = skill;
-            castInProgress = true;
         }
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if(castInProgress) {
-            batch.draw(skill.skillAnimation.getKeyFrame(playTime), Dank.targetList.get(1).heroActor.getX() - Dank.targetList.get(1).heroActor.getWidth(), Dank.targetList.get(1).heroActor.getY() - Dank.targetList.get(1).heroActor.getHeight());
-            playTime += Gdx.graphics.getDeltaTime();
-            if(skill.skillAnimation.isAnimationFinished(playTime)) {
-                playTime = 0;
-                castInProgress = false;
-            }
+        skill.draw(batch, playTime);
+        playTime += Gdx.graphics.getDeltaTime();
+        if(skill.skillAnimation.isAnimationFinished(playTime)) {
+            playTime = 0;
         }
     }
 }

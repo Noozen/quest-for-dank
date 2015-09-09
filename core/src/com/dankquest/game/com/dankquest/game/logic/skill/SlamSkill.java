@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
@@ -36,6 +37,11 @@ public class SlamSkill extends Skill {
         double damage = Dank.targetList.get(0).getHealthCurrent() * 0.2 * Dank.targetList.get(0).getDamageMultiplier();
         Dank.targetList.get(1).healthCurrent -= damage;
     };
+
+    @Override
+    public void draw(Batch batch, float playTime) {
+        batch.draw(skillAnimation.getKeyFrame(playTime), Dank.targetList.get(1).heroActor.getX() - Dank.targetList.get(1).heroActor.getWidth(),Dank.targetList.get(1).heroActor.getY() - Dank.targetList.get(1).heroActor.getHeight());
+    }
 
     @Override
     public float getX() {
