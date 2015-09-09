@@ -203,7 +203,8 @@ public class DankGame extends BasicScreen {
                             Dank.activeHero.getSkill(Dank.skillCastNumber).cast();
                             Dank.skillCastNumber = 0;
                             clearTargetsAndSortHeroList();
-                            checkIfGameEnded();
+                            if(checkIfGameEnded() == true)
+                                return;
                             update();
                             processComputerTurns();
                         }
@@ -285,7 +286,8 @@ public class DankGame extends BasicScreen {
                 public void run() {
                     artificialIntelligence();
                     clearTargetsAndSortHeroList();
-                    checkIfGameEnded();
+                    if(checkIfGameEnded())
+                        return;
                     update();
                     processComputerTurns();
                 }
@@ -305,7 +307,7 @@ public class DankGame extends BasicScreen {
         }
     }
 
-    private void checkIfGameEnded() {
+    private boolean checkIfGameEnded() {
         boolean win = true;
         boolean lose = true;
         for (Hero hero : Dank.enemyHeroesList) {
@@ -328,6 +330,7 @@ public class DankGame extends BasicScreen {
             winImage.setY(215);
             table.addActor(winImage);
             resetHealthAndStuff();
+            return true;
         }
         if (lose) {
             for (Hero hero : Dank.allHeroesInGameList) {
@@ -339,7 +342,9 @@ public class DankGame extends BasicScreen {
             loseImage.setY(215);
             table.addActor(loseImage);
             resetHealthAndStuff();
+            return true;
         }
+        return false;
     }
 
     private void artificialIntelligence() {

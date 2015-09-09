@@ -10,6 +10,14 @@ import java.util.Map;
 
 public class Hero {
 
+    Hero() { }
+    Hero(Hero hero) {
+        this.healthTotal = hero.healthTotal;
+        this.healthCurrent = hero.healthCurrent;
+        this.initiative = hero.initiative;
+        this.attackDamage = hero.attackDamage;
+        this.damageMultiplier = hero.damageMultiplier;
+    }
     public String name;
     public HeroClass heroClass;
     public Pixmap texture;
@@ -56,8 +64,7 @@ public class Hero {
     }
 
     private Hero getBuffedHeroValues() {
-        Hero buffedHero = new Hero();
-        buffedHero.equals(this);
+        Hero buffedHero = new Hero(this);
         for(Map.Entry<String, Buff> buffEntry : buffMap.entrySet()) {
             buffEntry.getValue().useBuff(buffedHero);
         }
@@ -76,13 +83,5 @@ public class Hero {
 
     public Pixmap getImage() {
         return texture;
-    }
-
-    public void equals(Hero hero) {
-        this.healthTotal = hero.healthTotal;
-        this.healthCurrent = hero.healthCurrent;
-        this.initiative = hero.initiative;
-        this.attackDamage = hero.attackDamage;
-        this.damageMultiplier = hero.damageMultiplier;
     }
 }
