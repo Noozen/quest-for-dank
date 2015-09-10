@@ -6,6 +6,7 @@ import com.dankquest.game.com.dankquest.game.logic.skill.ArrowSkill;
 import com.dankquest.game.com.dankquest.game.logic.skill.FireballSkill;
 import com.dankquest.game.com.dankquest.game.logic.skill.SlamSkill;
 import com.dankquest.game.com.dankquest.game.logic.skill.TwinBladeSkill;
+import com.dankquest.game.com.dankquest.game.logic.skill.IcelanceSkill;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,7 +94,7 @@ public class Dank {
         exampleHero.attackDamage = 20;
         exampleHero.initiative = 10;
         exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new ArrowSkill();
+        exampleHero.skill1 = new IcelanceSkill();
         exampleHero.skill2 = new FireballSkill();
         exampleHero.skill3 = new SlamSkill();
         exampleHero.skill4 = new TwinBladeSkill();

@@ -52,4 +52,9 @@ public class SlamSkill extends Skill {
     public float getY() {
         return 0;
     }
+
+    @Override
+    public void createAnimation() {
+
+    }
 }

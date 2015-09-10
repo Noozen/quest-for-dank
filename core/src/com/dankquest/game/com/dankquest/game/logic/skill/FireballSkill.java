@@ -50,4 +50,9 @@ public class FireballSkill extends Skill {
     public float getY() {
         return Dank.targetList.get(1).heroActor.getY()-64;
     }
+
+    @Override
+    public void createAnimation() {
+
+    }
 }

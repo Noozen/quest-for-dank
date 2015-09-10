@@ -60,7 +60,7 @@ public class Hero {
         for(Map.Entry<String, Buff> buffEntry : buffMap.entrySet()) {
             buffEntry.getValue().buffDuration--;
         }
-        //Wywalac jezeli buff sie skonczy³
+        //Wywalac jezeli buff sie skonczy
     }
 
     private Hero getBuffedHeroValues() {

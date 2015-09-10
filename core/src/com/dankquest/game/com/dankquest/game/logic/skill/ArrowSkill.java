@@ -58,4 +58,9 @@ public class ArrowSkill extends Skill {
     public float getY() {
         return 0;
     }
+
+    @Override
+    public void createAnimation() {
+
+    }
 }

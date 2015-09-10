@@ -46,4 +46,6 @@ public abstract class Skill {
     abstract public float getX();
 
     abstract public float getY();
+
+    abstract public void createAnimation();
 }

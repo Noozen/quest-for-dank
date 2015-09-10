@@ -54,4 +54,9 @@ public class TwinBladeSkill extends Skill {
     public float getY() {
         return 0;
     }
+
+    @Override
+    public void createAnimation() {
+
+    }
 }
