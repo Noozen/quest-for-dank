@@ -28,18 +28,19 @@ public class CastAnimationActor extends Actor {
 
     public CastAnimationActor(Skill skill) {
         if(skill!=null) {
+            skill.createAnimation();
+            skill.setNormalPlayMode();
             playTime = 0;
-            skill.skillAnimation.setPlayMode(Animation.PlayMode.NORMAL);
             this.skill = skill;
         }
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if(playTime+Gdx.graphics.getDeltaTime()<skill.skillAnimation.getAnimationDuration()) {
+        if(playTime+Gdx.graphics.getDeltaTime()<skill.getAnimationDuration()) {
             skill.draw(batch, playTime);
             playTime += Gdx.graphics.getDeltaTime();
-            if(skill.skillAnimation.isAnimationFinished(playTime)) {
+            if(skill.isAnimationFinished(playTime)) {
                 playTime = 0;
             }
         }

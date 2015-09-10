@@ -57,4 +57,19 @@ public class SlamSkill extends Skill {
     public void createAnimation() {
 
     }
+
+    @Override
+    public float getAnimationDuration() {
+        return skillAnimation.getAnimationDuration();
+    }
+
+    @Override
+    public boolean isAnimationFinished(float playTime) {
+        return skillAnimation.isAnimationFinished(playTime);
+    }
+
+    @Override
+    public void setNormalPlayMode() {
+        skillAnimation.setPlayMode(Animation.PlayMode.NORMAL);
+    }
 }

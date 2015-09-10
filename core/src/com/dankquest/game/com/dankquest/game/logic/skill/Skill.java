@@ -48,4 +48,11 @@ public abstract class Skill {
     abstract public float getY();
 
     abstract public void createAnimation();
+
+    public abstract float getAnimationDuration();
+
+    public abstract boolean isAnimationFinished(float playTime);
+
+    public abstract void setNormalPlayMode();
+
 }

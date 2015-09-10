@@ -210,7 +210,7 @@ public class DankGame extends BasicScreen {
                             update();
                             processComputerTurns();
                         }
-                    }, Dank.activeHero.getSkill(Dank.skillCastNumber).skillAnimation.getAnimationDuration());
+                    }, Dank.activeHero.getSkill(Dank.skillCastNumber).getAnimationDuration());
                 }
             }
         });
