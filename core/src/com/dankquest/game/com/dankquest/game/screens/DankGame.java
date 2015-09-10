@@ -215,6 +215,31 @@ public class DankGame extends BasicScreen {
         table.addActor(castButton);
     }
 
+    private void processComputerTurns() {
+        if (Dank.enemyHeroesList.contains(Dank.activeHero)) {
+            Dank.enemyTurnInProgress = true;
+            artificialIntelligence();
+            castAnimationActor = new CastAnimationActor(Dank.activeHero.getSkill(Dank.skillCastNumber));
+            stage.addActor(castAnimationActor);
+            AITimer.scheduleTask(new Timer.Task() {
+
+                @Override
+                public void run() {
+                    castAnimationActor.remove();
+                    Dank.activeHero.getSkill(Dank.skillCastNumber).cast();
+                    Dank.skillCastNumber = 0;
+                    clearTargetsAndSortHeroList();
+                    if(checkIfGameEnded())
+                        return;
+                    update();
+                    processComputerTurns();
+                }
+            },Dank.activeHero.getSkill(Dank.skillCastNumber).skillAnimation.getAnimationDuration());
+        } else {
+            Dank.enemyTurnInProgress = false;
+        }
+    }
+
     private void skillsSetup() {
         skill1 = new SkillActor(200, 10, 1, this);
         skill2 = new SkillActor(260, 10, 2, this);
@@ -275,26 +300,6 @@ public class DankGame extends BasicScreen {
         skill3.update();
         skill4.update();
         portraitActor.update();
-    }
-
-    private void processComputerTurns() {
-        if (Dank.enemyHeroesList.contains(Dank.activeHero)) {
-            Dank.enemyTurnInProgress = true;
-            AITimer.scheduleTask(new Timer.Task() {
-
-                @Override
-                public void run() {
-                    artificialIntelligence();
-                    clearTargetsAndSortHeroList();
-                    if(checkIfGameEnded())
-                        return;
-                    update();
-                    processComputerTurns();
-                }
-            },0.75f);
-        } else {
-            Dank.enemyTurnInProgress = false;
-        }
     }
 
     private void resetHealthAndStuff() {
@@ -360,7 +365,7 @@ public class DankGame extends BasicScreen {
         }
         Dank.targetList.add(Dank.activeHero);
         Dank.targetList.add(Dank.chosenHeroesList.get(i));
-        Dank.activeHero.getSkill(0).cast();
+        Dank.skillCastNumber = 1;
     }
 
     private void clearTargetsAndSortHeroList() {
