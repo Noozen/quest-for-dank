@@ -22,9 +22,9 @@ import com.dankquest.game.com.dankquest.game.actors.PortraitActor;
 import com.dankquest.game.com.dankquest.game.actors.SkillActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
-import com.dankquest.game.com.dankquest.game.logic.skill.ArrowSkill;
-import com.dankquest.game.com.dankquest.game.logic.skill.Skill;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
+
+import java.util.Iterator;
 
 /**
  * Created by Antah on 2015/09/02.
@@ -69,6 +69,7 @@ public class DankGame extends BasicScreen {
         Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
         Dank.thisTurnLeftHeroesList.sort(DankUtil.descendingInitiativeComparator);
         Dank.activeHero = Dank.allHeroesInGameList.get(0);
+        Dank.activeHero.reduceBuffDuration();
     }
 
     private void stageSetup() {
@@ -158,9 +159,10 @@ public class DankGame extends BasicScreen {
                 if (Dank.enemyTurnInProgress == true) {
                     return;
                 }
+                Dank.characterPassed = true;
                 Dank.passHeroesList.add(Dank.activeHero);
                 checkIfGameEnded();
-                clearTargetsAndSortHeroList();
+                clearTargetsUpdateBuffsSortHeroList();
                 processComputerTurns();
                 update();
             }
@@ -202,7 +204,7 @@ public class DankGame extends BasicScreen {
                             castAnimationActor.remove();
                             Dank.activeHero.getSkill(Dank.skillCastNumber).cast();
                             Dank.skillCastNumber = 0;
-                            clearTargetsAndSortHeroList();
+                            clearTargetsUpdateBuffsSortHeroList();
                             if(checkIfGameEnded() == true)
                                 return;
                             update();
@@ -228,7 +230,7 @@ public class DankGame extends BasicScreen {
                     castAnimationActor.remove();
                     Dank.activeHero.getSkill(Dank.skillCastNumber).cast();
                     Dank.skillCastNumber = 0;
-                    clearTargetsAndSortHeroList();
+                    clearTargetsUpdateBuffsSortHeroList();
                     if(checkIfGameEnded())
                         return;
                     update();
@@ -303,13 +305,13 @@ public class DankGame extends BasicScreen {
     }
 
     private void resetHealthAndStuff() {
+        for (Hero hero : Dank.allHeroesInGameList) {
+            hero.healthCurrent = hero.healthTotal;
+        }
         Dank.thisTurnLeftHeroesList.clear();
         Dank.allHeroesInGameList.clear();
         Dank.targetList.clear();
         Dank.passHeroesList.clear();
-        for (Hero hero : Dank.allHeroesInGameList) {
-            hero.healthCurrent = hero.healthTotal;
-        }
     }
 
     private boolean checkIfGameEnded() {
@@ -368,10 +370,11 @@ public class DankGame extends BasicScreen {
         Dank.skillCastNumber = 1;
     }
 
-    private void clearTargetsAndSortHeroList() {
+    private void clearTargetsUpdateBuffsSortHeroList() {
         Dank.skillCastNumber = 0;
         Dank.targetList.clear();
         Dank.thisTurnLeftHeroesList.remove(Dank.activeHero);
+        removeDeadHeroesFromCurrentTurn();
         Dank.thisTurnLeftHeroesList.sort(DankUtil.descendingInitiativeComparator);
         Dank.allHeroesInGameList.sort(DankUtil.descendingInitiativeComparator);
         if (Dank.thisTurnLeftHeroesList.isEmpty()) {
@@ -383,10 +386,27 @@ public class DankGame extends BasicScreen {
             } else {
                 Dank.passPhase = false;
                 Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
+                removeDeadHeroesFromCurrentTurn();
                 Dank.thisTurnLeftHeroesList.sort(DankUtil.descendingInitiativeComparator);
             }
         }
+        if(Dank.characterPassed == false) {
+            Dank.activeHero.reduceBuffDuration();
+        } else {
+            Dank.characterPassed = false;
+        }
         Dank.activeHero = Dank.thisTurnLeftHeroesList.get(0);
+    }
+
+    private void removeDeadHeroesFromCurrentTurn() {
+        Iterator<Hero> heroIterator = Dank.thisTurnLeftHeroesList.iterator();
+        Hero heroEntry;
+        while(heroIterator.hasNext()) {
+            heroEntry = heroIterator.next();
+            if(heroEntry.healthCurrent <=0) {
+                heroIterator.remove();
+            }
+        }
     }
 
     @Override

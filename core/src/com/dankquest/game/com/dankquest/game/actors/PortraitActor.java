@@ -31,6 +31,11 @@ public class PortraitActor extends Actor {
     public void draw (Batch batch, float parentAlpha) {
         batch.draw(texture, 10, 10, 100, 100);
         bitmapFont.draw(batch, Dank.activeHero.name, 50, 50);
+        int i = 0;
+        for(Map.Entry<String, Buff> buffEntry : Dank.activeHero.buffMap.entrySet()) {
+            bitmapFont.draw(batch, String.valueOf(buffEntry.getValue().buffDuration), 12 + i*16, 92);
+            i++;
+        }
     }
 
     public void update() {
@@ -41,7 +46,7 @@ public class PortraitActor extends Actor {
         pixmap.drawPixmap(Dank.activeHero.getImage(), 0, 0, 64, 64, 0, 0, 100, 100);
         int i = 0;
         for(Map.Entry<String, Buff> buffEntry : Dank.activeHero.buffMap.entrySet()) {
-            pixmap.drawPixmap(buffEntry.getValue().getImage(), 0 + 32*i, 68);
+            pixmap.drawPixmap(buffEntry.getValue().getImage(), 0 + 16*i, 0);
             i++;
         }
         texture = new Texture(pixmap);

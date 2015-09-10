@@ -36,10 +36,12 @@ public class CastAnimationActor extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        skill.draw(batch, playTime);
-        playTime += Gdx.graphics.getDeltaTime();
-        if(skill.skillAnimation.isAnimationFinished(playTime)) {
-            playTime = 0;
+        if(playTime+Gdx.graphics.getDeltaTime()<skill.skillAnimation.getAnimationDuration()) {
+            skill.draw(batch, playTime);
+            playTime += Gdx.graphics.getDeltaTime();
+            if(skill.skillAnimation.isAnimationFinished(playTime)) {
+                playTime = 0;
+            }
         }
     }
 }

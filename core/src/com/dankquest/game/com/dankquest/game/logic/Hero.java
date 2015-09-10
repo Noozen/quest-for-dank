@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.dankquest.game.com.dankquest.game.actors.HeroActor;
 import com.dankquest.game.com.dankquest.game.logic.skill.Skill;
 
+import java.util.Iterator;
 import java.util.Map;
 
 public class Hero {
@@ -60,7 +61,14 @@ public class Hero {
         for(Map.Entry<String, Buff> buffEntry : buffMap.entrySet()) {
             buffEntry.getValue().buffDuration--;
         }
-        //Wywalac jezeli buff sie skonczy
+        Iterator<Map.Entry<String, Buff>> mapIterator = buffMap.entrySet().iterator();
+        Map.Entry<String, Buff> mapEntry;
+        while(mapIterator.hasNext()) {
+            mapEntry = mapIterator.next();
+            if(mapEntry.getValue().buffDuration <= 0) {
+                mapIterator.remove();
+            }
+        }
     }
 
     private Hero getBuffedHeroValues() {
