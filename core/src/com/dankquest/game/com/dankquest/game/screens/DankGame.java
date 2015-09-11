@@ -231,12 +231,12 @@ public class DankGame extends BasicScreen {
                     Dank.activeHero.getSkill(Dank.skillCastNumber).cast();
                     Dank.skillCastNumber = 0;
                     clearTargetsUpdateBuffsSortHeroList();
-                    if(checkIfGameEnded())
+                    if (checkIfGameEnded())
                         return;
                     update();
                     processComputerTurns();
                 }
-            },Dank.activeHero.getSkill(Dank.skillCastNumber).skillAnimation.getAnimationDuration());
+            }, Dank.activeHero.getSkill(Dank.skillCastNumber).skillAnimation.getAnimationDuration());
         } else {
             Dank.enemyTurnInProgress = false;
         }
@@ -401,6 +401,14 @@ public class DankGame extends BasicScreen {
     private void removeDeadHeroesFromCurrentTurn() {
         Iterator<Hero> heroIterator = Dank.thisTurnLeftHeroesList.iterator();
         Hero heroEntry;
+        while(heroIterator.hasNext()) {
+            heroEntry = heroIterator.next();
+            if(heroEntry.healthCurrent <=0) {
+                heroIterator.remove();
+            }
+        }
+
+        heroIterator = Dank.passHeroesList.iterator();
         while(heroIterator.hasNext()) {
             heroEntry = heroIterator.next();
             if(heroEntry.healthCurrent <=0) {
