@@ -83,9 +83,10 @@ public class HeroActor extends Actor {
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 if (Dank.skillCastNumber == 0) {
+                    //Wyswietl tooltip
                     return;
                 }
-                if (Dank.enemyTurnInProgress == true) {
+                if (Dank.enemyTurnInProgress == true || Dank.animationInProgress == true) {
                     return;
                 }
                 if (Dank.targetList.subList(1, Dank.targetList.size()).contains(characterList.get(heroNumber - 1))) {
@@ -97,10 +98,11 @@ public class HeroActor extends Actor {
                         }
                     }
                 }
-                if (Dank.targetList.size() <= characterList.get(heroNumber - 1).getSkill(Dank.skillCastNumber).getAmountOfTargets())
+                if (Dank.targetList.size() == 1 + characterList.get(heroNumber - 1).getSkill(Dank.skillCastNumber).getAmountOfTargets())
                 {
-                    Dank.targetList.add(characterList.get(heroNumber - 1));
+                    Dank.targetList.remove(1);
                 }
+                Dank.targetList.add(characterList.get(heroNumber - 1));
                 dankGameInstance.update();
             }
         });

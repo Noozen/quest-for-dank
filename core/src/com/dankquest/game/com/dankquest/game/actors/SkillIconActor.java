@@ -14,7 +14,7 @@ import com.dankquest.game.com.dankquest.game.screens.DankGame;
 /**
  * Created by Antah on 2015/09/05.
  */
-public class SkillActor extends Actor {
+public class SkillIconActor extends Actor {
 
     private Texture texture;
 
@@ -26,7 +26,7 @@ public class SkillActor extends Actor {
 
     private DankGame dankGameInstance;
 
-    public SkillActor(int x, int y, int skillNumber, DankGame dankGame) {
+    public SkillIconActor(int x, int y, int skillNumber, DankGame dankGame) {
         bitmapFont = new BitmapFont();
         bitmapFont.setColor(1, 0, 0, 1);
         pixmap = new Pixmap(50, 50, Pixmap.Format.RGBA8888);
@@ -66,24 +66,19 @@ public class SkillActor extends Actor {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (Dank.enemyTurnInProgress == true) {
+                if (Dank.enemyTurnInProgress == true || Dank.animationInProgress == true) {
                     return;
                 }
-                skillCastTouchUp(skillNumber);
+                Dank.targetList.clear();
+                if(Dank.skillCastNumber == skillNumber){
+                    Dank.skillCastNumber = 0;
+                    dankGameInstance.update();
+                    return;
+                }
+                Dank.skillCastNumber = skillNumber;
+                Dank.targetList.add(Dank.activeHero);
                 dankGameInstance.update();
             }
         });
-    }
-
-    private void skillCastTouchUp(int i) {
-        if (Dank.skillCastNumber > 0) {
-            if (Dank.skillCastNumber == i) {
-                Dank.skillCastNumber = 0;
-                Dank.targetList.clear();
-            }
-        } else {
-            Dank.skillCastNumber = i;
-            Dank.targetList.add(Dank.activeHero);
-        }
     }
 }

@@ -40,7 +40,7 @@ public class Dank {
     public static boolean characterPassed = false;
     public static boolean enemyTurnInProgress = false;
     //Cast animation
-    public static float castStateTime;
+    public static boolean animationInProgress;
 
     static {
         ownedHeroesList = new ArrayList<Hero>();

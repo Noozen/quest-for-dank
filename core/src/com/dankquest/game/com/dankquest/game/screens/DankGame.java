@@ -19,7 +19,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.dankquest.game.com.dankquest.game.actors.CastAnimationActor;
 import com.dankquest.game.com.dankquest.game.actors.HeroActor;
 import com.dankquest.game.com.dankquest.game.actors.PortraitActor;
-import com.dankquest.game.com.dankquest.game.actors.SkillActor;
+import com.dankquest.game.com.dankquest.game.actors.SkillIconActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
@@ -39,7 +39,7 @@ public class DankGame extends BasicScreen {
     private Skin skin;
     private TextButton retreatButton, castButton, passButton;
     private PortraitActor portraitActor;
-    private SkillActor skill1, skill2, skill3, skill4;
+    private SkillIconActor skill1, skill2, skill3, skill4;
     //Heroes
     private HeroActor hero1, hero2, hero3, hero4;
     private HeroActor enemy1, enemy2, enemy3, enemy4;
@@ -129,6 +129,9 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                if (Dank.enemyTurnInProgress == true || Dank.animationInProgress == true) {
+                    return;
+                }
                 battleMusic.stop();
                 resetHealthAndStuff();
                 game.setScreen(new GameMenu(game));
@@ -156,7 +159,7 @@ public class DankGame extends BasicScreen {
                 if (Dank.passPhase == true) {
                     return;
                 }
-                if (Dank.enemyTurnInProgress == true) {
+                if (Dank.enemyTurnInProgress == true || Dank.animationInProgress == true) {
                     return;
                 }
                 Dank.characterPassed = true;
@@ -191,10 +194,11 @@ public class DankGame extends BasicScreen {
                 if (Dank.targetList.size() != Dank.activeHero.getSkill(Dank.skillCastNumber).getAmountOfTargets() + 1) {
                     return;
                 }
-                if (Dank.enemyTurnInProgress == true) {
+                if (Dank.enemyTurnInProgress == true || Dank.animationInProgress == true) {
                     return;
                 }
                 if (Dank.chosenHeroesList.contains(Dank.activeHero)) {
+                    Dank.animationInProgress = true;
                     Timer timer = new Timer();
                     castAnimationActor = new CastAnimationActor(Dank.activeHero.getSkill(Dank.skillCastNumber));
                     stage.addActor(castAnimationActor);
@@ -209,6 +213,7 @@ public class DankGame extends BasicScreen {
                                 return;
                             update();
                             processComputerTurns();
+                            Dank.animationInProgress = false;
                         }
                     }, Dank.activeHero.getSkill(Dank.skillCastNumber).getAnimationDuration());
                 }
@@ -243,10 +248,10 @@ public class DankGame extends BasicScreen {
     }
 
     private void skillsSetup() {
-        skill1 = new SkillActor(200, 10, 1, this);
-        skill2 = new SkillActor(260, 10, 2, this);
-        skill3 = new SkillActor(320, 10, 3, this);
-        skill4 = new SkillActor(380, 10, 4, this);
+        skill1 = new SkillIconActor(200, 10, 1, this);
+        skill2 = new SkillIconActor(260, 10, 2, this);
+        skill3 = new SkillIconActor(320, 10, 3, this);
+        skill4 = new SkillIconActor(380, 10, 4, this);
 
         table.addActor(skill1);
         table.addActor(skill2);
