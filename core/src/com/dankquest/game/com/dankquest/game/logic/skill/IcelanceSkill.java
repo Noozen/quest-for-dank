@@ -20,7 +20,7 @@ public class IcelanceSkill extends Skill {
     public IcelanceSkill(){
         amountOfTargets = 1;
         basePixmap = new Pixmap(Gdx.files.internal("skills/arrow.png"));
-        skillName = "Icelance";
+        skillName = "Ice Lance";
         skillSheet = new Texture(Gdx.files.internal("skills_animations/Icelance.png"));
         TextureRegion[][] tmp = TextureRegion.split(skillSheet, 192, 192);
         skillFramesCreate = new TextureRegion[8];

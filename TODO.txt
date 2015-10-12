@@ -1,15 +1,13 @@
 Bugi:
-* Zrobic ze przyciski sa nienaciskalne gdy animacja jest w trakcie - zajme sie tym, Karol
 * Naprawic boundsy przyciskow w menu glownym
 
 Refactor:
 * Dodac super klase ktora bedzie miala w sobie tekstury
 * Dodac metode receive damage zamiast zabierac hp herosom (uwzglednia buffy)
 * Dodac metode deal damage zamiast samemu mnozyc dmg przez mnoznik
-* Dodac status czyMartwy zamiast sprawdzac czy hp<=0
+* Dodac status isDed zamiast sprawdzac czy hp<=0
 
 Design/features:
-* Dodac skille/classy ktore omowilismy - pracuje nad tym, sporo roboty D:, Karol
+* Dodac ustalone skille/klasy
 * Buffy i herosi powinni wyswietlac tooltip po najechaniu
 * Dodac statystyki bohatera do portretu
-* Zmienic system targetowania zeby zmienial target gdy nacisnie sie inny

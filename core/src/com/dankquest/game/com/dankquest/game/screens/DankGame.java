@@ -115,7 +115,7 @@ public class DankGame extends BasicScreen {
     }
 
     private void retreatButtonSetup() {
-        retreatButton = new TextButton("Neverlucky", skin, "orange_yellow_fat");
+        retreatButton = new TextButton("Retreat", skin, "orange_yellow_fat");
 
         retreatButton.setWidth(200);
         retreatButton.setHeight(50);
@@ -424,7 +424,7 @@ public class DankGame extends BasicScreen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
     }
