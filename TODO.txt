@@ -2,6 +2,8 @@ Bugi:
 * Naprawic boundsy przyciskow w menu glownym
 
 Refactor:
+* Przeniesc metody od logiki z DankGame, do Dank, m.in. clearTargetsUpdateBuffsSortHeroList(), removeDeadHeroesFromCurrentTurn()
+* Dodac oddzielna paczke która bêdzie trzyma³a listenery do m.in. castButton, passButton i heroActorów
 * Dodac super klase ktora bedzie miala w sobie tekstury
 * Dodac metode receive damage zamiast zabierac hp herosom (uwzglednia buffy)
 * Dodac metode deal damage zamiast samemu mnozyc dmg przez mnoznik
