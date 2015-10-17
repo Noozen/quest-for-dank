@@ -2,6 +2,8 @@ Bugi:
 * Naprawic boundsy przyciskow w menu glownym
 
 Refactor:
+* Wyrzucic screen posrednicz¹cy pomiedzy MainMenu a wyborem postaci
+* Ujednolicic design czcionek
 * Przeniesc metody od logiki z DankGame, do Dank, m.in. clearTargetsUpdateBuffsSortHeroList(), removeDeadHeroesFromCurrentTurn()
 * Dodac oddzielna paczke która bêdzie trzyma³a listenery do m.in. castButton, passButton i heroActorów
 * Dodac super klase ktora bedzie miala w sobie tekstury
@@ -10,6 +12,9 @@ Refactor:
 * Dodac status isDed zamiast sprawdzac czy hp<=0
 
 Design/features:
-* Dodac ustalone skille/klasy
+* Dodac wybór stage'a
+* Stworzyc w sumie 4 funkcjonalne klasy
+* Dodac animacje do wszystkich skilli
+* Dodac dzwieki/muzyke
 * Buffy i herosi powinni wyswietlac tooltip po najechaniu
 * Dodac statystyki bohatera do portretu
