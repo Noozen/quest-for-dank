@@ -22,6 +22,8 @@ import com.dankquest.game.com.dankquest.game.actors.PortraitActor;
 import com.dankquest.game.com.dankquest.game.actors.SkillIconActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
+import com.dankquest.game.com.dankquest.game.util.Assets;
+import com.dankquest.game.com.dankquest.game.util.DankMusic;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
 
 import java.util.Iterator;
@@ -33,7 +35,6 @@ public class DankGame extends BasicScreen {
     private Stage stage;
     private Table table;
     //Our beautiful assets
-    private Music battleMusic;
     private Image backgroundFloorImage, backgroundWallImage;
     //UI
     private Skin skin;
@@ -83,10 +84,7 @@ public class DankGame extends BasicScreen {
     }
 
     private void musicSetup() {
-        battleMusic = Gdx.audio.newMusic(Gdx.files.internal("music/Battle2.ogg"));
-        battleMusic.setVolume(0.2f);
-        battleMusic.setLooping(true);
-        battleMusic.play();
+        DankMusic.playMusic("music/Battle2.ogg");
     }
 
     private void backgroundSetup() {
@@ -99,8 +97,7 @@ public class DankGame extends BasicScreen {
 
     private void uiSetup() {
         //Skin setup
-        skin = new Skin(Gdx.files.internal("skins/rainbowpack.json"),
-                new TextureAtlas(Gdx.files.internal("skins/rainbowpack.pack")));
+        skin = Assets.manager.get("skins/rainbowpack.json", Skin.class);
 
         retreatButtonSetup();
         castButtonSetup();
@@ -132,7 +129,6 @@ public class DankGame extends BasicScreen {
                 if (Dank.enemyTurnInProgress == true || Dank.animationInProgress == true) {
                     return;
                 }
-                battleMusic.stop();
                 resetHealthAndStuff();
                 game.setScreen(new GameMenu(game));
             }
