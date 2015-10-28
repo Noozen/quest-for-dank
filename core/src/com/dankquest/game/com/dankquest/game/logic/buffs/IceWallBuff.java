@@ -10,10 +10,10 @@ import com.dankquest.game.com.dankquest.game.logic.Hero;
 public class IceWallBuff extends Buff{
     public IceWallBuff() {
         basePixmap = new Pixmap(Gdx.files.internal("buffs/exhausted.png"));
-        buffDuration = 10;
+        buffDuration = 5;
         name = "Shield";
     }
     public void useBuff(Hero hero) {
-        hero.shield = 100;
+        hero.shield += 20;
     }
 }

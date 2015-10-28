@@ -18,7 +18,7 @@ public class Hero {
         this.initiative = hero.initiative;
         this.attackDamage = hero.attackDamage;
         this.damageMultiplier = hero.damageMultiplier;
-        this.shield = 0;
+        this.shield = hero.shield;
     }
     public String name;
     public HeroClass heroClass;
@@ -42,6 +42,9 @@ public class Hero {
 
     public double getDamageMultiplier() {
         return getBuffedHeroValues().damageMultiplier;
+    }
+    public double getShield(){
+        return getBuffedHeroValues().shield;
     }
 
     public double healthTotal;
@@ -93,8 +96,5 @@ public class Hero {
 
     public Pixmap getImage() {
         return texture;
-    }
-    public double getShield(){
-        return this.shield;
     }
 }

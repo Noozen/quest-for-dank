@@ -62,10 +62,9 @@ public class HeroActor extends Actor {
         pixmap.setColor(1, 0.5f, 0.5f, 1);
         pixmap.fillRectangle(0, 0, 64, 10);
         pixmap.setColor(1, 0, 0, 1);
-        pixmap.fillRectangle(0, 0, (int) (64 * (characterList.get(heroNumber - 1).healthCurrent / characterList.get(heroNumber - 1).getHealthTotal())), 10);
+        pixmap.fillRectangle(0, 0, (int) (64 * (characterList.get(heroNumber - 1).getHealthCurrent() / characterList.get(heroNumber - 1).getHealthTotal())), 10);
         pixmap.setColor(0, 0.5f, 1, 1);
-        pixmap.fillRectangle((int) (64 * (characterList.get(heroNumber - 1).healthCurrent / characterList.get(heroNumber - 1).getHealthTotal())), 0,
-                (int) characterList.get(heroNumber - 1).getShield(), 10);
+        pixmap.fillRectangle(0, 0, (int) (64 * (characterList.get(heroNumber - 1).getShield() / characterList.get(heroNumber - 1).getHealthTotal())), 5);
         if(Dank.targetList.size()>1) {
             if(Dank.targetList.subList(1,Dank.targetList.size()).contains(characterList.get(heroNumber-1))) {
                 pixmap.setColor(1,1,1,0.4f);
