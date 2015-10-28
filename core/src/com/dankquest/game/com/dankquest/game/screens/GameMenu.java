@@ -13,15 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.dankquest.game.com.dankquest.game.util.Assets;
+import com.dankquest.game.com.dankquest.game.util.DankMusic;
 
 public class GameMenu extends BasicScreen {
 
     private Stage stage;
     private Table table;
-
-    Music relaxingMusic;
 
     private Image backgroundImage;
 
@@ -38,35 +37,96 @@ public class GameMenu extends BasicScreen {
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(640,480));
-        Gdx.input.setInputProcessor(stage);
+        loadAssets();
+        setupStage();
+        setupTable();
+        setupBackground();
+        setupMusic();
+        setupSkin();
+        setupAdventureButton();
+        setupPartyManagementButton();
+        setupBackButton();
+        setupShopButton();
+    }
 
-        table = new Table();
-        table.setFillParent(true);
-        stage.addActor(table);
+    private void setupMusic() {
+        DankMusic.playMusic("music/night_hours.mp3");
+    }
 
-        //Music Setup
-        relaxingMusic = Gdx.audio.newMusic(Gdx.files.internal("music/night_hours.mp3"));
-        relaxingMusic.setVolume(0.2f);
-        relaxingMusic.setLooping(true);
-        relaxingMusic.play();
+    private void setupShopButton() {
+        shopButton = new TextButton("Shop", skin, "orange_yellow_fat");
 
-        //Background Setup
-        backgroundImage = new Image(new TextureRegion(new Texture(Gdx.files.internal("backgrounds/Tower1.png"))));
-        table.addActor(backgroundImage);
+        shopButton.setWidth(200);
+        shopButton.setHeight(70);
 
-        //Skin setup
-        skin = new Skin(Gdx.files.internal("skins/rainbowpack.json"),
-                new TextureAtlas(Gdx.files.internal("skins/rainbowpack.pack")));
+        shopButton.setX(400);
+        shopButton.setY(155);
 
-        //Adventure Button Setup
+        shopButton.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new ShopMenu(game));
+            }
+        });
+
+        table.addActor(shopButton);
+    }
+
+    private void setupBackButton() {
+        backButton = new TextButton("Back", skin, "orange_yellow_fat");
+
+        backButton.setWidth(200);
+        backButton.setHeight(70);
+
+        backButton.setX(400);
+        backButton.setY(55);
+
+        backButton.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new MainMenu(game));
+            }
+        });
+
+        table.addActor(backButton);
+    }
+
+    private void setupPartyManagementButton() {
+        partyManagementButton = new TextButton("Party\nManagement", skin, "orange_yellow_fat");
+
+        partyManagementButton.setWidth(200);
+        partyManagementButton.setHeight(70);
+
+        partyManagementButton.setX(400);
+        partyManagementButton.setY(255);
+
+        partyManagementButton.addListener(new InputListener() {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new HeroManagementMenu(game));
+            }
+        });
+
+        table.addActor(partyManagementButton);
+    }
+
+    private void setupAdventureButton() {
         adventureButton = new TextButton("Adventure", skin, "orange_yellow_fat");
 
-        adventureButton.setWidth(240);
-        adventureButton.setHeight(140);
+        adventureButton.setWidth(200);
+        adventureButton.setHeight(70);
 
-        adventureButton.setX(340);
-        adventureButton.setY(80);
+        adventureButton.setX(400);
+        adventureButton.setY(355);
 
         adventureButton.addListener(new InputListener() {
 
@@ -75,78 +135,35 @@ public class GameMenu extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                relaxingMusic.stop();
                 game.setScreen(new AdventureMenu(game));
             }
         });
 
         table.addActor(adventureButton);
+    }
 
-        //partyManagment Button Setup
-        partyManagementButton = new TextButton("Party\nManagement", skin, "orange_yellow_fat");
+    private void setupSkin() {
+        skin = Assets.manager.get("skins/rainbowpack.json", Skin.class);
+    }
 
-        partyManagementButton.setWidth(240);
-        partyManagementButton.setHeight(140);
+    private void setupBackground() {
+        backgroundImage = new Image(new TextureRegion(new Texture(Gdx.files.internal("backgrounds/Tower1.png"))));
+        table.addActor(backgroundImage);
+    }
 
-        partyManagementButton.setX(340);
-        partyManagementButton.setY(260);
+    private void setupTable() {
+        table = new Table();
+        table.setFillParent(true);
+        stage.addActor(table);
+    }
 
-        partyManagementButton.addListener(new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
+    private void setupStage() {
+        stage = new Stage(new FitViewport(640,480));
+        Gdx.input.setInputProcessor(stage);
+    }
 
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                relaxingMusic.stop();
-                game.setScreen(new HeroManagementMenu(game));
-            }
-        });
-
-        table.addActor(partyManagementButton);
-
-        //Back Button Setup
-        backButton = new TextButton("Back", skin, "orange_yellow_fat");
-
-        backButton.setWidth(240);
-        backButton.setHeight(140);
-
-        backButton.setX(60);
-        backButton.setY(80);
-
-        backButton.addListener(new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                relaxingMusic.stop();
-                game.setScreen(new MainMenu(game));
-            }
-        });
-
-        table.addActor(backButton);
-
-        //Shop Button Setup
-        shopButton = new TextButton("Shop", skin, "orange_yellow_fat");
-
-        shopButton.setWidth(240);
-        shopButton.setHeight(140);
-
-        shopButton.setX(60);
-        shopButton.setY(260);
-
-        shopButton.addListener(new InputListener() {
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                relaxingMusic.stop();
-                game.setScreen(new ShopMenu(game));
-            }
-        });
-
-        table.addActor(shopButton);
+    private void loadAssets() {
+        Assets.loadMainMenu();
     }
 
     @Override

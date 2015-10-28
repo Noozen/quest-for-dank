@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -18,10 +17,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.dankquest.game.com.dankquest.game.actors.OwnedHeroesActor;
 import com.dankquest.game.com.dankquest.game.actors.ChosenHeroesActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
-import com.dankquest.game.com.dankquest.game.logic.Hero;
+import com.dankquest.game.com.dankquest.game.util.Assets;
+import com.dankquest.game.com.dankquest.game.util.DankMusic;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
-
-import java.util.Comparator;
 
 /**
  * Created by Antah on 2015/09/02.
@@ -51,76 +49,63 @@ public class AdventureMenu extends BasicScreen {
 
     @Override
     public void show() {
-        stage = new Stage(new FitViewport(640,480));
-        Gdx.input.setInputProcessor(stage);
+        loadAssets();
+        setupStage();
+        setupTable();
+        musicSetup();
+        setupBackground();
+        setupSkin();
+        setupBackButton();
+        setupPlayButton();
+        setupArrowButtons();
+        setupOwnedHeroesActor();
+        setupChosenHeroesActor();
+    }
 
-        table = new Table();
-        table.setFillParent(true);
-        stage.addActor(table);
-
-        //Music Setup
-        relaxingMusic = Gdx.audio.newMusic(Gdx.files.internal("music/night_hours.mp3"));
-        relaxingMusic.setVolume(0.2f);
-        relaxingMusic.setLooping(true);
-        relaxingMusic.play();
-
-        //Background Setup
-        backgroundImage = new Image(new TextureRegion(new Texture(Gdx.files.internal("backgrounds/Tower1.png"))));
-        table.addActor(backgroundImage);
-
-        //Skin setup
-        skin = new Skin(Gdx.files.internal("skins/rainbowpack.json"),
-                new TextureAtlas(Gdx.files.internal("skins/rainbowpack.pack")));
-
-        //Back Button Setup
-        backButton = new TextButton("Back", skin, "orange_yellow_fat");
-
-        backButton.setWidth(100);
-        backButton.setHeight(100);
-
-        backButton.setX(10);
-        backButton.setY(10);
-
-        backButton.addListener(new InputListener() {
+    private void setupChosenHeroesActor() {
+        chosenHeroesActor.addListener(new InputListener() {
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                relaxingMusic.stop();
-                game.setScreen(new GameMenu(game));
+                if(Dank.chosenHeroesList.size()> Math.round(x) / 100) {
+                    Dank.ownedHeroesList.add(Dank.chosenHeroesList.remove(Math.round(x) / 100));
+                    ownedHeroesActor.update();
+                    chosenHeroesActor.update();
+
+                    Dank.ownedHeroesList.sort(DankUtil.ascendingNameComparator);
+
+                }
             }
         });
 
-        table.addActor(backButton);
+        table.addActor(chosenHeroesActor);
+    }
 
-        //Play Button Setup
-        playButton = new TextButton("Play", skin, "orange_yellow_fat");
-
-        playButton.setWidth(100);
-        playButton.setHeight(100);
-
-        playButton.setX(530);
-        playButton.setY(10);
-
-        playButton.addListener(new InputListener() {
+    private void setupOwnedHeroesActor() {
+        ownedHeroesActor.addListener(new InputListener() {
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if (Dank.chosenHeroesList.size() == 4) {
-                    relaxingMusic.stop();
-                    game.setScreen(new DankGame(game));
-                 }
+                if(Dank.chosenHeroesList.size()<4 && Dank.ownedHeroesList.size()> ownedHeroesActor.currentHero + Math.round(x) / 100) {
+                    Dank.chosenHeroesList.add(Dank.ownedHeroesList.remove(ownedHeroesActor.currentHero + Math.round(x) / 100));
+                    ownedHeroesActor.update();
+                    chosenHeroesActor.update();
+
+                    Dank.ownedHeroesList.sort(DankUtil.ascendingNameComparator);
+                }
             }
         });
 
-        table.addActor(playButton);
+        table.addActor(ownedHeroesActor);
+    }
 
-        //toLeftCharacter Button Setup
+    private void setupArrowButtons() {
         toLeftCharacterButton = new TextButton("<-", skin, "orange_yellow_fat");
 
         toLeftCharacterButton.setWidth(100);
@@ -142,7 +127,6 @@ public class AdventureMenu extends BasicScreen {
 
         table.addActor(toLeftCharacterButton);
 
-        //toRightCharacter Button Setup
         toRightCharacterButton = new TextButton("->", skin, "orange_yellow_fat");
 
         toRightCharacterButton.setWidth(100);
@@ -163,47 +147,82 @@ public class AdventureMenu extends BasicScreen {
         });
 
         table.addActor(toRightCharacterButton);
+    }
 
-        //ownedHeroesActor
-        ownedHeroesActor.addListener(new InputListener() {
+    private void setupPlayButton() {
+        playButton = new TextButton("Play", skin, "orange_yellow_fat");
 
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
+        playButton.setWidth(100);
+        playButton.setHeight(100);
 
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(Dank.chosenHeroesList.size()<4 && Dank.ownedHeroesList.size()> ownedHeroesActor.currentHero + Math.round(x) / 100) {
-                    Dank.chosenHeroesList.add(Dank.ownedHeroesList.remove(ownedHeroesActor.currentHero + Math.round(x) / 100));
-                    ownedHeroesActor.update();
-                    chosenHeroesActor.update();
+        playButton.setX(530);
+        playButton.setY(10);
 
-                    Dank.ownedHeroesList.sort(DankUtil.ascendingNameComparator);
-                }
-            }
-        });
-
-        table.addActor(ownedHeroesActor);
-
-        //chosenHeroesActor
-        chosenHeroesActor.addListener(new InputListener() {
+        playButton.addListener(new InputListener() {
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(Dank.chosenHeroesList.size()> Math.round(x) / 100) {
-                    Dank.ownedHeroesList.add(Dank.chosenHeroesList.remove(Math.round(x) / 100));
-                    ownedHeroesActor.update();
-                    chosenHeroesActor.update();
-
-                    Dank.ownedHeroesList.sort(DankUtil.ascendingNameComparator);
-
+                if (Dank.chosenHeroesList.size() == 4) {
+                    game.setScreen(new DankGame(game));
                 }
             }
         });
 
-        table.addActor(chosenHeroesActor);
+        table.addActor(playButton);
+    }
+
+    private void setupBackButton() {
+        backButton = new TextButton("Back", skin, "orange_yellow_fat");
+
+        backButton.setWidth(100);
+        backButton.setHeight(100);
+
+        backButton.setX(10);
+        backButton.setY(10);
+
+        backButton.addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                game.setScreen(new GameMenu(game));
+            }
+        });
+
+        table.addActor(backButton);
+    }
+
+    private void setupSkin() {
+        skin = Assets.manager.get("skins/rainbowpack.json", Skin.class);
+    }
+
+    private void setupBackground() {
+        backgroundImage = new Image(new TextureRegion(new Texture(Gdx.files.internal("backgrounds/Tower1.png"))));
+        table.addActor(backgroundImage);
+    }
+
+    private void musicSetup() {
+        DankMusic.playMusic("music/night_hours.mp3");
+    }
+
+    private void setupTable() {
+        table = new Table();
+        table.setFillParent(true);
+        stage.addActor(table);
+    }
+
+    private void setupStage() {
+        stage = new Stage(new FitViewport(640,480));
+        Gdx.input.setInputProcessor(stage);
+    }
+
+    private void loadAssets() {
+        Assets.loadMainMenu();
     }
 
     @Override
