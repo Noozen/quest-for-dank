@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
 import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
-import com.dankquest.game.com.dankquest.game.logic.buffs.ExhaustedBuff;
+import com.dankquest.game.com.dankquest.game.logic.buffs.IceWallBuff;
 
 import java.util.List;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -40,7 +40,12 @@ public class IceWallSkill extends Skill {
     }
 
     public void cast() {
-
+        Buff iceWallBuff = new IceWallBuff();
+        for (Hero h : Dank.chosenHeroesList) {
+            if (h.getHealthCurrent() > 0) {
+                h.buffMap.put(iceWallBuff.getName() + Dank.targetList.get(0).toString(), iceWallBuff);
+            }
+        }
     }
 
     @Override

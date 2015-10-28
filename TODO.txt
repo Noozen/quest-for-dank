@@ -2,12 +2,19 @@ Bugi:
 * Naprawic boundsy przyciskow w menu glownym
 
 Refactor:
-* Dodac super klase ktora bedzie miala w sobie tekstury
+* Zmienic sposob ladownia tekstor
 * Dodac metode receive damage zamiast zabierac hp herosom (uwzglednia buffy)
 * Dodac metode deal damage zamiast samemu mnozyc dmg przez mnoznik
-* Dodac status isDed zamiast sprawdzac czy hp<=0
+* Dodac status isDead zamiast sprawdzac czy hp<=0
 
 Design/features:
+* Ujednolicic design
 * Dodac ustalone skille/klasy
 * Buffy i herosi powinni wyswietlac tooltip po najechaniu
 * Dodac statystyki bohatera do portretu
+
+Na projekt indywidualny:
+* kilka przykladowych poziomow
+* 4 klasy postaci + przeciwnicy
+* proste AI
+* sklep z potkami
