@@ -16,15 +16,12 @@ public class DankUtil {
 
     static {
         ascendingNameComparator = new Comparator<Hero>() {
-            @Override
             public int compare(Hero o1, Hero o2) {
                 return o1.name.compareTo(o2.name);
             }
         };
 
         descendingInitiativeComparator = new Comparator<Hero>() {
-
-            @Override
             public int compare(Hero o1, Hero o2) {
                 if (o1.getInitiative() < o2.getInitiative())
                     return 1;

@@ -26,6 +26,7 @@ import com.dankquest.game.com.dankquest.game.util.Assets;
 import com.dankquest.game.com.dankquest.game.util.DankMusic;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -68,7 +69,7 @@ public class DankGame extends BasicScreen {
         Dank.allHeroesInGameList.addAll(Dank.chosenHeroesList);
         Dank.allHeroesInGameList.addAll(Dank.enemyHeroesList);
         Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
-        Dank.thisTurnLeftHeroesList.sort(DankUtil.descendingInitiativeComparator);
+        Collections.sort(Dank.thisTurnLeftHeroesList, DankUtil.descendingInitiativeComparator);
         Dank.activeHero = Dank.allHeroesInGameList.get(0);
         Dank.activeHero.reduceBuffDuration();
     }
@@ -376,11 +377,11 @@ public class DankGame extends BasicScreen {
         Dank.targetList.clear();
         Dank.thisTurnLeftHeroesList.remove(Dank.activeHero);
         removeDeadHeroesFromCurrentTurn();
-        Dank.thisTurnLeftHeroesList.sort(DankUtil.descendingInitiativeComparator);
-        Dank.allHeroesInGameList.sort(DankUtil.descendingInitiativeComparator);
+        Collections.sort(Dank.thisTurnLeftHeroesList, DankUtil.descendingInitiativeComparator);
+        Collections.sort(Dank.allHeroesInGameList, DankUtil.descendingInitiativeComparator);
         if (Dank.thisTurnLeftHeroesList.isEmpty()) {
             if (!Dank.passHeroesList.isEmpty()) {
-                Dank.passHeroesList.sort(DankUtil.descendingInitiativeComparator);
+                Collections.sort(Dank.passHeroesList, DankUtil.descendingInitiativeComparator);
                 Dank.thisTurnLeftHeroesList.addAll(Dank.passHeroesList);
                 Dank.passHeroesList.clear();
                 Dank.passPhase = true;
@@ -388,7 +389,7 @@ public class DankGame extends BasicScreen {
                 Dank.passPhase = false;
                 Dank.thisTurnLeftHeroesList.addAll(Dank.allHeroesInGameList);
                 removeDeadHeroesFromCurrentTurn();
-                Dank.thisTurnLeftHeroesList.sort(DankUtil.descendingInitiativeComparator);
+                Collections.sort(Dank.thisTurnLeftHeroesList, DankUtil.descendingInitiativeComparator);
             }
         }
         if(Dank.characterPassed == false) {

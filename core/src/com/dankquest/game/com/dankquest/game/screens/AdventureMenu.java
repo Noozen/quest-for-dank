@@ -21,6 +21,8 @@ import com.dankquest.game.com.dankquest.game.util.Assets;
 import com.dankquest.game.com.dankquest.game.util.DankMusic;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
 
+import java.util.Collections;
+
 /**
  * Created by Antah on 2015/09/02.
  */
@@ -75,8 +77,7 @@ public class AdventureMenu extends BasicScreen {
                     ownedHeroesActor.update();
                     chosenHeroesActor.update();
 
-                    Dank.ownedHeroesList.sort(DankUtil.ascendingNameComparator);
-
+                    Collections.sort(Dank.ownedHeroesList, DankUtil.ascendingNameComparator);
                 }
             }
         });
@@ -97,7 +98,7 @@ public class AdventureMenu extends BasicScreen {
                     ownedHeroesActor.update();
                     chosenHeroesActor.update();
 
-                    Dank.ownedHeroesList.sort(DankUtil.ascendingNameComparator);
+                    Collections.sort(Dank.ownedHeroesList, DankUtil.ascendingNameComparator);
                 }
             }
         });

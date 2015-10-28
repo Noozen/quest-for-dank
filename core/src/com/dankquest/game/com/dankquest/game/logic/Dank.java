@@ -5,6 +5,7 @@ import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
 import com.dankquest.game.com.dankquest.game.logic.skill.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -147,7 +148,7 @@ public class Dank {
         exampleHero.buffMap = new HashMap<String, Buff>();
         ownedHeroesList.add(exampleHero);
 
-        ownedHeroesList.sort(DankUtil.ascendingNameComparator);
+        Collections.sort(Dank.ownedHeroesList, DankUtil.ascendingNameComparator);
 
         //Enemies
         exampleHero = new Hero();
