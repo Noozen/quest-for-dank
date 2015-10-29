@@ -43,8 +43,23 @@ public class Hero {
     public double getDamageMultiplier() {
         return getBuffedHeroValues().damageMultiplier;
     }
+
     public double getShield(){
         return getBuffedHeroValues().shield;
+    }
+
+    public void recieveDamage(double damageRecieved, boolean trueDamage){
+        if(!trueDamage) {
+            if(getShield() >= damageRecieved) {
+                this.shield = getShield() - damageRecieved;
+                damageRecieved = 0;
+            }
+            else{
+                damageRecieved -= getShield();
+                this.shield = 0;
+            }
+        }
+        this.healthCurrent -= damageRecieved;
     }
 
     public double healthTotal;
@@ -53,6 +68,7 @@ public class Hero {
     public double initiative;
     public double damageMultiplier;
     public double shield;
+    public boolean isDed;
 
     public Skill skill1;
     public Skill skill2;
