@@ -33,8 +33,8 @@ public class FireballSkill extends Skill {
 
     public void cast() {
         double damage = Dank.targetList.get(0).getAttackDamage()*2 * Dank.targetList.get(0).getDamageMultiplier();
-        Dank.targetList.get(1).healthCurrent -= damage;
-    };
+        Dank.targetList.get(1).recieveDamage(damage, false);
+    }
 
     @Override
     public void draw(Batch batch, float playTime) {

@@ -12,17 +12,22 @@ import java.util.Map;
 public class Hero {
 
     Hero() { }
+    public Hero(String name) {
+        this.name = name;
+    }
     Hero(Hero hero) {
         this.healthTotal = hero.healthTotal;
         this.healthCurrent = hero.healthCurrent;
         this.initiative = hero.initiative;
         this.attackDamage = hero.attackDamage;
         this.damageMultiplier = hero.damageMultiplier;
+        this.baseShield = hero.baseShield;
         this.shield = hero.shield;
     }
     public String name;
     public HeroClass heroClass;
     public Pixmap texture;
+    public Pixmap portrait;
 
     public double getHealthTotal() {
         return getBuffedHeroValues().healthTotal;
@@ -48,18 +53,20 @@ public class Hero {
         return getBuffedHeroValues().shield;
     }
 
+    public double getBaseShield(){
+        return getBuffedHeroValues().baseShield;
+    }
+
     public void recieveDamage(double damageRecieved, boolean trueDamage){
         if(!trueDamage) {
-            if(getShield() >= damageRecieved) {
-                this.shield = getShield() - damageRecieved;
-                damageRecieved = 0;
-            }
-            else{
-                damageRecieved -= getShield();
+            this.shield -= damageRecieved;
+            if(this.shield < 0){
+                this.healthCurrent += this.shield;
                 this.shield = 0;
             }
+        } else{
+            this.healthCurrent -= damageRecieved;
         }
-        this.healthCurrent -= damageRecieved;
     }
 
     public double healthTotal;
@@ -67,7 +74,7 @@ public class Hero {
     public double attackDamage;
     public double initiative;
     public double damageMultiplier;
-    public double shield;
+    public double shield, baseShield;
     public boolean isDed;
 
     public Skill skill1;

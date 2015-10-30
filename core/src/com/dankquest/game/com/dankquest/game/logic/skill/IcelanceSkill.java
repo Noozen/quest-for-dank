@@ -42,7 +42,7 @@ public class IcelanceSkill extends Skill {
             skillFramesBreak[index] = tmp[2][i];
             index++;
         }
-        skillAnimationCreate = new Animation(0.05f, skillFramesCreate);
+        skillAnimationCreate = new Animation(0.02f, skillFramesCreate);
         skillAnimationBreak = new Animation(0.1f, skillFramesBreak);
 }
 

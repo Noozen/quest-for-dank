@@ -1,14 +1,12 @@
 Bugi:
-* Naprawic boundsy przyciskow w menu glownym
+* Metoda recieveDamage dziwnie reaguje z tarcz?
 
 Refactor:
-* Zmienic sposob ladownia tekstor
-* Dodac metode receive damage zamiast zabierac hp herosom (uwzglednia buffy)
+* Zmienic sposob ladownia tekstor (AssetLoader juz jest w trakcie implementacji)
 * Dodac metode deal damage zamiast samemu mnozyc dmg przez mnoznik
-* Dodac status isDead zamiast sprawdzac czy hp<=0
+* Dodac status isDead zamiast sprawdzac czy hp<=0 (jest status, ale nie u?ywany)
 
 Design/features:
-* Ujednolicic design
 * Dodac ustalone skille/klasy
 * Buffy i herosi powinni wyswietlac tooltip po najechaniu
 * Dodac statystyki bohatera do portretu
@@ -17,4 +15,3 @@ Na projekt indywidualny:
 * kilka przykladowych poziomow
 * 4 klasy postaci + przeciwnicy
 * proste AI
-* sklep z potkami

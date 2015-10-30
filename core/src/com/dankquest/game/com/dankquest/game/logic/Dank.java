@@ -2,6 +2,7 @@ package com.dankquest.game.com.dankquest.game.logic;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
+import com.dankquest.game.com.dankquest.game.logic.heroes.*;
 import com.dankquest.game.com.dankquest.game.logic.skill.*;
 
 import java.util.ArrayList;
@@ -52,167 +53,37 @@ public class Dank {
         Hero exampleHero;
 
         //Heroes
-        exampleHero = new Hero();
-        exampleHero.name = "Noozen";
-        exampleHero.heroClass = HeroClass.WARRIOR;
-        exampleHero.healthTotal = 200;
-        exampleHero.healthCurrent = 200;
-        exampleHero.attackDamage = 5;
-        exampleHero.initiative = 7;
-        exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new ArrowSkill();
-        exampleHero.skill2 = new FireballSkill();
-        exampleHero.skill3 = new SlamSkill();
-        exampleHero.skill4 = new TwinBladeSkill();
-        exampleHero.texture = new Pixmap(Gdx.files.internal("heroes/troll.png"));
-        exampleHero.buffMap = new HashMap<String, Buff>();
+        exampleHero = new IceShaperHero("Antah");
         ownedHeroesList.add(exampleHero);
 
-        exampleHero = new Hero();
-        exampleHero.name = "Xental";
-        exampleHero.heroClass = HeroClass.WARRIOR;
-        exampleHero.healthTotal = 100;
-        exampleHero.healthCurrent = 100;
-        exampleHero.attackDamage = 10;
-        exampleHero.initiative = 9;
-        exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new ArrowSkill();
-        exampleHero.skill2 = new FireballSkill();
-        exampleHero.skill3 = new SlamSkill();
-        exampleHero.skill4 = new TwinBladeSkill();
-        exampleHero.texture = new Pixmap(Gdx.files.internal("heroes/goblin.png"));
-        exampleHero.buffMap = new HashMap<String, Buff>();
+        exampleHero = new PyromancerHero("Xental");
         ownedHeroesList.add(exampleHero);
 
-        exampleHero = new Hero();
-        exampleHero.name = "Antah";
-        exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.healthTotal = 50;
-        exampleHero.healthCurrent = 50;
-        exampleHero.attackDamage = 20;
-        exampleHero.initiative = 10;
-        exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new FreezingMistSkill();
-        exampleHero.skill2 = new IcelanceSkill();
-        exampleHero.skill3 = new IceWallSkill();
-        exampleHero.skill4 = new TwinBladeSkill();
-        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
-        exampleHero.buffMap = new HashMap<String, Buff>();
+        exampleHero = new NoozjebHero("Noozen");
         ownedHeroesList.add(exampleHero);
 
-        exampleHero = new Hero();
-        exampleHero.name = "Noctiphobia";
-        exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.healthTotal = 60;
-        exampleHero.healthCurrent = 60;
-        exampleHero.attackDamage = 15;
-        exampleHero.initiative = 6;
-        exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new ArrowSkill();
-        exampleHero.skill2 = new FireballSkill();
-        exampleHero.skill3 = new SlamSkill();
-        exampleHero.skill4 = new TwinBladeSkill();
-        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/goblin.png"));
-        exampleHero.buffMap = new HashMap<String, Buff>();
+        exampleHero = new PyromancerHero("Lixe");
         ownedHeroesList.add(exampleHero);
 
-        exampleHero = new Hero();
-        exampleHero.name = "Nachrichter";
-        exampleHero.heroClass = HeroClass.WARRIOR;
-        exampleHero.healthTotal = 80;
-        exampleHero.healthCurrent = 80;
-        exampleHero.attackDamage = 12;
-        exampleHero.initiative = 5;
-        exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new ArrowSkill();
-        exampleHero.skill2 = new FireballSkill();
-        exampleHero.skill3 = new SlamSkill();
-        exampleHero.skill4 = new TwinBladeSkill();
-        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/goblin.png"));
-        exampleHero.buffMap = new HashMap<String, Buff>();
+        exampleHero = new PyromancerHero("Ahmi");
         ownedHeroesList.add(exampleHero);
 
-        exampleHero = new Hero();
-        exampleHero.name = "Ray";
-        exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.healthTotal = 30;
-        exampleHero.healthCurrent = 30;
-        exampleHero.attackDamage = 30;
-        exampleHero.initiative = 11;
-        exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new ArrowSkill();
-        exampleHero.skill2 = new FireballSkill();
-        exampleHero.skill3 = new SlamSkill();
-        exampleHero.skill4 = new TwinBladeSkill();
-        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/goblin.png"));
-        exampleHero.buffMap = new HashMap<String, Buff>();
+        exampleHero = new LorewalkerHero("Niebo");
+        ownedHeroesList.add(exampleHero);
+
+        exampleHero = new PyromancerHero("Ray");
         ownedHeroesList.add(exampleHero);
 
         Collections.sort(Dank.ownedHeroesList, DankUtil.ascendingNameComparator);
 
         //Enemies
-        exampleHero = new Hero();
-        exampleHero.name = "Enemy1";
-        exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.healthTotal = 50;
-        exampleHero.healthCurrent = 50;
-        exampleHero.attackDamage = 20;
-        exampleHero.initiative = 9;
-        exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new ArrowSkill();
-        exampleHero.skill2 = new FireballSkill();
-        exampleHero.skill3 = new SlamSkill();
-        exampleHero.skill4 = new TwinBladeSkill();
-        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
-        exampleHero.buffMap = new HashMap<String, Buff>();
+        exampleHero = new GoblinHero("Goblin 1");
         enemyHeroesList.add(exampleHero);
-
-        exampleHero = new Hero();
-        exampleHero.name = "Enemy2";
-        exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.healthTotal = 50;
-        exampleHero.healthCurrent = 50;
-        exampleHero.attackDamage = 20;
-        exampleHero.initiative = 9;
-        exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new ArrowSkill();
-        exampleHero.skill2 = new FireballSkill();
-        exampleHero.skill3 = new SlamSkill();
-        exampleHero.skill4 = new TwinBladeSkill();
-        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
-        exampleHero.buffMap = new HashMap<String, Buff>();
+        exampleHero = new GoblinHero("Goblin 2");
         enemyHeroesList.add(exampleHero);
-
-        exampleHero = new Hero();
-        exampleHero.name = "Enemy3";
-        exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.healthTotal = 50;
-        exampleHero.healthCurrent = 50;
-        exampleHero.attackDamage = 20;
-        exampleHero.initiative = 9;
-        exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new ArrowSkill();
-        exampleHero.skill2 = new FireballSkill();
-        exampleHero.skill3 = new SlamSkill();
-        exampleHero.skill4 = new TwinBladeSkill();
-        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
-        exampleHero.buffMap = new HashMap<String, Buff>();
+        exampleHero = new GoblinHero("Goblin 3");
         enemyHeroesList.add(exampleHero);
-
-        exampleHero = new Hero();
-        exampleHero.name = "Enemy4";
-        exampleHero.heroClass = HeroClass.MAGE;
-        exampleHero.healthTotal = 50;
-        exampleHero.healthCurrent = 50;
-        exampleHero.attackDamage = 20;
-        exampleHero.initiative = 9;
-        exampleHero.damageMultiplier = 1;
-        exampleHero.skill1 = new ArrowSkill();
-        exampleHero.skill2 = new FireballSkill();
-        exampleHero.skill3 = new SlamSkill();
-        exampleHero.skill4 = new TwinBladeSkill();
-        exampleHero.texture = new  Pixmap(Gdx.files.internal("heroes/dwarf.png"));
-        exampleHero.buffMap = new HashMap<String, Buff>();
+        exampleHero = new GoblinHero("Goblin 4");
         enemyHeroesList.add(exampleHero);
 
     }

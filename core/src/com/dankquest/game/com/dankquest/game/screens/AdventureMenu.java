@@ -224,6 +224,7 @@ public class AdventureMenu extends BasicScreen {
 
     private void loadAssets() {
         Assets.loadMainMenu();
+        Assets.loadPortraits();
     }
 
     @Override
