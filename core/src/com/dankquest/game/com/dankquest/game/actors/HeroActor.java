@@ -91,7 +91,7 @@ public class HeroActor extends Actor {
                     //Wyswietl tooltip
                     return;
                 }
-                if (Dank.enemyTurnInProgress == true || Dank.animationInProgress == true) {
+                if (Dank.enemyTurnInProgress == true || Dank.animationInProgress == true || characterList.get(heroNumber - 1).getSkill(Dank.skillCastNumber).getAmountOfTargets() == 0) {
                     return;
                 }
                 if (Dank.targetList.subList(1, Dank.targetList.size()).contains(characterList.get(heroNumber - 1))) {

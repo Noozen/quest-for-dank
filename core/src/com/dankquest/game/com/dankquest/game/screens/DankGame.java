@@ -2,10 +2,8 @@ package com.dankquest.game.com.dankquest.game.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -85,7 +83,7 @@ public class DankGame extends BasicScreen {
     }
 
     private void musicSetup() {
-        DankMusic.playMusic("music/Battle2.ogg");
+        DankMusic.changeSoundtrack("music/Battle2.ogg");
     }
 
     private void backgroundSetup() {
@@ -334,24 +332,17 @@ public class DankGame extends BasicScreen {
                 hero.buffMap.clear();
                 hero.healthCurrent = hero.healthTotal;
             }
-            Image winImage = new Image(new Texture(Gdx.files.internal("inne/victory.png")));
-            winImage.setX(270);
-            winImage.setY(215);
-            table.addActor(winImage);
             resetHealthAndStuff();
-            return true;
+            DankMusic.playSound("music/ff14_level_up.mp3");
+            game.setScreen(new PostGameMenu(game));
         }
         if (lose) {
             for (Hero hero : Dank.allHeroesInGameList) {
                 hero.buffMap.clear();
                 hero.healthCurrent = hero.healthTotal;
             }
-            Image loseImage = new Image(new Texture(Gdx.files.internal("inne/defeat.png")));
-            loseImage.setX(270);
-            loseImage.setY(215);
-            table.addActor(loseImage);
             resetHealthAndStuff();
-            return true;
+            game.setScreen(new PostGameMenu(game));
         }
         return false;
     }

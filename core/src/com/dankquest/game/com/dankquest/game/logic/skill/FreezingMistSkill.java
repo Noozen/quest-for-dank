@@ -18,7 +18,7 @@ public class FreezingMistSkill extends Skill{
     private float flyingAnimationTime;
     public FreezingMistSkill(){
         amountOfTargets = 1;
-        basePixmap = new Pixmap(Gdx.files.internal("skills/arrow.png"));
+        basePixmap = new Pixmap(Gdx.files.internal("skills/mist.png"));
         skillName = "Freezing Mist";
     }
 

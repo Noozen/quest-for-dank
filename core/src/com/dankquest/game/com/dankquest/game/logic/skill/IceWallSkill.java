@@ -23,7 +23,7 @@ public class IceWallSkill extends Skill {
 
     public IceWallSkill () {
         amountOfTargets = 0;
-        basePixmap = new Pixmap(Gdx.files.internal("skills/arrow.png"));
+        basePixmap = new Pixmap(Gdx.files.internal("skills/icewall.png"));
         skillName = "Ice Wall";
         skillSheet = new Texture(Gdx.files.internal("skills_animations/icewall.png"));
         skillFrames = new TextureRegion[2 * 5];

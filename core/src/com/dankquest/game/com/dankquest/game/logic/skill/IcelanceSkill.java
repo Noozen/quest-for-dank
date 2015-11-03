@@ -19,7 +19,7 @@ public class IcelanceSkill extends Skill {
     private float flyingAnimationTime;
     public IcelanceSkill(){
         amountOfTargets = 1;
-        basePixmap = new Pixmap(Gdx.files.internal("skills/arrow.png"));
+        basePixmap = new Pixmap(Gdx.files.internal("skills/icelance.png"));
         skillName = "Ice Lance";
         skillSheet = new Texture(Gdx.files.internal("skills_animations/Icelance.png"));
         TextureRegion[][] tmp = TextureRegion.split(skillSheet, 192, 192);

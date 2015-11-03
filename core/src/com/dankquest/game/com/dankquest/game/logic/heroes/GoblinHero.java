@@ -16,12 +16,12 @@ public class GoblinHero extends Hero {
     public GoblinHero(String name){
         super(name);
 
-        this.healthTotal = 200;
-        this.healthCurrent = 200;
+        this.healthTotal = 100;
+        this.healthCurrent = 100;
         this.initiative = 8;
         this.attackDamage = 10;
         this.damageMultiplier = 1;
-        this.baseShield = 100;
+        this.baseShield = 10;
         this.shield = this.baseShield;
 
         this.heroClass = HeroClass.WARRIOR;

@@ -208,7 +208,7 @@ public class AdventureMenu extends BasicScreen {
     }
 
     private void musicSetup() {
-        DankMusic.playMusic("music/night_hours.mp3");
+        DankMusic.changeSoundtrack("music/night_hours.mp3");
     }
 
     private void setupTable() {
