@@ -26,9 +26,9 @@ public class PyromancerHero extends Hero {
 
         this.heroClass = HeroClass.MAGE;
         this.skill1 = new FireballSkill();
-        this.skill2 = new IcelanceSkill();
+        this.skill2 = new FlameWaveSkill();
         this.skill3 = new MeteorSkill();
-        this.skill4 = new TwinBladeSkill();
+        this.skill4 = new HellboltSkill();
         this.texture = new Pixmap(Gdx.files.internal("heroes/dwarf.png"));
         this.buffMap = new HashMap<String, Buff>();
     }

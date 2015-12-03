@@ -28,7 +28,7 @@ public class DankMusic {
         Assets.load(filename, Music.class);
         Assets.manager.finishLoading();
         Music s = Assets.manager.get(filename, Music.class);
-        s.setVolume(0.4f);
+        s.setVolume(0.2f);
         s.play();
     }
     public static void stopSoundtrack(){

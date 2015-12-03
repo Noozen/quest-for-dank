@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
 import com.badlogic.gdx.graphics.Texture;
 import com.dankquest.game.com.dankquest.game.actors.HeroActor;
+import com.dankquest.game.com.dankquest.game.logic.buffs.DOTBuff;
 import com.dankquest.game.com.dankquest.game.logic.skill.Skill;
 
 import java.util.Iterator;
@@ -88,6 +89,10 @@ public class Hero {
     public void reduceBuffDuration() {
         for(Map.Entry<String, Buff> buffEntry : buffMap.entrySet()) {
             buffEntry.getValue().buffDuration--;
+            if (buffEntry.getValue() instanceof DOTBuff) {
+
+                ((DOTBuff) buffEntry.getValue()).applyDOT(this);
+            }
         }
         Iterator<Map.Entry<String, Buff>> mapIterator = buffMap.entrySet().iterator();
         Map.Entry<String, Buff> mapEntry;

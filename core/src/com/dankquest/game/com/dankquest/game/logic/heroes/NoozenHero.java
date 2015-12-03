@@ -12,8 +12,8 @@ import java.util.HashMap;
 /**
  * Created by Antah on 2015/10/30.
  */
-public class NoozjebHero extends Hero {
-    public NoozjebHero(String name){
+public class NoozenHero extends Hero {
+    public NoozenHero(String name){
         super(name);
 
         this.healthTotal = 400;

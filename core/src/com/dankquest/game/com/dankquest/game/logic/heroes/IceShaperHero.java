@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
 import com.dankquest.game.com.dankquest.game.logic.HeroClass;
 import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
-import com.dankquest.game.com.dankquest.game.logic.skill.FreezingMistSkill;
-import com.dankquest.game.com.dankquest.game.logic.skill.IceWallSkill;
-import com.dankquest.game.com.dankquest.game.logic.skill.IcelanceSkill;
-import com.dankquest.game.com.dankquest.game.logic.skill.TwinBladeSkill;
+import com.dankquest.game.com.dankquest.game.logic.skill.*;
 
 import java.util.HashMap;
 
@@ -31,8 +28,9 @@ public class IceShaperHero extends Hero {
         this.skill1 = new FreezingMistSkill();
         this.skill2 = new IcelanceSkill();
         this.skill3 = new IceWallSkill();
-        this.skill4 = new TwinBladeSkill();
+        this.skill4 = new ZeroBladeSkill();
         this.texture = new Pixmap(Gdx.files.internal("heroes/dwarf.png"));
         this.buffMap = new HashMap<String, Buff>();
     }
 }
+

@@ -1,16 +1,11 @@
 package com.dankquest.game.com.dankquest.game.logic;
 
-import com.badlogic.gdx.graphics.Pixmap;
-import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
 import com.dankquest.game.com.dankquest.game.logic.heroes.*;
-import com.dankquest.game.com.dankquest.game.logic.skill.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
-import com.badlogic.gdx.Gdx;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
 
 /**
@@ -59,7 +54,7 @@ public class Dank {
         exampleHero = new PyromancerHero("Xental");
         ownedHeroesList.add(exampleHero);
 
-        exampleHero = new NoozjebHero("Noozen");
+        exampleHero = new NoozenHero("Noozen");
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new PyromancerHero("Lixe");

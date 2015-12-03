@@ -20,4 +20,6 @@ abstract public class Buff {
     public String getName() {
         return name;
     }
+
+
 }
