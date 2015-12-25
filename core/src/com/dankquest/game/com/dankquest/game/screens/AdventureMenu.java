@@ -9,17 +9,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.dankquest.game.com.dankquest.game.actors.OwnedHeroesActor;
 import com.dankquest.game.com.dankquest.game.actors.ChosenHeroesActor;
+import com.dankquest.game.com.dankquest.game.actors.PortraitActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.util.Assets;
 import com.dankquest.game.com.dankquest.game.util.DankMusic;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import java.util.Collections;
 
@@ -43,7 +42,9 @@ public class AdventureMenu extends BasicScreen {
     private TextButton toRightCharacterButton;
 
     private OwnedHeroesActor ownedHeroesActor = new OwnedHeroesActor();
+    private List<PortraitActor> ownedHeroesActorList;
     private ChosenHeroesActor chosenHeroesActor = new ChosenHeroesActor();
+    private List<PortraitActor> chosenHeroesActorList;
 
     public AdventureMenu(Game game) {
         super(game);

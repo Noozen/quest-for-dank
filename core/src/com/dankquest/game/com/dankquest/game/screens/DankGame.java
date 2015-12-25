@@ -106,7 +106,7 @@ public class DankGame extends BasicScreen {
         enemiesSetup();
 
         //Portrait Actor
-        portraitActor = new PortraitActor();
+        portraitActor = new PortraitActor(Dank.activeHero);
         table.addActor(portraitActor);
     }
 

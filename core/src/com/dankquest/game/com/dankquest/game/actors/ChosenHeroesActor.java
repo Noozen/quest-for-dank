@@ -19,48 +19,40 @@ public class ChosenHeroesActor extends Actor {
     private Pixmap chosenHeroesPixmap;
     private Pixmap singleHeroPixmap;
 
-    private Pixmap placeholderPixmap = new Pixmap(Gdx.files.internal("adventure_menu/placeholder.png"));
-    private Pixmap warriorPixmap = new Pixmap(Gdx.files.internal("adventure_menu/warrior.png"));
-    private Pixmap magePixmap = new Pixmap(Gdx.files.internal("adventure_menu/mage.png"));
-
     BitmapFont bitmapFont;
 
     public ChosenHeroesActor() {
-        chosenHeroesPixmap = new Pixmap(400, 100, Pixmap.Format.RGBA8888);
-        singleHeroPixmap = new Pixmap(100,100, Pixmap.Format.RGBA8888);
+        chosenHeroesPixmap = new Pixmap(434, 116, Pixmap.Format.RGBA8888);
+        singleHeroPixmap = new Pixmap(96, 96, Pixmap.Format.RGBA8888);
         bitmapFont = new BitmapFont();
         bitmapFont.setColor(1, 0, 0, 1);
-        setBounds(120, 10, 400, 100);
+        setBounds(103, 10, 434, 116);
         update();
     }
 
     @Override
     public void draw (Batch batch, float parentAlpha) {
-        batch.draw(texture, 120, 10);
+        batch.draw(texture, 103, 10);
         //writes hero names
         for(int i=0;i<4;i++) {
             if(i>=Dank.chosenHeroesList.size()) {
                 continue;
             }
-            bitmapFont.draw(batch, Dank.chosenHeroesList.get(i).name,120+100*(i), 110);
+            bitmapFont.draw(batch, Dank.chosenHeroesList.get(i).name,103 + 10 + 106*(i), 106);
         }
     }
 
     public void update() {
         //updates hero portraits
         for(int i=0;i<4;i++) {
+            singleHeroPixmap.setColor(0.5f, 0.5f, 0.5f, 1f);
+            singleHeroPixmap.fillRectangle(0, 0, 96, 96);
+            chosenHeroesPixmap.drawPixmap(singleHeroPixmap, 10 + i * 106, 10);
             if(i>=Dank.chosenHeroesList.size()) {
-                singleHeroPixmap.drawPixmap(placeholderPixmap, 0, 0);
-                chosenHeroesPixmap.drawPixmap(singleHeroPixmap, i * 100, 0);
                 continue;
             }
-            if(Dank.chosenHeroesList.get(i).heroClass == HeroClass.WARRIOR) {
-                singleHeroPixmap.drawPixmap(warriorPixmap, 0, 25, 100, 125, 0, 0, 100, 100);
-            }
-            if(Dank.chosenHeroesList.get(i).heroClass == HeroClass.MAGE) {
-                singleHeroPixmap.drawPixmap(magePixmap, 0, 0);
-            }
-            chosenHeroesPixmap.drawPixmap(singleHeroPixmap, i * 100, 0);
+            singleHeroPixmap.drawPixmap(Dank.chosenHeroesList.get(i).getImage(), 0, 0);
+            chosenHeroesPixmap.drawPixmap(singleHeroPixmap, 10 + i * 106, 10);
         }
         texture = new Texture(chosenHeroesPixmap);
     }
