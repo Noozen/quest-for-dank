@@ -25,12 +25,7 @@ public class ChosenHeroPortraitActor extends PortraitActor {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(getHero() != null){
-                    Dank.chosenHeroesList.remove(getHero());
-                    adventureMenuInstance.updateChosenHeroesActorList();
-                    System.out.print("usowam ");
-                }
-                System.out.print("wtf ");
+
             }
         });
     }
