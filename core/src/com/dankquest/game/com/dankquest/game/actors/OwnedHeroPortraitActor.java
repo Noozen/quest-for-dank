@@ -19,6 +19,7 @@ public class OwnedHeroPortraitActor extends PortraitActor{
     }
 
     public void addCustomListener() {
+        final PortraitActor tmp = this;
         addListener(new InputListener() {
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -26,14 +27,11 @@ public class OwnedHeroPortraitActor extends PortraitActor{
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(getHero() == null){
-                    return;
-                }
                 if(chosen == false && Dank.chosenHeroesList.size() < 4) {
                     chosen = true;
                     Dank.chosenHeroesList.add(getHero());
-                    adventureMenuInstance.updateChosenHeroesActorList();
-                    System.out.print("dodaje  ");
+                    adventureMenuInstance.updateChosenHeroesActorList(tmp);
+                    System.out.print("dodaje  " + chosen);
                 }
                 System.out.print("dodanyyy  ");
             }

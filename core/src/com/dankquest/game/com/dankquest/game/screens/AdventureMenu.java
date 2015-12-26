@@ -41,8 +41,8 @@ public class AdventureMenu extends BasicScreen {
     private TextButton toRightCharacterButton;
 
     private OwnedHeroesActor ownedHeroesActor = new OwnedHeroesActor();
-    private List<PortraitActor> ownedHeroesActorList = new ArrayList<PortraitActor>();
-    private List<PortraitActor> chosenHeroesActorList = new ArrayList<PortraitActor>();
+    private List<OwnedHeroPortraitActor> ownedHeroesActorList = new ArrayList<OwnedHeroPortraitActor>();
+    private List<ChosenHeroPortraitActor> chosenHeroesActorList = new ArrayList<ChosenHeroPortraitActor>();
 
 
     public AdventureMenu(Game game) {
@@ -77,11 +77,16 @@ public class AdventureMenu extends BasicScreen {
         }
     }
 
-    public void updateChosenHeroesActorList(){
+    public void updateChosenHeroesActorList(PortraitActor portraitActor){
         int i = 0;
         for(Hero h: Dank.chosenHeroesList){
-            chosenHeroesActorList.get(i).setHero(h);
-            chosenHeroesActorList.get(i).update();
+            ChosenHeroPortraitActor tmp = chosenHeroesActorList.get(i);
+            tmp.setHero(h);
+            if(!tmp.isLinked())
+                tmp.linkPortraits(portraitActor);
+            else
+                portraitActor.setChosen(false);
+            tmp.update();
             i++;
         }
         for(int j = i; i < 4; i++){
