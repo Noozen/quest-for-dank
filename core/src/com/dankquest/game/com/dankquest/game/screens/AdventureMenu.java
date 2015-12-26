@@ -11,16 +11,17 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.dankquest.game.com.dankquest.game.actors.OwnedHeroesActor;
-import com.dankquest.game.com.dankquest.game.actors.ChosenHeroesActor;
-import com.dankquest.game.com.dankquest.game.actors.PortraitActor;
+import com.dankquest.game.com.dankquest.game.actors.*;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
+import com.dankquest.game.com.dankquest.game.logic.Hero;
 import com.dankquest.game.com.dankquest.game.util.Assets;
 import com.dankquest.game.com.dankquest.game.util.DankMusic;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Antah on 2015/09/02.
@@ -29,8 +30,6 @@ public class AdventureMenu extends BasicScreen {
 
     private Stage stage;
     private Table table;
-
-    private Music relaxingMusic;
 
     private Image backgroundImage;
 
@@ -42,9 +41,9 @@ public class AdventureMenu extends BasicScreen {
     private TextButton toRightCharacterButton;
 
     private OwnedHeroesActor ownedHeroesActor = new OwnedHeroesActor();
-    private List<PortraitActor> ownedHeroesActorList;
-    private ChosenHeroesActor chosenHeroesActor = new ChosenHeroesActor();
-    private List<PortraitActor> chosenHeroesActorList;
+    private List<PortraitActor> ownedHeroesActorList = new ArrayList<PortraitActor>();
+    private List<PortraitActor> chosenHeroesActorList = new ArrayList<PortraitActor>();
+
 
     public AdventureMenu(Game game) {
         super(game);
@@ -66,45 +65,42 @@ public class AdventureMenu extends BasicScreen {
     }
 
     private void setupChosenHeroesActor() {
-        chosenHeroesActor.addListener(new InputListener() {
+        for (int i=0; i < 4; i++) {
+            ChosenHeroPortraitActor tmp = new ChosenHeroPortraitActor(this);
+            tmp.setX(113 + i * 106);
+            tmp.setY(20);
+            tmp.update();
+            chosenHeroesActorList.add(tmp);
+        }
+        for (PortraitActor p: chosenHeroesActorList) {
+            table.addActor(p);
+        }
+    }
 
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(Dank.chosenHeroesList.size()> Math.round(x) / 100) {
-                    Dank.ownedHeroesList.add(Dank.chosenHeroesList.remove(Math.round(x) / 100));
-                    ownedHeroesActor.update();
-                    chosenHeroesActor.update();
-
-                    Collections.sort(Dank.ownedHeroesList, DankUtil.ascendingNameComparator);
-                }
-            }
-        });
-
-        table.addActor(chosenHeroesActor);
+    public void updateChosenHeroesActorList(){
+        int i = 0;
+        for(Hero h: Dank.chosenHeroesList){
+            chosenHeroesActorList.get(i).setHero(h);
+            chosenHeroesActorList.get(i).update();
+            i++;
+        }
+        for(int j = i; i < 4; i++){
+            chosenHeroesActorList.get(j).setHero(null);
+            chosenHeroesActorList.get(j).update();
+        }
     }
 
     private void setupOwnedHeroesActor() {
-        ownedHeroesActor.addListener(new InputListener() {
-
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(Dank.chosenHeroesList.size()<4 && Dank.ownedHeroesList.size()> ownedHeroesActor.currentHero + Math.round(x) / 100) {
-                    Dank.chosenHeroesList.add(Dank.ownedHeroesList.remove(ownedHeroesActor.currentHero + Math.round(x) / 100));
-                    ownedHeroesActor.update();
-                    chosenHeroesActor.update();
-
-                    Collections.sort(Dank.ownedHeroesList, DankUtil.ascendingNameComparator);
-                }
-            }
-        });
-
-        table.addActor(ownedHeroesActor);
+        for (Hero h:Dank.ownedHeroesList) {
+            OwnedHeroPortraitActor tmp = new OwnedHeroPortraitActor(h, this);
+            ownedHeroesActorList.add(tmp);
+        }
+        for(int i=0; i < 6; i++){
+            ownedHeroesActorList.get(i).setX(166 + ((i/2)%3) * 106);
+            ownedHeroesActorList.get(i).setY(200 + ((i+1)%2) * 106);
+            ownedHeroesActorList.get(i).update();
+            table.addActor(ownedHeroesActorList.get(i));
+        }
     }
 
     private void setupArrowButtons() {
@@ -237,7 +233,7 @@ public class AdventureMenu extends BasicScreen {
 
     @Override
     public void hide() {
-
+        stage.dispose();
     }
 
     @Override
