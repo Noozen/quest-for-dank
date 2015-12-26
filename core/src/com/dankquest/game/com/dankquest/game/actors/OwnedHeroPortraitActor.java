@@ -26,14 +26,16 @@ public class OwnedHeroPortraitActor extends PortraitActor{
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(getHero() == null){
-                    return;
-                }
                 if(chosen == false && Dank.chosenHeroesList.size() < 4) {
                     chosen = true;
                     Dank.chosenHeroesList.add(getHero());
                     adventureMenuInstance.updateChosenHeroesActorList();
                     System.out.print("dodaje  ");
+                } else if(chosen == true){
+                    chosen = false;
+                    Dank.chosenHeroesList.remove(getHero());
+                    adventureMenuInstance.updateChosenHeroesActorList();
+                    System.out.print("usuwam...");
                 }
                 System.out.print("dodanyyy  ");
             }
