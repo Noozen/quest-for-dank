@@ -39,8 +39,8 @@ public class LorewalkerHero extends Hero {
 
         Assets.load("portraits/LorewalkerPortrait.png", Pixmap.class);
         this.portraitTexture = Assets.manager.get("portraits/LorewalkerPortrait.png", Pixmap.class);
-        Assets.load("heroes/IceShaperSheet.png", Texture.class);
-        this.characterTexture = Assets.manager.get("heroes/IceShaperSheet.png", Texture.class);
+        Assets.load("heroes/LorewalkerSheet.png", Texture.class);
+        this.characterTexture = Assets.manager.get("heroes/LorewalkerSheet.png", Texture.class);
     }
 
 }

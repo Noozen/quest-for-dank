@@ -36,7 +36,7 @@ public class NoozenHero extends Hero {
 
         Assets.load("portraits/WarriorPortrait.png", Pixmap.class);
         this.portraitTexture = Assets.manager.get("portraits/WarriorPortrait.png", Pixmap.class);
-        Assets.load("heroes/IceShaperSheet.png", Texture.class);
-        this.characterTexture = Assets.manager.get("heroes/IceShaperSheet.png", Texture.class);
+        Assets.load("heroes/WarriorSheet.png", Texture.class);
+        this.characterTexture = Assets.manager.get("heroes/WarriorSheet.png", Texture.class);
     }
 }

@@ -301,6 +301,7 @@ public class DankGame extends BasicScreen {
         skill2.update();
         skill3.update();
         skill4.update();
+        portraitActor.setHero(Dank.activeHero);
         portraitActor.update();
     }
 

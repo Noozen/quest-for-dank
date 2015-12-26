@@ -36,7 +36,7 @@ public class GoblinHero extends Hero {
 
         Assets.load("portraits/GoblinPortrait.png", Pixmap.class);
         this.portraitTexture = Assets.manager.get("portraits/GoblinPortrait.png", Pixmap.class);
-        Assets.load("heroes/IceShaperSheet.png", Texture.class);
-        this.characterTexture = Assets.manager.get("heroes/IceShaperSheet.png", Texture.class);
+        Assets.load("heroes/goblin.png", Texture.class);
+        this.characterTexture = Assets.manager.get("heroes/goblin.png", Texture.class);
     }
 }
