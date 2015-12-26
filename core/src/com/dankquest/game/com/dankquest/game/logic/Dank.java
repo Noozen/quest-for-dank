@@ -51,13 +51,13 @@ public class Dank {
         exampleHero = new IceShaperHero("Antah");
         ownedHeroesList.add(exampleHero);
 
-        exampleHero = new PyromancerHero("Xental");
+        exampleHero = new NoozenHero("Xental");
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new NoozenHero("Noozen");
         ownedHeroesList.add(exampleHero);
 
-        exampleHero = new PyromancerHero("Lixe");
+        exampleHero = new LorewalkerHero("Lixe");
         ownedHeroesList.add(exampleHero);
 
         exampleHero = new PyromancerHero("Ahmi");

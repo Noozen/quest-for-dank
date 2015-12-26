@@ -18,12 +18,12 @@ import java.util.Map;
  */
 public class PortraitActor extends Actor {
 
-    private Hero hero;
-    private Texture texture;
-    private Pixmap pixmap = new Pixmap(96, 96, Pixmap.Format.RGBA8888);
+    protected Hero hero;
+    protected Texture texture;
+    protected Pixmap pixmap = new Pixmap(96, 96, Pixmap.Format.RGBA8888);
     BitmapFont bitmapFont;
     protected boolean chosen;
-    private int x = 0, y = 0;
+    protected int x = 0, y = 0;
 
     public PortraitActor() {
         bitmapFont = new BitmapFont();

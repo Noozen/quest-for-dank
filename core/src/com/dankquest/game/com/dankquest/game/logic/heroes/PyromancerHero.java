@@ -34,9 +34,9 @@ public class PyromancerHero extends Hero {
         this.skill4 = new HellboltSkill();
         this.buffMap = new HashMap<String, Buff>();
 
-        Assets.load("portraits/IceShaperPortrait.png", Pixmap.class);
+        Assets.load("portraits/PyromancerPortrait.png", Pixmap.class);
+        this.portraitTexture = Assets.manager.get("portraits/PyromancerPortrait.png", Pixmap.class);
         Assets.load("heroes/IceShaperSheet.png", Texture.class);
-        this.portraitTexture = Assets.manager.get("portraits/IceShaperPortrait.png", Pixmap.class);
         this.characterTexture = Assets.manager.get("heroes/IceShaperSheet.png", Texture.class);
     }
 }

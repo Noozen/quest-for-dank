@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.util.Assets;
 
 /**
@@ -64,6 +65,7 @@ public class PostGameMenu extends BasicScreen {
 
         backButton.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                Dank.chosenHeroesList.clear();
                 game.setScreen(new AdventureMenu(game));
                 return true;
             }

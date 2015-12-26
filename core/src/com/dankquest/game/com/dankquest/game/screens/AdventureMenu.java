@@ -29,7 +29,7 @@ import java.util.List;
 public class AdventureMenu extends BasicScreen {
 
     private Stage stage;
-    private Table table;
+    private Table table, ownedHeroesTable;
 
     private Image backgroundImage;
 
@@ -43,6 +43,7 @@ public class AdventureMenu extends BasicScreen {
     private OwnedHeroesActor ownedHeroesActor = new OwnedHeroesActor();
     private List<PortraitActor> ownedHeroesActorList = new ArrayList<PortraitActor>();
     private List<PortraitActor> chosenHeroesActorList = new ArrayList<PortraitActor>();
+    private int ownedHeroIndex;
 
 
     public AdventureMenu(Game game) {
@@ -91,26 +92,22 @@ public class AdventureMenu extends BasicScreen {
     }
 
     private void setupOwnedHeroesActor() {
+        ownedHeroIndex = 0;
         for (Hero h:Dank.ownedHeroesList) {
             OwnedHeroPortraitActor tmp = new OwnedHeroPortraitActor(h, this);
             ownedHeroesActorList.add(tmp);
         }
-        for(int i=0; i < 6; i++){
-            ownedHeroesActorList.get(i).setX(166 + ((i/2)%3) * 106);
-            ownedHeroesActorList.get(i).setY(200 + ((i+1)%2) * 106);
-            ownedHeroesActorList.get(i).update();
-            table.addActor(ownedHeroesActorList.get(i));
-        }
+        updateOwnedHeroesActorTable();
     }
 
     private void setupArrowButtons() {
         toLeftCharacterButton = new TextButton("<-", skin, "orange_yellow_fat");
 
-        toLeftCharacterButton.setWidth(100);
-        toLeftCharacterButton.setHeight(350);
+        toLeftCharacterButton.setWidth(128);
+        toLeftCharacterButton.setHeight(64);
 
-        toLeftCharacterButton.setX(10);
-        toLeftCharacterButton.setY(120);
+        toLeftCharacterButton.setX(7);
+        toLeftCharacterButton.setY(250);
 
         toLeftCharacterButton.addListener(new InputListener() {
 
@@ -119,7 +116,11 @@ public class AdventureMenu extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                ownedHeroesActor.heroDecreased();
+                if(ownedHeroIndex <=0){
+                    return;
+                }
+                ownedHeroIndex--;
+                updateOwnedHeroesActorTable();
             }
         });
 
@@ -127,11 +128,11 @@ public class AdventureMenu extends BasicScreen {
 
         toRightCharacterButton = new TextButton("->", skin, "orange_yellow_fat");
 
-        toRightCharacterButton.setWidth(100);
-        toRightCharacterButton.setHeight(350);
+        toRightCharacterButton.setWidth(128);
+        toRightCharacterButton.setHeight(64);
 
-        toRightCharacterButton.setX(530);
-        toRightCharacterButton.setY(120);
+        toRightCharacterButton.setX(505);
+        toRightCharacterButton.setY(250);
 
         toRightCharacterButton.addListener(new InputListener() {
 
@@ -140,21 +141,38 @@ public class AdventureMenu extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                ownedHeroesActor.heroIncreased();
+                if(ownedHeroIndex >= ownedHeroesActorList.size()-5){
+                    return;
+                }
+                ownedHeroIndex++;
+                updateOwnedHeroesActorTable();
             }
         });
 
         table.addActor(toRightCharacterButton);
     }
 
+    private void updateOwnedHeroesActorTable() {
+        ownedHeroesTable.clear();
+        for(int i=ownedHeroIndex; i < ownedHeroIndex+6; i++){
+            if(ownedHeroesActorList.size() <= i){
+                continue;
+            }
+            ownedHeroesActorList.get(i).setX(166 + ((i/2)%3) * 106);
+            ownedHeroesActorList.get(i).setY(200 + ((i+1)%2) * 106);
+            ownedHeroesActorList.get(i).update();
+            ownedHeroesTable.addActor(ownedHeroesActorList.get(i));
+        }
+    }
+
     private void setupPlayButton() {
         playButton = new TextButton("Play", skin, "orange_yellow_fat");
 
-        playButton.setWidth(100);
-        playButton.setHeight(100);
+        playButton.setWidth(96);
+        playButton.setHeight(96);
 
-        playButton.setX(530);
-        playButton.setY(10);
+        playButton.setX(537);
+        playButton.setY(20);
 
         playButton.addListener(new InputListener() {
 
@@ -175,11 +193,11 @@ public class AdventureMenu extends BasicScreen {
     private void setupBackButton() {
         backButton = new TextButton("Back", skin, "orange_yellow_fat");
 
-        backButton.setWidth(100);
-        backButton.setHeight(100);
+        backButton.setWidth(96);
+        backButton.setHeight(96);
 
-        backButton.setX(10);
-        backButton.setY(10);
+        backButton.setX(7);
+        backButton.setY(20);
 
         backButton.addListener(new InputListener() {
 
@@ -188,6 +206,7 @@ public class AdventureMenu extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Dank.chosenHeroesList.clear();
                 game.setScreen(new GameMenu(game));
             }
         });
@@ -212,6 +231,10 @@ public class AdventureMenu extends BasicScreen {
         table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
+
+        ownedHeroesTable = new Table();
+        ownedHeroesTable.setFillParent(true);
+        stage.addActor(ownedHeroesTable);
     }
 
     private void setupStage() {

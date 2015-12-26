@@ -1,9 +1,13 @@
 package com.dankquest.game.com.dankquest.game.actors;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
+import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
 import com.dankquest.game.com.dankquest.game.screens.AdventureMenu;
+
+import java.util.Map;
 
 /**
  * Created by Antah on 2015/12/26.

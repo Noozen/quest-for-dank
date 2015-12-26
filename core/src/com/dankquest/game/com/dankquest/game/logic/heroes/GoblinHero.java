@@ -34,9 +34,9 @@ public class GoblinHero extends Hero {
         this.skill4 = new TwinBladeSkill();
         this.buffMap = new HashMap<String, Buff>();
 
-        Assets.load("portraits/IceShaperPortrait.png", Pixmap.class);
+        Assets.load("portraits/GoblinPortrait.png", Pixmap.class);
+        this.portraitTexture = Assets.manager.get("portraits/GoblinPortrait.png", Pixmap.class);
         Assets.load("heroes/IceShaperSheet.png", Texture.class);
-        this.portraitTexture = Assets.manager.get("portraits/IceShaperPortrait.png", Pixmap.class);
         this.characterTexture = Assets.manager.get("heroes/IceShaperSheet.png", Texture.class);
     }
 }
