@@ -31,16 +31,13 @@ public class OwnedHeroPortraitActor extends PortraitActor{
                     chosen = true;
                     Dank.chosenHeroesList.add(getHero());
                     adventureMenuInstance.updateChosenHeroesActorList();
-                    System.out.print("dodaje  ");
                     update();
                 } else if(chosen == true){
                     chosen = false;
                     Dank.chosenHeroesList.remove(getHero());
                     adventureMenuInstance.updateChosenHeroesActorList();
-                    System.out.print("usuwam...");
                     update();
                 }
-                System.out.print("dodanyyy  ");
             }
         });
     }
