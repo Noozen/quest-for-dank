@@ -4,10 +4,10 @@ package com.dankquest.game.com.dankquest.game.actors;
  * Created by Antah on 2015/09/05.
  */
 
+        import com.badlogic.gdx.Gdx;
         import com.badlogic.gdx.graphics.Pixmap;
         import com.badlogic.gdx.graphics.Texture;
-        import com.badlogic.gdx.graphics.g2d.Batch;
-        import com.badlogic.gdx.graphics.g2d.BitmapFont;
+        import com.badlogic.gdx.graphics.g2d.*;
         import com.badlogic.gdx.scenes.scene2d.Actor;
         import com.badlogic.gdx.scenes.scene2d.InputEvent;
         import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -19,11 +19,14 @@ package com.dankquest.game.com.dankquest.game.actors;
 
 public class HeroActor extends Actor {
 
-    private Texture texture;
+    private Texture texture, heroSheet;
+    private TextureRegion[] heroFrames;
+    private Animation standingAnimation;
+    private SpriteBatch spriteBatch;
+    private float elapsedTime;
+    boolean playerControlled;
 
     BitmapFont bitmapFont;
-
-
 
     private int x, y, heroNumber;
 
@@ -34,6 +37,7 @@ public class HeroActor extends Actor {
     private DankGame dankGameInstance;
 
     public HeroActor(int x, int y, int heroNumber, boolean playerControlled, DankGame dankGame) {
+        this.playerControlled = playerControlled;
         if(playerControlled) {
             characterList = Dank.chosenHeroesList;
         } else {
@@ -46,6 +50,34 @@ public class HeroActor extends Actor {
         this.y = y;
         this.heroNumber = heroNumber;
         this.dankGameInstance = dankGame;
+        if(playerControlled == true) {
+            heroSheet = characterList.get(heroNumber - 1).getCharacterSheet();
+            heroFrames = new TextureRegion[4 * 3];
+            TextureRegion[][] tmp = TextureRegion.split(heroSheet, 32, 32);
+            int index = 0;
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 3; j++) {
+                    heroFrames[index++] = tmp[i][j];
+                }
+            }
+            TextureRegion[] standingFrames = new TextureRegion[2];
+            standingFrames[0] = heroFrames[7];
+            standingFrames[1] = heroFrames[8];
+            standingAnimation = new Animation(1f, standingFrames);
+            spriteBatch = new SpriteBatch();
+        } else {
+            heroSheet = characterList.get(heroNumber - 1).getCharacterSheet();
+            heroFrames = new TextureRegion[1 * 1];
+            TextureRegion[][] tmp = TextureRegion.split(heroSheet, 64, 64);
+            int index = 0;
+            for (int i = 0; i < 1; i++) {
+                for (int j = 0; j < 1; j++) {
+                    heroFrames[index++] = tmp[i][j];
+                }
+            }
+            standingAnimation = new Animation(1f, heroFrames);
+            spriteBatch = new SpriteBatch();
+        }
         setBounds(x, y, 64, 64);
         addCustomListener();
         update();
@@ -53,12 +85,17 @@ public class HeroActor extends Actor {
 
     @Override
     public void draw (Batch batch, float parentAlpha) {
+        elapsedTime += Gdx.graphics.getDeltaTime();
+        if(playerControlled == true) {
+            batch.draw(standingAnimation.getKeyFrame(elapsedTime, true), this.x + 16, this.y + 16);
+        } else {
+            batch.draw(standingAnimation.getKeyFrame(elapsedTime, true), this.x, this.y);
+        }
         batch.draw(texture, x, y);
         bitmapFont.draw(batch, characterList.get(heroNumber - 1).name, x, y+74);
     }
 
     public void update() {
-        pixmap.drawPixmap(characterList.get(heroNumber - 1).getImage(), 0, 0);
         pixmap.setColor(1, 0.5f, 0.5f, 1);
         pixmap.fillRectangle(0, 0, 64, 10);
         pixmap.setColor(1, 0, 0, 1);

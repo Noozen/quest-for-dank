@@ -1,8 +1,9 @@
 package com.dankquest.game.com.dankquest.game.logic;
 
 import com.badlogic.gdx.graphics.Pixmap;
-import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
 import com.dankquest.game.com.dankquest.game.actors.HeroActor;
 import com.dankquest.game.com.dankquest.game.logic.buffs.DOTBuff;
 import com.dankquest.game.com.dankquest.game.logic.skill.Skill;
@@ -27,8 +28,8 @@ public class Hero {
     }
     public String name;
     public HeroClass heroClass;
-    public Pixmap texture;
-    public Pixmap portrait;
+    public Pixmap portraitTexture;
+    public Texture characterTexture;
 
     public double getHealthTotal() {
         return getBuffedHeroValues().healthTotal;
@@ -123,6 +124,12 @@ public class Hero {
     }
 
     public Pixmap getImage() {
-        return texture;
+        return portraitTexture;
     }
+
+    public Texture getCharacterSheet(){
+        return this.characterTexture;
+    }
+
+
 }

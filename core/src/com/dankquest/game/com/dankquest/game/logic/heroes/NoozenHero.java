@@ -2,10 +2,13 @@ package com.dankquest.game.com.dankquest.game.logic.heroes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
 import com.dankquest.game.com.dankquest.game.logic.HeroClass;
 import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
 import com.dankquest.game.com.dankquest.game.logic.skill.*;
+import com.dankquest.game.com.dankquest.game.util.Assets;
 
 import java.util.HashMap;
 
@@ -29,7 +32,11 @@ public class NoozenHero extends Hero {
         this.skill2 = new IcelanceSkill();
         this.skill3 = new IceWallSkill();
         this.skill4 = new TwinBladeSkill();
-        this.texture = new Pixmap(Gdx.files.internal("heroes/dwarf.png"));
         this.buffMap = new HashMap<String, Buff>();
+
+        Assets.load("portraits/WarriorPortrait.png", Pixmap.class);
+        this.portraitTexture = Assets.manager.get("portraits/WarriorPortrait.png", Pixmap.class);
+        Assets.load("heroes/WarriorSheet.png", Texture.class);
+        this.characterTexture = Assets.manager.get("heroes/WarriorSheet.png", Texture.class);
     }
 }

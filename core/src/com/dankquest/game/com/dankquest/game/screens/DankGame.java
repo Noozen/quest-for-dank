@@ -106,7 +106,7 @@ public class DankGame extends BasicScreen {
         enemiesSetup();
 
         //Portrait Actor
-        portraitActor = new PortraitActor();
+        portraitActor = new PortraitActor(Dank.activeHero);
         table.addActor(portraitActor);
     }
 
@@ -125,11 +125,15 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                return;
+                /*
                 if (Dank.enemyTurnInProgress == true || Dank.animationInProgress == true) {
                     return;
                 }
                 resetHealthAndStuff();
+                Dank.chosenHeroesList.clear();
                 game.setScreen(new GameMenu(game));
+                */
             }
         });
 
@@ -151,6 +155,8 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                return;
+                /*
                 if (Dank.passPhase == true) {
                     return;
                 }
@@ -163,6 +169,7 @@ public class DankGame extends BasicScreen {
                 clearTargetsUpdateBuffsSortHeroList();
                 processComputerTurns();
                 update();
+                */
             }
         });
 
@@ -301,6 +308,7 @@ public class DankGame extends BasicScreen {
         skill2.update();
         skill3.update();
         skill4.update();
+        portraitActor.setHero(Dank.activeHero);
         portraitActor.update();
     }
 

@@ -1,9 +1,11 @@
 {
   "com.badlogic.gdx.graphics.g2d.BitmapFont": {
     "font": { "file": "fonts/font.fnt" },
-    "fat_font": { "file": "fonts/fat_font.fnt"}
+    "fat_font": { "file": "fonts/fat_font.fnt"},
+    "bdfont": { "file": "fonts/bdfont.fnt"}
     },
   "com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle": {
+    "birthday": {"font": "bdfont","up": "orange_btn" },
     "default": { "font": "fat_font", "pressedOffsetY": -4 },
     "orange_fat": { "up": "orange_btn" , "down": "orange_btn_pressed", "font": "fat_font", "pressedOffsetY": -4 },
     "yellow_fat": { "up": "yellow_btn" , "down": "yellow_btn_pressed", "font": "fat_font", "pressedOffsetY": -4 },

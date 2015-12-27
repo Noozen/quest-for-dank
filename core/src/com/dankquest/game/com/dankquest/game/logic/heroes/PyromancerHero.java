@@ -2,10 +2,13 @@ package com.dankquest.game.com.dankquest.game.logic.heroes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.dankquest.game.com.dankquest.game.logic.Hero;
 import com.dankquest.game.com.dankquest.game.logic.HeroClass;
 import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
 import com.dankquest.game.com.dankquest.game.logic.skill.*;
+import com.dankquest.game.com.dankquest.game.util.Assets;
 
 import java.util.HashMap;
 
@@ -29,7 +32,11 @@ public class PyromancerHero extends Hero {
         this.skill2 = new FlameWaveSkill();
         this.skill3 = new MeteorSkill();
         this.skill4 = new HellboltSkill();
-        this.texture = new Pixmap(Gdx.files.internal("heroes/dwarf.png"));
         this.buffMap = new HashMap<String, Buff>();
+
+        Assets.load("portraits/PyromancerPortrait.png", Pixmap.class);
+        this.portraitTexture = Assets.manager.get("portraits/PyromancerPortrait.png", Pixmap.class);
+        Assets.load("heroes/PyromancerSheet.png", Texture.class);
+        this.characterTexture = Assets.manager.get("heroes/PyromancerSheet.png", Texture.class);
     }
 }

@@ -9,6 +9,8 @@ import com.badlogic.gdx.audio.Sound;
 public class DankMusic {
     private static Music soundtrack;
     public static String soundtrackName;
+    public static boolean soundtrackPlaying;
+
     public static void changeSoundtrack(String filename){
         if(soundtrackName != null && soundtrackName.equals(filename))
             return;
@@ -41,5 +43,13 @@ public class DankMusic {
 
     public static void setSoundtrackVolume(float soundtrackVolume) {
         soundtrack.setVolume(soundtrackVolume);
+    }
+
+    public static void setSoundtrackLooping(boolean soundtrackLooping) {
+        soundtrack.setLooping(soundtrackLooping);
+    }
+
+    public static boolean isSoundtrackPlaying(){
+        return soundtrack.isPlaying();
     }
 }

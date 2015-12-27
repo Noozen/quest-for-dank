@@ -28,28 +28,28 @@ public class OwnedHeroesActor extends Actor {
     private BitmapFont bitmapFont;
 
     public OwnedHeroesActor() {
-        ownedHeroesPixmap = new Pixmap(400, 350, Pixmap.Format.RGBA8888);
-        singleHeroPixmap = new Pixmap(100,350, Pixmap.Format.RGBA8888);
+        ownedHeroesPixmap = new Pixmap(328, 222, Pixmap.Format.RGBA8888);
+        singleHeroPixmap = new Pixmap(96, 96, Pixmap.Format.RGBA8888);
         bitmapFont = new BitmapFont();
         bitmapFont.setColor(1, 0, 0, 1);
-        setBounds(120, 120, 400, 350);
+        setBounds(156, 248, 328, 222);
         update();
     }
 
     @Override
     public void draw (Batch batch, float parentAlpha) {
-        batch.draw(texture, 120, 120);
+        batch.draw(texture, 156, 248);
         //writes hero names
-        for(int i=currentHero;i<(currentHero+4);i++) {
+        for(int i=currentHero;i<(currentHero+6);i++) {
             if(i>=Dank.ownedHeroesList.size()) {
                 continue;
             }
-            bitmapFont.draw(batch, Dank.ownedHeroesList.get(i).name,120+100*(i-currentHero), 470);
+            bitmapFont.draw(batch, Dank.ownedHeroesList.get(i).name,10 + (i - currentHero)%3 * (-106) + 412, 10 + (i - currentHero)%2 * (-106) + 306);
         }
     }
 
     public void heroIncreased() {
-        if(currentHero<Dank.ownedHeroesList.size()-4) {
+        if(currentHero<Dank.ownedHeroesList.size()-6) {
             currentHero++;
         }
         update();
@@ -64,19 +64,17 @@ public class OwnedHeroesActor extends Actor {
 
     public void update() {
         //updates hero portraits
-        for(int i=currentHero;i<(currentHero+4);i++) {
+        for(int i=currentHero;i<(currentHero+6);i++) {
+
+
+            singleHeroPixmap.setColor(0.5f, 0.5f, 0.5f, 1f);
+            singleHeroPixmap.fillRectangle(0, 0, 96, 96);
+            ownedHeroesPixmap.drawPixmap(singleHeroPixmap, 10 + (i - currentHero)%3 * (-106) + 212, 10 + (i - currentHero)%2 * (-106) + 106);
             if(i>=Dank.ownedHeroesList.size()) {
-                singleHeroPixmap.drawPixmap(placeholderPixmap, 0, 0);
-                ownedHeroesPixmap.drawPixmap(singleHeroPixmap, (i - currentHero) * 100, 0);
                 continue;
             }
-            if(Dank.ownedHeroesList.get(i).heroClass == HeroClass.WARRIOR) {
-                singleHeroPixmap.drawPixmap(warriorPixmap, 0, 0);
-            }
-            if(Dank.ownedHeroesList.get(i).heroClass == HeroClass.MAGE) {
-                singleHeroPixmap.drawPixmap(magePixmap, 0, 0);
-            }
-            ownedHeroesPixmap.drawPixmap(singleHeroPixmap, (i - currentHero) * 100, 0);
+            singleHeroPixmap.drawPixmap(Dank.ownedHeroesList.get(i).getImage(), 0, 0);
+            ownedHeroesPixmap.drawPixmap(singleHeroPixmap, 10 + (i - currentHero)%3 * (-106) + 212, 10 + (i - currentHero)%2 * (-106) + 106);
         }
         texture = new Texture(ownedHeroesPixmap);
     }

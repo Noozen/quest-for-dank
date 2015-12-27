@@ -18,6 +18,7 @@ public class Assets implements Disposable, AssetErrorListener {
 
     public static void load(String filePath, Class fileClass){
         manager.load(String.valueOf(Gdx.files.internal(filePath)), fileClass);
+        loadingScreen();
     }
 
     public static void loadMainMenu(){
@@ -30,11 +31,12 @@ public class Assets implements Disposable, AssetErrorListener {
         load("adventure_menu/placeholder.png", Pixmap.class);
         load("adventure_menu/warrior.png", Pixmap.class);
         load("adventure_menu/mage.png", Pixmap.class);
+        loadingScreen();
     }
 
     private static void loadingScreen() {
         while(!manager.update()){
-            System.out.println(manager.getProgress() * 100 + "%");
+            //System.out.println(manager.getProgress() * 100 + "%");
         }
     }
     @Override

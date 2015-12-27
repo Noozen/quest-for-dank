@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.dankquest.game.com.dankquest.game.logic.Dank;
 import com.dankquest.game.com.dankquest.game.util.Assets;
 
 /**
@@ -64,8 +65,12 @@ public class PostGameMenu extends BasicScreen {
 
         backButton.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new AdventureMenu(game));
                 return true;
+            }
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                return;
+                //Dank.chosenHeroesList.clear();
+                //game.setScreen(new AdventureMenu(game));
             }
         });
         table.addActor(backButton);
@@ -82,8 +87,11 @@ public class PostGameMenu extends BasicScreen {
 
         exitButton.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                Gdx.app.exit();
                 return true;
+            }
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                return;
+                //Gdx.app.exit();
             }
         });
 
@@ -104,8 +112,9 @@ public class PostGameMenu extends BasicScreen {
         playButton.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if(numberOfClicks == 1){
-                    playButton.setText("Have a good day.");
-                    numberOfClicks++;
+                    Dank.chosenHeroesList.clear();
+                    game.setScreen(new BirthdayScreen(game));
+                    return true;
                 }
                 if(numberOfClicks == 0) {
                     playButton.setText("404 error:\nString not found");
