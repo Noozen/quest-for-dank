@@ -68,9 +68,8 @@ public class PostGameMenu extends BasicScreen {
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                return;
-                //Dank.chosenHeroesList.clear();
-                //game.setScreen(new AdventureMenu(game));
+                Dank.chosenHeroesList.clear();
+                game.setScreen(new AdventureMenu(game));
             }
         });
         table.addActor(backButton);
@@ -90,8 +89,7 @@ public class PostGameMenu extends BasicScreen {
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                return;
-                //Gdx.app.exit();
+                Gdx.app.exit();
             }
         });
 
@@ -112,8 +110,8 @@ public class PostGameMenu extends BasicScreen {
         playButton.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if(numberOfClicks == 1){
-                    Dank.chosenHeroesList.clear();
-                    game.setScreen(new BirthdayScreen(game));
+                    //Dank.chosenHeroesList.clear();
+                    //game.setScreen(new BirthdayScreen(game));
                     return true;
                 }
                 if(numberOfClicks == 0) {

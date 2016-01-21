@@ -125,15 +125,12 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                return;
-                /*
                 if (Dank.enemyTurnInProgress == true || Dank.animationInProgress == true) {
                     return;
                 }
                 resetHealthAndStuff();
                 Dank.chosenHeroesList.clear();
                 game.setScreen(new GameMenu(game));
-                */
             }
         });
 
@@ -155,8 +152,6 @@ public class DankGame extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                return;
-                /*
                 if (Dank.passPhase == true) {
                     return;
                 }
@@ -169,7 +164,6 @@ public class DankGame extends BasicScreen {
                 clearTargetsUpdateBuffsSortHeroList();
                 processComputerTurns();
                 update();
-                */
             }
         });
 
