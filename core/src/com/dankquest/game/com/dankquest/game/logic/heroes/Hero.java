@@ -1,8 +1,8 @@
-package com.dankquest.game.com.dankquest.game.logic;
+package com.dankquest.game.com.dankquest.game.logic.heroes;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.dankquest.game.com.dankquest.game.logic.HeroClass;
 import com.dankquest.game.com.dankquest.game.logic.buffs.Buff;
 import com.dankquest.game.com.dankquest.game.actors.HeroActor;
 import com.dankquest.game.com.dankquest.game.logic.buffs.DOTBuff;

@@ -108,7 +108,7 @@ public class MainMenu extends BasicScreen {
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                game.setScreen(new GameMenu(game));
+                game.setScreen(new AdventureMenu(game));
             }
         });
 

@@ -8,21 +8,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.dankquest.game.com.dankquest.game.actors.*;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
-import com.dankquest.game.com.dankquest.game.logic.heroes.Hero;
+import com.dankquest.game.com.dankquest.game.util.LevelFactory;
 import com.dankquest.game.com.dankquest.game.util.Assets;
 import com.dankquest.game.com.dankquest.game.util.DankMusic;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Antah on 2015/09/02.
  */
-public class AdventureMenu extends BasicScreen {
+public class LevelSelectMenu extends BasicScreen {
 
     private Stage stage;
     private Table table, ownedHeroesTable;
@@ -33,17 +32,13 @@ public class AdventureMenu extends BasicScreen {
 
     private TextButton backButton;
     private TextButton playButton;
-    private TextButton toLeftCharacterButton;
-    private TextButton toRightCharacterButton;
+    private TextButton level1, level2, level3;
 
-    private OwnedHeroesActor ownedHeroesActor = new OwnedHeroesActor();
-    private List<PortraitActor> ownedHeroesActorList = new ArrayList<PortraitActor>();
-    private List<PortraitActor> chosenHeroesActorList = new ArrayList<PortraitActor>();
-    private int ownedHeroIndex;
+    private boolean levelSelected;
 
-
-    public AdventureMenu(Game game) {
+    public LevelSelectMenu(Game game) {
         super(game);
+        levelSelected = false;
     }
 
     @Override
@@ -56,109 +51,64 @@ public class AdventureMenu extends BasicScreen {
         setupSkin();
         setupBackButton();
         setupPlayButton();
-        setupArrowButtons();
-        setupOwnedHeroesActor();
-        setupChosenHeroesActor();
+        setupLevelButtons();
     }
+    private void setupLevelButtons() {
+        level1 = new TextButton("Level 1", skin, "orange_yellow_fat");
+        level2 = new TextButton("Level 2", skin, "orange_yellow_fat");
+        level3 = new TextButton("Level 3", skin, "orange_yellow_fat");
 
-    private void setupChosenHeroesActor() {
-        for (int i=0; i < 4; i++) {
-            ChosenHeroPortraitActor tmp = new ChosenHeroPortraitActor(this);
-            tmp.setX(113 + i * 106);
-            tmp.setY(20);
-            tmp.update();
-            chosenHeroesActorList.add(tmp);
-        }
-        for (PortraitActor p: chosenHeroesActorList) {
-            table.addActor(p);
-        }
-    }
+        level1.setWidth(144);
+        level1.setHeight(96);
+        level2.setWidth(144);
+        level2.setHeight(96);
+        level3.setWidth(144);
+        level3.setHeight(96);
 
-    public void updateChosenHeroesActorList(){
-        int i = 0;
-        for(Hero h: Dank.chosenHeroesList){
-            chosenHeroesActorList.get(i).setHero(h);
-            chosenHeroesActorList.get(i).update();
-            i++;
-        }
-        for(int j = i; i < 4; i++){
-            chosenHeroesActorList.get(j).setHero(null);
-            chosenHeroesActorList.get(j).update();
-        }
-    }
+        level1.setX(52);
+        level1.setY(374);
+        level2.setX(248);
+        level2.setY(374);
+        level3.setX(444);
+        level3.setY(374);
 
-    private void setupOwnedHeroesActor() {
-        ownedHeroIndex = 0;
-        for (Hero h:Dank.ownedHeroesList) {
-            OwnedHeroPortraitActor tmp = new OwnedHeroPortraitActor(h, this);
-            ownedHeroesActorList.add(tmp);
-        }
-        updateOwnedHeroesActorTable();
-    }
-
-    private void setupArrowButtons() {
-        toLeftCharacterButton = new TextButton("<-", skin, "orange_yellow_fat");
-
-        toLeftCharacterButton.setWidth(128);
-        toLeftCharacterButton.setHeight(64);
-
-        toLeftCharacterButton.setX(7);
-        toLeftCharacterButton.setY(250);
-
-        toLeftCharacterButton.addListener(new InputListener() {
+        level1.addListener(new InputListener() {
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(ownedHeroIndex <=0){
-                    return;
-                }
-                ownedHeroIndex--;
-                updateOwnedHeroesActorTable();
+                levelSelected = true;
+                LevelFactory.setEnemyHeroList(1);
             }
         });
-
-        table.addActor(toLeftCharacterButton);
-
-        toRightCharacterButton = new TextButton("->", skin, "orange_yellow_fat");
-
-        toRightCharacterButton.setWidth(128);
-        toRightCharacterButton.setHeight(64);
-
-        toRightCharacterButton.setX(505);
-        toRightCharacterButton.setY(250);
-
-        toRightCharacterButton.addListener(new InputListener() {
+        level2.addListener(new InputListener() {
 
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                if(ownedHeroIndex >= ownedHeroesActorList.size()-5){
-                    return;
-                }
-                ownedHeroIndex++;
-                updateOwnedHeroesActorTable();
+                levelSelected = true;
+                LevelFactory.setEnemyHeroList(2);
+            }
+        });
+        level3.addListener(new InputListener() {
+
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                levelSelected = true;
+                LevelFactory.setEnemyHeroList(3);
             }
         });
 
-        table.addActor(toRightCharacterButton);
-    }
-
-    private void updateOwnedHeroesActorTable() {
-        ownedHeroesTable.clear();
-        for(int i=ownedHeroIndex; i < ownedHeroIndex+6; i++){
-            if(ownedHeroesActorList.size() <= i){
-                continue;
-            }
-            ownedHeroesActorList.get(i).setX(166 + ((i/2)%3) * 106);
-            ownedHeroesActorList.get(i).setY(200 + ((i+1)%2) * 106);
-            ownedHeroesActorList.get(i).update();
-            ownedHeroesTable.addActor(ownedHeroesActorList.get(i));
-        }
+        table.addActor(level1);
+        table.addActor(level2);
+        table.addActor(level3);
     }
 
     private void setupPlayButton() {
@@ -178,7 +128,8 @@ public class AdventureMenu extends BasicScreen {
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 if (Dank.chosenHeroesList.size() == 4) {
-                    game.setScreen(new LevelSelectMenu(game));
+                    if(levelSelected)
+                    game.setScreen(new DankGame(game));
                 }
             }
         });
@@ -203,7 +154,7 @@ public class AdventureMenu extends BasicScreen {
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Dank.chosenHeroesList.clear();
-                game.setScreen(new MainMenu(game));
+                game.setScreen(new AdventureMenu(game));
             }
         });
 

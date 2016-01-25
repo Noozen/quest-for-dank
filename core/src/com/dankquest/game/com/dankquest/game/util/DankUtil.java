@@ -1,6 +1,6 @@
 package com.dankquest.game.com.dankquest.game.util;
 
-import com.dankquest.game.com.dankquest.game.logic.Hero;
+import com.dankquest.game.com.dankquest.game.logic.heroes.Hero;
 
 import java.util.Comparator;
 

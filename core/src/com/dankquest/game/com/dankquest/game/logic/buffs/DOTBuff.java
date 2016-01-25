@@ -1,6 +1,6 @@
 package com.dankquest.game.com.dankquest.game.logic.buffs;
 
-import com.dankquest.game.com.dankquest.game.logic.Hero;
+import com.dankquest.game.com.dankquest.game.logic.heroes.Hero;
 
 /**
  * Created by KTamo_000 on 2015-12-03.

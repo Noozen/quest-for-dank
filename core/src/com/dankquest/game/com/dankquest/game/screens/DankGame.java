@@ -19,7 +19,7 @@ import com.dankquest.game.com.dankquest.game.actors.HeroActor;
 import com.dankquest.game.com.dankquest.game.actors.PortraitActor;
 import com.dankquest.game.com.dankquest.game.actors.SkillIconActor;
 import com.dankquest.game.com.dankquest.game.logic.Dank;
-import com.dankquest.game.com.dankquest.game.logic.Hero;
+import com.dankquest.game.com.dankquest.game.logic.heroes.Hero;
 import com.dankquest.game.com.dankquest.game.util.Assets;
 import com.dankquest.game.com.dankquest.game.util.DankMusic;
 import com.dankquest.game.com.dankquest.game.util.DankUtil;
@@ -79,7 +79,6 @@ public class DankGame extends BasicScreen {
         table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-
     }
 
     private void musicSetup() {
@@ -130,7 +129,8 @@ public class DankGame extends BasicScreen {
                 }
                 resetHealthAndStuff();
                 Dank.chosenHeroesList.clear();
-                game.setScreen(new GameMenu(game));
+                Dank.passPhase = false;
+                game.setScreen(new AdventureMenu(game));
             }
         });
 
@@ -309,6 +309,7 @@ public class DankGame extends BasicScreen {
     private void resetHealthAndStuff() {
         for (Hero hero : Dank.allHeroesInGameList) {
             hero.healthCurrent = hero.healthTotal;
+            hero.buffMap.clear();
         }
         Dank.thisTurnLeftHeroesList.clear();
         Dank.allHeroesInGameList.clear();

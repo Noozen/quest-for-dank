@@ -57,41 +57,7 @@ public class BirthdayScreen extends BasicScreen {
     }
 
     private void setupZyczenia() {
-        zyczenia[0] = "Wszystkiego najlepszego!\n" +
-                "Standardowo szczęścia,\n" +
-                "zdrowia, pomyślności\n" +
-                "i tak dalej.\n" +
-                "(naciskaj szczałki)";
-
-        zyczenia[1] = "A tak personalnie,\n" +
-                "to mam nadzieję,\n" +
-                "że miło spędziłaś\n" +
-                "święta z rodziną.";
-
-        zyczenia[2] = "Do tego życzę Ci,\n" +
-                "żeby dalej dobrze\n" +
-                "japoński szedł.";
-
-        zyczenia[3] = "Żeby wykładowcy nie\n" +
-                "męczyli zbytnio.";
-
-        zyczenia[4] = "Żeby projekty\n" +
-                "łatwo szły.";
-
-        zyczenia[5] = "Oczywiście masy\n" +
-                "słodyczy też.";
-
-        zyczenia[6] = "A tak samolubnie\n" +
-                "trochę, to życzę Ci\n" +
-                "więcej wolnego czasu.\n" +
-                "(w tym dla mnie :()";
-
-        zyczenia[7] = "I nie zmieniaj się.\n" +
-                "Przynajmniej nie za dużo.";
-
-        zyczenia[8] = "To już wszystko.\n" +
-                "Miłego wypoczywania\n" +
-                "i udanego Sylwestra!";
+        zyczenia = null;
     }
 
     private void setupMusic() {

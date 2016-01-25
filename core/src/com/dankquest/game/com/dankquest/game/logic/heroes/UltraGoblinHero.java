@@ -12,28 +12,28 @@ import java.util.HashMap;
 /**
  * Created by Antah on 2015/10/30.
  */
-public class NoozenHero extends Hero {
-    public NoozenHero(String name){
+public class UltraGoblinHero extends Hero {
+    public UltraGoblinHero(String name){
         super(name);
 
-        this.healthTotal = 400;
-        this.healthCurrent = 400;
-        this.initiative = 10;
-        this.attackDamage = 35;
+        this.healthTotal = 420;
+        this.healthCurrent = 420;
+        this.initiative = 8;
+        this.attackDamage = 30;
         this.damageMultiplier = 1;
-        this.baseShield = 0;
+        this.baseShield = 30;
         this.shield = this.baseShield;
 
         this.heroClass = HeroClass.WARRIOR;
-        this.skill1 = new SlamSkill();
+        this.skill1 = new FireballSkill();
         this.skill2 = new IcelanceSkill();
         this.skill3 = new IceWallSkill();
         this.skill4 = new TwinBladeSkill();
         this.buffMap = new HashMap<String, Buff>();
 
-        Assets.load("portraits/WarriorPortrait.png", Pixmap.class);
-        this.portraitTexture = Assets.manager.get("portraits/WarriorPortrait.png", Pixmap.class);
-        Assets.load("heroes/WarriorSheet.png", Texture.class);
-        this.characterTexture = Assets.manager.get("heroes/WarriorSheet.png", Texture.class);
+        Assets.load("portraits/GoblinPortrait.png", Pixmap.class);
+        this.portraitTexture = Assets.manager.get("portraits/GoblinPortrait.png", Pixmap.class);
+        Assets.load("heroes/goblin.png", Texture.class);
+        this.characterTexture = Assets.manager.get("heroes/goblin.png", Texture.class);
     }
 }

@@ -1,16 +1,11 @@
 package com.dankquest.game.com.dankquest.game.logic.skill;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Timer;
-import com.dankquest.game.com.dankquest.game.logic.Hero;
-
-import java.util.List;
 
 /**
  * Created by Miko on 2015-09-04.

@@ -12,7 +12,7 @@ package com.dankquest.game.com.dankquest.game.actors;
         import com.badlogic.gdx.scenes.scene2d.InputEvent;
         import com.badlogic.gdx.scenes.scene2d.InputListener;
         import com.dankquest.game.com.dankquest.game.logic.Dank;
-        import com.dankquest.game.com.dankquest.game.logic.Hero;
+        import com.dankquest.game.com.dankquest.game.logic.heroes.Hero;
         import com.dankquest.game.com.dankquest.game.screens.DankGame;
 
         import java.util.List;
